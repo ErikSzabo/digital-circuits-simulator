@@ -193,7 +193,7 @@ public class DigitalCircuits {
 //         áramkört. Ezt menthetjük is fájlba. utána be lehet olvasni és csak hasznalni kell. lehet több input/outputpinje.
     }
 
-    public static void main(String[] args) throws PinAlreadyInUseException, PinNotExistsException {
+    public static void main(String[] args) {
         kotelezoFeladat();
         System.out.println("-----------------------------------------------------");
         szavazogep();
