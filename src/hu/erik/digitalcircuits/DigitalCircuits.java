@@ -10,7 +10,7 @@ public class DigitalCircuits {
         // FONTOS:
         // Csak a kapcsolókkal módsítsuk a bemenetet!
         // Itt az egyszerű connectet használtam ami mindent megcsinál helyettem, de van egy
-        // "bonyolultabb", ahol a kapcsolodó pin-t is ki lehet választani.
+        // "bonyolultabb", ahol a kapcsolodó pineket is ki lehet választani.
         // Egy pines eszközök esetén ennek sok értelme nincs. Ha nem a 0-ás pint választjuk kivétel fog dobódni.
 
 
@@ -21,9 +21,9 @@ public class DigitalCircuits {
         // Kell majd egy csomópont is hogy az áramforrást több kapcsolóra is rá tudjuk kötni
         Junction csomopont = new Junction(5);
 
-        // Ezek lesznek a kombinációs hálózat változói. Meg amúgy a kapcsolók
-        // A képvéseli a legnagyobb helyiértéket
-        // Alap állapotában le van kapcsolva, tehát 0
+        // Ezek lesznek a kombinációs hálózat változói. Meg amúgy a kapcsolók.
+        // "A" képvéseli a legnagyobb helyiértéket
+        // Alap állapotában le vannnak kapcsolva
         Switch A = new Switch();
         Switch B = new Switch();
         Switch C = new Switch();
@@ -31,9 +31,9 @@ public class DigitalCircuits {
         Switch E = new Switch();
 
         // Az adott feladatot legegyszerűbben egy Vagy kapuval lehetne megoldani.
-        // Úgyhogy ezért most 1 db NAND kapuval fogjuk megcsinálni
+        // Úgyhogy ezért most 1 db NAND kapuval fogjuk megcsinálni.
         // Maga a feladat: 5 változós kombinációs hálózat, ami az 5 bemenetre 0-át ad egyébként 1-et
-        // Itt az őt az input pinek számát adja meg. Lehet külön megcsinálni ezeket a pineket, de sok fölösleges írás lenne
+        // Csináljunk egy Nand kaput 5 darab input pinnel.
         NandGate NandKapu = new NandGate(5);
 
         // Szükségünk lesz 3 inverterre is
@@ -47,19 +47,16 @@ public class DigitalCircuits {
         // Elem hozzákötése a csomóponthoz
         elem.connect(csomopont);
 
-        // csomopont kimeneteit összekötjük a kapcsolók bemeneteivel
+        // csomopont kimeneteit összekötjük a kapcsolók bemeneteivel (Sorrendre figyeljünk!)
         csomopont.connectAll(A, B, C, D, E);
 
-        // Összekötjük a kapcsolók kimeneteit a NAND kapunkkal
-        A.connect(inverter1);
-        inverter1.connect(NandKapu);
-        B.connect(inverter2);
-        inverter2.connect(NandKapu);
+        // Összekötjük a kapcsolók kimeneteit az inverterekkel majd a NAND kapunkkal
+        // Lehet "chainelni" az összekötést
+        A.connect(inverter1).connect(NandKapu);
+        B.connect(inverter2).connect(NandKapu);
         C.connect(NandKapu);
-        D.connect(inverter3);
-        inverter3.connect(NandKapu);
+        D.connect(inverter3).connect(NandKapu);
         E.connect(NandKapu);
-
 
         // Kapcsoljuk be az áramot
         elem.on();
