@@ -15,7 +15,7 @@ public class Switch extends SimpleDevice {
         sendOutput();
     }
 
-    public void  off() {
+    public void off() {
         this.status = false;
         calcOutput();
         sendOutput();

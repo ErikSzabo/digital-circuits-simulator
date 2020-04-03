@@ -6,18 +6,16 @@ public class PowerSource extends SimpleDevice {
 
     public PowerSource() {
         super();
-        getInputPin().setValue(true);
-        getOutputPin().setValue(true);
     }
 
-    public void destroyPaks() {
-        getInputPin().setValue(false);
+    public void on() {
+        getInputPin().setValue(true);
         calcOutput();
         sendOutput();
     }
 
-    public void rebuildPaks() {
-        getInputPin().setValue(true);
+    public void off() {
+        getInputPin().setValue(false);
         calcOutput();
         sendOutput();
     }

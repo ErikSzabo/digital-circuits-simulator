@@ -39,7 +39,7 @@ public class CircuitBox extends MultipinDevice {
             Pin bindPin = d.getOutputPin(pinIndex);
             Pin boxPin = getOutputPin(boxPinIndex);
             if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
-            getInputPins()[boxPinIndex] = bindPin;
+            getOutputPins()[boxPinIndex] = bindPin;
         } catch (PinAlreadyInUseException | PinNotExists | BoundException err) {
             System.err.println(err.getMessage());
         }

@@ -18,7 +18,7 @@ public class Pin implements Serializable {
      *
      * @param parentDevice Device to which it will be connected.
      */
-    protected Pin(Device parentDevice) {
+    public Pin(Device parentDevice) {
         this.parentDevice = parentDevice;
         this.value = false;
         this.free = true;
@@ -77,6 +77,6 @@ public class Pin implements Serializable {
      * @param value Determines the new free status for the pin
      */
     public void setAvailability(boolean value) {
-        this.free = free;
+        this.free = value;
     }
 }
