@@ -4,8 +4,7 @@ import hu.erik.digitalcircuits.devices.build.ConnectableDevice;
 import hu.erik.digitalcircuits.devices.build.Device;
 import hu.erik.digitalcircuits.devices.build.Pin;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 public class Junction extends ConnectableDevice {
     private Pin inputPin;
@@ -39,17 +38,15 @@ public class Junction extends ConnectableDevice {
     }
 
     @Override
-    public Pin getInputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index > 0) throw new PinNotExists(this, index);
-        if(index == 0 && inputPin.isFree()) return inputPin;
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getInputPin(int index) throws PinNotExistsException {
+        if(index == 0) return inputPin;
+        throw new PinNotExistsException(this, index);
     }
 
     @Override
-    public Pin getOutputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index >= outputPins.length) throw new PinNotExists(this, index);
-        if(outputPins[index].isFree()) return outputPins[index];
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getOutputPin(int index) throws PinNotExistsException {
+        if(index >= outputPins.length) throw new PinNotExistsException(this, index);
+        return outputPins[index];
     }
 
     @Override

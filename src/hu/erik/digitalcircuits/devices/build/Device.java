@@ -2,8 +2,7 @@ package hu.erik.digitalcircuits.devices.build;
 
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 import java.io.Serializable;
 
@@ -38,20 +37,18 @@ public interface Device extends Serializable {
      *
      * @param index Index of the required input pin.
      * @return Pin or null if there isn't any pin at the given index.
-     * @throws PinAlreadyInUseException If the required pin is already connected to something
-     * @throws PinNotExists If the selected pin is not exists
+     * @throws PinNotExistsException If the selected pin is not exists
      */
-    Pin getInputPin(int index) throws PinAlreadyInUseException, PinNotExists;
+    Pin getInputPin(int index) throws PinNotExistsException;
 
     /**
      * Method to get a specified output pin.
      *
      * @param index Index of the required output pin
      * @return Pin or null if there isn't any pin at the given index
-     * @throws PinAlreadyInUseException If the required pin is already connected to something
-     * @throws PinNotExists If the selected pin is not exists
+     * @throws PinNotExistsException If the selected pin is not exists
      */
-    Pin getOutputPin(int index) throws PinAlreadyInUseException, PinNotExists;
+    Pin getOutputPin(int index) throws PinNotExistsException;
 
     /**
      * Connects this device next free output pin to the

@@ -2,11 +2,11 @@ package hu.erik.digitalcircuits;
 
 import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 import hu.erik.digitalcircuits.utils.FileHandler;
 
 public class DigitalCircuits {
-    public static void kotelezoFeladat() throws PinAlreadyInUseException, PinNotExists {
+    public static void kotelezoFeladat() {
         // FONTOS:
         // Csak a kapcsolókkal módsítsuk a bemenetet!
         // Itt az egyszerű connectet használtam ami mindent megcsinál helyettem, de van egy
@@ -68,28 +68,32 @@ public class DigitalCircuits {
         // Mivel a kapcsolók alapból 0 jelet továbbítanak, elég csak a két megfelelő kapcsolót 1-be rakni
         C.on();
         E.on();
+        try {
+            // Most az elvárt kimenet 0 mivel ezt kérte a feladat
+            // Nézzük meg tényleg 0-ban van-e a Nand kapu output pin-je.
+            System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
 
-        // Most az elvárt kimenet 0 mivel ezt kérte a feladat
-        // Nézzük meg tényleg 0-ban van-e a Nand kapu output pin-je.
-        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
+            // Most nézzük meg mi lesz ha átállítjuk a kapcsolakat
+            // Billentsük le C kapcsolót és mondjuk A-t fel
+            C.off();
+            A.on();
+            System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
 
-        // Most nézzük meg mi lesz ha átállítjuk a kapcsolakat
-        // Billentsük le C kapcsolót és mondjuk A-t fel
-        C.off();
-        A.on();
-        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
+            // További tesztek
+            System.out.println("----------------------- Tesztek helyes működésre -----------------------");
+            B.on();
+            E.on();
+            System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
+            C.on();
+            A.off();
+            System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
+        } catch (PinNotExistsException err) {
+            System.err.println(err.getMessage());
+        }
 
-        // További tesztek
-        System.out.println("----------------------- Tesztek helyes működésre -----------------------");
-        B.on();
-        E.on();
-        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
-        C.on();
-        A.off();
-        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
     }
 
-    public static void szavazogep() throws PinAlreadyInUseException, PinNotExists {
+    public static void szavazogep() {
 
         // Feladat leírás:
 
@@ -166,28 +170,33 @@ public class DigitalCircuits {
         // Kapcsoljuk fel az áramot
         aram.on();
 
-        // Hamis (0)
-        A.on();
-        System.out.println("Ha csak a polgármester szavazott igennel akkor a kimenetnek false-nak kéne lennie");
-        System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
+        try {
+            // Hamis (0)
+            A.on();
+            System.out.println("Ha csak a polgármester szavazott igennel akkor a kimenetnek false-nak kéne lennie");
+            System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
 
-        // Igaz (1)
-        // Most épp a polgármester szavazója már igenre van állítva, adjunk neki még egy társat
-        B.on();
-        System.out.println("Mostmár B is igennel szavazott így a kimenetnek true-nak kéne lennie");
-        System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
+            // Igaz (1)
+            // Most épp a polgármester szavazója már igenre van állítva, adjunk neki még egy társat
+            B.on();
+            System.out.println("Mostmár B is igennel szavazott így a kimenetnek true-nak kéne lennie");
+            System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
 
-        // Hamis (0)
-        A.off();
-        C.on();
-        System.out.println("Most 2 ember szavazott igennel de a polgármester nincs köztük. Kimenetnek false-nak kéne lennie.");
-        System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
+            // Hamis (0)
+            A.off();
+            C.on();
+            System.out.println("Most 2 ember szavazott igennel de a polgármester nincs köztük. Kimenetnek false-nak kéne lennie.");
+            System.out.println("Kimenet: " + ujBox.getOutputPin(0).getValue());
+        } catch (PinNotExistsException err) {
+            System.err.println(err.getMessage());
+        }
+
 
 //         NOTE: ez a dobozolás azért volt jó mert igy egy blacboxba be tudunk rakni egy mar elkészített
 //         áramkört. Ezt menthetjük is fájlba. utána be lehet olvasni és csak hasznalni kell. lehet több input/outputpinje.
     }
 
-    public static void main(String[] args) throws PinAlreadyInUseException, PinNotExists {
+    public static void main(String[] args) throws PinAlreadyInUseException, PinNotExistsException {
         kotelezoFeladat();
         System.out.println("-----------------------------------------------------");
         szavazogep();

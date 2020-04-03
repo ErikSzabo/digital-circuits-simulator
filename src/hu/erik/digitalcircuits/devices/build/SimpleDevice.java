@@ -1,8 +1,7 @@
 package hu.erik.digitalcircuits.devices.build;
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 /**
  * Abstract class to create device which only have exactly one input and output pin
@@ -53,13 +52,12 @@ public abstract class SimpleDevice extends ConnectableDevice {
      *
      * @param index Index of the required input pin.
      * @return Free input pin
-     * @throws PinAlreadyInUseException If the selected output pin is already connected to something
+     * @throws PinNotExistsException If the selected input pin does not exists
      */
     @Override
-    public Pin getInputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index > 0) throw new PinNotExists(this, index);
-        if(index == 0 && inputPin.isFree()) return inputPin;
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getInputPin(int index) throws PinNotExistsException {
+        if(index == 0) return inputPin;
+        throw new PinNotExistsException(this, index);
     }
 
     /**
@@ -67,13 +65,12 @@ public abstract class SimpleDevice extends ConnectableDevice {
      *
      * @param index Index of the required output pin
      * @return Free output pin
-     * @throws PinAlreadyInUseException If the selected output pin is already connected to something
+     * @throws PinNotExistsException If the selected output pin does not exists
      */
     @Override
-    public Pin getOutputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index > 0) throw new PinNotExists(this, index);
-        if(index == 0 && outputPin.isFree()) return outputPin;
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getOutputPin(int index) throws PinNotExistsException {
+        if(index == 0) return outputPin;
+        throw new PinNotExistsException(this, index);
     }
 
     protected Pin getInputPin() {

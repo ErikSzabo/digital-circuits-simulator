@@ -1,8 +1,7 @@
 package hu.erik.digitalcircuits.devices.build;
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 public abstract class Gate extends ConnectableDevice {
     private Pin[] inputPins;
@@ -29,17 +28,15 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     @Override
-    public Pin getInputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index >= inputPins.length) throw new PinNotExists(this, index);
-        if(inputPins[index].isFree()) return inputPins[index];
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getInputPin(int index) throws PinNotExistsException {
+        if(index >= inputPins.length) throw new PinNotExistsException(this, index);
+        return inputPins[index];
     }
 
     @Override
-    public Pin getOutputPin(int index) throws PinAlreadyInUseException, PinNotExists {
-        if(index > 0) throw new PinNotExists(this, index);
-        if(index == 0 && outputPin.isFree()) return outputPin;
-        throw new PinAlreadyInUseException(this, index);
+    public Pin getOutputPin(int index) throws PinNotExistsException {
+        if(index == 0) return outputPin;
+        throw new PinNotExistsException(this, index);
     }
 
     @Override

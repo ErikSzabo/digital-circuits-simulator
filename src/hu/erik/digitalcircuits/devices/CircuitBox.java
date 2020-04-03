@@ -5,7 +5,7 @@ import hu.erik.digitalcircuits.devices.build.MultipinDevice;
 import hu.erik.digitalcircuits.devices.build.Pin;
 import hu.erik.digitalcircuits.errors.BoundException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 
 public class CircuitBox extends MultipinDevice {
@@ -26,9 +26,11 @@ public class CircuitBox extends MultipinDevice {
         try {
             Pin bindPin = d.getInputPin(pinIndex);
             Pin boxPin = getInputPin(boxPinIndex);
+            if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
+            if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
             if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
             getInputPins()[boxPinIndex] = bindPin;
-        } catch (PinAlreadyInUseException | PinNotExists | BoundException err) {
+        } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
             System.err.println(err.getMessage());
         }
     }
@@ -38,9 +40,11 @@ public class CircuitBox extends MultipinDevice {
         try {
             Pin bindPin = d.getOutputPin(pinIndex);
             Pin boxPin = getOutputPin(boxPinIndex);
+            if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
+            if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
             if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
             getOutputPins()[boxPinIndex] = bindPin;
-        } catch (PinAlreadyInUseException | PinNotExists | BoundException err) {
+        } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
             System.err.println(err.getMessage());
         }
     }

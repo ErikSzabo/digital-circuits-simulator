@@ -3,8 +3,11 @@ package hu.erik.digitalcircuits.devices.build;
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
-import hu.erik.digitalcircuits.errors.PinNotExists;
+import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
+/**
+ * Abstract class for Device which implements the connection methods
+ */
 public abstract class ConnectableDevice implements Device {
 
     /**
@@ -37,8 +40,9 @@ public abstract class ConnectableDevice implements Device {
         try {
             Pin outputPin = getFreeOutputPin();
             Pin targetInputPin = device.getInputPin(targetInputIndex);
+            if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
-        } catch(NoMorePinException | PinAlreadyInUseException | PinNotExists err) {
+        } catch(NoMorePinException | PinAlreadyInUseException | PinNotExistsException err) {
             System.err.println(err.getMessage());
         }
         return device;
@@ -58,8 +62,10 @@ public abstract class ConnectableDevice implements Device {
         try {
             Pin outputPin = getOutputPin(outputIndex);
             Pin targetInputPin = device.getInputPin(targetInputIndex);
+            if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, outputIndex);
+            if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
-        } catch (PinAlreadyInUseException | PinNotExists err) {
+        } catch (PinAlreadyInUseException | PinNotExistsException err) {
             System.err.println(err.getMessage());
         }
         return device;
