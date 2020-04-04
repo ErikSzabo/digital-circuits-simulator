@@ -1,7 +1,6 @@
 package hu.erik.digitalcircuits;
 
 import hu.erik.digitalcircuits.devices.*;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
 import hu.erik.digitalcircuits.utils.FileHandler;
 
