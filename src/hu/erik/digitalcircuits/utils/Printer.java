@@ -17,7 +17,7 @@ public class Printer {
         System.err.println(">> " + e.getMessage());
     }
 
-    public static void printStraightLine(String material) {
+    public static void printSeparatorLine(String material) {
         System.out.println(lineBuilder(material, CONSOLEWIDTH));
     }
 

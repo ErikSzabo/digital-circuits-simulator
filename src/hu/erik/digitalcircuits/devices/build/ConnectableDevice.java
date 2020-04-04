@@ -4,6 +4,7 @@ package hu.erik.digitalcircuits.devices.build;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
+import hu.erik.digitalcircuits.utils.Printer;
 
 /**
  * Abstract class for Device which implements the connection methods
@@ -22,7 +23,7 @@ public abstract class ConnectableDevice implements Device {
         try {
             new Cable(getFreeOutputPin(), device.getFreeInputPin());
         } catch (NoMorePinException err) {
-            System.err.println(err.getMessage());
+            Printer.printErr(err);
         }
         return device;
     }
@@ -43,7 +44,7 @@ public abstract class ConnectableDevice implements Device {
             if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
         } catch(NoMorePinException | PinAlreadyInUseException | PinNotExistsException err) {
-            System.err.println(err.getMessage());
+            Printer.printErr(err);
         }
         return device;
     }
@@ -66,7 +67,7 @@ public abstract class ConnectableDevice implements Device {
             if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
         } catch (PinAlreadyInUseException | PinNotExistsException err) {
-            System.err.println(err.getMessage());
+            Printer.printErr(err);
         }
         return device;
     }

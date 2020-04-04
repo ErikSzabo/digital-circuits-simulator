@@ -6,6 +6,7 @@ import hu.erik.digitalcircuits.devices.build.Pin;
 import hu.erik.digitalcircuits.errors.BoundException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
+import hu.erik.digitalcircuits.utils.Printer;
 
 
 public class CircuitBox extends MultipinDevice {
@@ -31,7 +32,7 @@ public class CircuitBox extends MultipinDevice {
             if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
             getInputPins()[boxPinIndex] = bindPin;
         } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
-            System.err.println(err.getMessage());
+            Printer.printErr(err);
         }
     }
 
@@ -45,7 +46,7 @@ public class CircuitBox extends MultipinDevice {
             if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
             getOutputPins()[boxPinIndex] = bindPin;
         } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
-            System.err.println(err.getMessage());
+            Printer.printErr(err);
         }
     }
 

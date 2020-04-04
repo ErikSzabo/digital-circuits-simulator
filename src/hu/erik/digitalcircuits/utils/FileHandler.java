@@ -15,10 +15,10 @@ public class FileHandler {
             fileIn.close();
             return b;
         } catch (IOException i) {
-            i.printStackTrace();
+            Printer.printErr(i);
             return null;
         } catch (ClassNotFoundException c) {
-            System.out.println("Circuit not found!");
+            Printer.printErr(new Exception("Error while loading class!"));
             c.printStackTrace();
             return null;
         }
@@ -31,7 +31,6 @@ public class FileHandler {
             out.writeObject(box);
             out.close();
             fileOut.close();
-            System.out.println("Circuit: [" + box.getName() + "] has been saved successfully!");
         } catch (IOException i) {
             i.printStackTrace();
         }
