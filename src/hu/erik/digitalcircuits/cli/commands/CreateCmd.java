@@ -16,7 +16,7 @@ public class CreateCmd extends Command {
         // FORMAT:
         // create <type> <name> [inputnum] [outputnum]
 
-        if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 3, cmd.length);
+        if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 3, cmd.length - 1);
         if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         String type, name;
@@ -56,6 +56,7 @@ public class CreateCmd extends Command {
                 default:
                     throw new InvalidDeviceTypeException(type);
             }
+            System.out.println("Device added!");
         } catch (RedundantKeyException | NullDeviceException | InvalidDeviceTypeException err) {
             Printer.printErr(err);
         } catch (NumberFormatException | IndexOutOfBoundsException err) {
