@@ -32,6 +32,10 @@ public class DeviceMap {
         return device;
     }
 
+    public String getDeviceType(String name) {
+        return map.get(name).getClass().getName();
+    }
+
     public Set<String> keySet() {
         return map.keySet();
     }

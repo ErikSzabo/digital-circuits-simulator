@@ -1,5 +1,8 @@
 package hu.erik.digitalcircuits.cli;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class DeviceType {
     public static final String SWITCH = "switch";
     public static final String POWER = "powersource";
@@ -10,4 +13,7 @@ public class DeviceType {
     public static final String NORGATE = "norgate";
     public static final String ANDGATE = "andgate";
     public static final String ORGATE = "orgate";
+    public static final ArrayList<String> ALL = new ArrayList<>(
+            Arrays.asList(SWITCH, POWER, INVERTER, JUNCTION, CIRCUITBOX, NANDGATE, NORGATE, ANDGATE, ORGATE)
+    );
 }
