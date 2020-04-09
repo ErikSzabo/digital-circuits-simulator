@@ -20,7 +20,7 @@ public class ListCmd extends Command {
 
         if(cmd.length == 1) {
             for(String name : storage.keySet()) {
-                Printer.println("Name: " + name + "\tType: " + storage.getDeviceType(name));
+                Printer.println("[Name]: " + name + ", [Type]: " + storage.getDeviceType(name));
             }
             Printer.println("Done!");
         } else {
@@ -31,7 +31,7 @@ public class ListCmd extends Command {
             for(String name : storage.keySet()) {
                 String type = storage.getDeviceType(name);
                 if(type.equalsIgnoreCase(cmd[1])) {
-                    Printer.println("Name: " + name + "\tType: " + type);
+                    Printer.println("[Name]: " + name + ", [Type]: " + type);
                 }
             }
             Printer.println("Done!");
