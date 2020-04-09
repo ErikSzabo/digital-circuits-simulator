@@ -108,6 +108,6 @@ public class DeviceCmd extends Command {
     }
 
     private void handleCircuitBox(DeviceMap storage, String[] cmd) {
-        Printer.println("This funcionality hasn't implemented yet, sorry! :(");
+        Printer.println("This functionality hasn't implemented yet, sorry! :(");
     }
 }
