@@ -26,10 +26,10 @@ public class ShowCmd extends Command {
 
             switch (cmd[1]) {
                 case "input":
-                    Printer.println(cmd[2] + " inputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])));
+                    Printer.println(cmd[2] + " inputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])).getValue());
                     break;
                 case "output":
-                    Printer.println(cmd[2] + " outputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])));
+                    Printer.println(cmd[2] + " outputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])).getValue());
                     break;
                 default:
                     throw new InvalidArgumentException(cmd[0], cmd[1]);
