@@ -50,7 +50,7 @@ public class HelpCmd extends Command {
                 "on - turns on the electricity\n" +
                 "off - turns off the electricity\n" +
                 "\n" +
-                "You can use these uniqe functions by typing \"device <your powersource name> <on or off>\"");
+                "You can use these uniqe functions by typing \"power <your powersource name> <on or off>\"");
     }
 
     private void writeSwitchHelpPage() {
@@ -76,10 +76,10 @@ public class HelpCmd extends Command {
                 "\n" +
                 "To create: \"create junction <name> <output pin number>\"\n" +
                 "\n" +
-                "Junction devices gets access to a special connectall function. With this, you can connect multiple devices\n" +
+                "Junction devices have access to a special connectall function. With this, you can connect multiple devices\n" +
                 "to your Junction at the same time\n" +
                 "\n" +
-                "To use this uniqe function, type: \"device <your junction name> connectall <you device names>\"");
+                "To use this uniqe function, type: \"junction <your junction name> connectall <you device names>\"");
     }
 
     private void writeGatesHelpPage() {
@@ -101,14 +101,14 @@ public class HelpCmd extends Command {
                 "\n" +
                 "- Bind your circuit pins to the box:\n" +
                 "     - To bind an input pin, type: \n" +
-                "          \"device <box name> bindinputpin <target device name> <target pin index> <box pin index>\"\n" +
+                "          \"circuitbox <box name> bindinputpin <target device name> <target pin index> <box pin index>\"\n" +
                 "     - To bind an output pin, type:\n" +
-                "          \"device <box name> bindoutputpin <target device name> <target pin index> <box pin index>\"\n" +
+                "          \"circuitbox <box name> bindoutputpin <target device name> <target pin index> <box pin index>\"\n" +
                 "     In order to bind pins, the target device pins can't be connected to anything.\n" +
                 "\n" +
                 "- Save and load\n" +
-                "      - To save, type: \"device <box name> save\"\n" +
-                "      - To load, type: \"device <boxname> load\"\n" +
+                "      - To save, type: \"circuitbox <box name> save\"\n" +
+                "      - To load, type: \"circuitbox <boxname> load\"\n" +
                 "     After loading, you can connect your box as usual.");
     }
 
