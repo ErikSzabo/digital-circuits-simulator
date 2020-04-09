@@ -22,6 +22,7 @@ public class ConnectCmd extends Command{
             Device d1 = storage.get(cmd[1]);
             Device d2 = storage.get(cmd[3]);
             d1.connect(d2);
+            Printer.println("Connected!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
         }

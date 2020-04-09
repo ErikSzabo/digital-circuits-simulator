@@ -20,7 +20,7 @@ public class DeleteCmd extends Command {
 
         try {
             storage.remove(cmd[1]);
-            System.out.println("Device has been deleted!");
+            Printer.println("Device has been deleted!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
         }

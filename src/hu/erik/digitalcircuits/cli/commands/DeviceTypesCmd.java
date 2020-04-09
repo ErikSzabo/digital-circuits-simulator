@@ -15,7 +15,7 @@ public class DeviceTypesCmd extends Command {
         if(cmd.length > 1) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         for(String type : DeviceType.ALL) {
-            System.out.println(type);
+            Printer.println(type);
         }
     }
 }

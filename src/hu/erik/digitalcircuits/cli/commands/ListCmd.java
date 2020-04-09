@@ -22,6 +22,7 @@ public class ListCmd extends Command {
             for(String name : storage.keySet()) {
                 Printer.println("Name: " + name + "\tType: " + storage.getDeviceType(name));
             }
+            Printer.println("Done!");
         } else {
             if(!DeviceType.ALL.contains(cmd[1])) {
                 Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
@@ -33,6 +34,7 @@ public class ListCmd extends Command {
                     Printer.println("Name: " + name + "\tType: " + type);
                 }
             }
+            Printer.println("Done!");
         }
 
     }

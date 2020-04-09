@@ -1,5 +1,6 @@
 package hu.erik.digitalcircuits;
 
+import hu.erik.digitalcircuits.cli.CliController;
 import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
 import hu.erik.digitalcircuits.utils.FileHandler;
@@ -193,8 +194,10 @@ public class DigitalCircuits {
     }
 
     public static void main(String[] args) {
-        kotelezoFeladat();
-        System.out.println("-----------------------------------------------------");
-        szavazogep();
+//        kotelezoFeladat();
+//        System.out.println("-----------------------------------------------------");
+//        szavazogep();
+        CliController cliController = new CliController();
+        cliController.listen();
     }
 }

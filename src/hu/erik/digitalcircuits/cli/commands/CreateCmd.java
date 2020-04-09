@@ -56,7 +56,7 @@ public class CreateCmd extends Command {
                 default:
                     throw new InvalidDeviceTypeException(type);
             }
-            System.out.println("Device added!");
+            Printer.println("Device added!");
         } catch (RedundantKeyException | NullDeviceException | InvalidDeviceTypeException err) {
             Printer.printErr(err);
         } catch (NumberFormatException | IndexOutOfBoundsException err) {
