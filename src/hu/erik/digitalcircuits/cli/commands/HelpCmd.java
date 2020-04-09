@@ -54,6 +54,7 @@ public class HelpCmd extends Command {
     }
 
     private void writeSwitchHelpPage() {
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("Switch\n" +
                 "\n" +
                 "Used to simulate circuit variables. You can set your variables in your circuits with switches.\n" +
@@ -65,10 +66,12 @@ public class HelpCmd extends Command {
                 "on - generete 1 on the output\n" +
                 "off - generate 0 on the output\n" +
                 "\n" +
-                "You can use these uniqe functions by typing \"device <your switch name> <on or off>\"");
+                "You can use these uniqe functions by typing \"switch <your switch name> <on or off>\"");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
     private void writeJunctionHelpPage() {
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("Junction\n" +
                 "\n" +
                 "Junctions are usally used to duplicate signals. For example, you can connect your PowerSource to a\n" +
@@ -80,18 +83,22 @@ public class HelpCmd extends Command {
                 "to your Junction at the same time\n" +
                 "\n" +
                 "To use this uniqe function, type: \"junction <your junction name> connectall <you device names separated by spaces>\"");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
     private void writeGatesHelpPage() {
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("Gates\n" +
                 "\n" +
                 "A Gate or Inverter is responsible for the circuit logic.\n" +
                 "For more information about gates, visit Google :) \n" +
                 "\n" +
                 "To create a Gate: \"create <gatetype or inverter> <name> [input pin number if it is a gate] ");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
     private void writeCircuitBoxHelpPage() {
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("CircuitBox\n" +
                 "\n" +
                 "With this tool, you can put your whole circuit to box. And the reason to that, well, you can save and load\n" +
@@ -110,6 +117,7 @@ public class HelpCmd extends Command {
                 "      - To save, type: \"circuitbox <box name> save\"\n" +
                 "      - To load, type: \"circuitbox <boxname> load\"\n" +
                 "     After loading, you can connect your box as usual.");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
 }
