@@ -97,6 +97,7 @@ public class DeviceCmd extends Command {
                 // these devices won't be connected to the junction.
                 for(Device d : devicesToConnect) {
                     junction.connect(d);
+                    Printer.println("Connected!");
                 }
             }
         } catch (ClassCastException err) {
@@ -107,6 +108,6 @@ public class DeviceCmd extends Command {
     }
 
     private void handleCircuitBox(DeviceMap storage, String[] cmd) {
-
+        Printer.println("This funcionality hasn't implemented yet, sorry! :(");
     }
 }
