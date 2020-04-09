@@ -49,7 +49,11 @@ public class CliController {
             String[] splittedCMD = cmd.split(" ");
 
             try {
-                commands.get(splittedCMD[0]).action(devices, splittedCMD);
+                if(DeviceType.ALL.contains(splittedCMD[0])) {
+                    commands.get("device").action(devices, splittedCMD);
+                } else {
+                    commands.get(splittedCMD[0]).action(devices, splittedCMD);
+                }
             } catch (NotEnoughArgsException err) {
                 Printer.printErr(err);
             } catch (NullPointerException err) {
