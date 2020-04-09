@@ -39,6 +39,7 @@ public class HelpCmd extends Command {
     }
 
     private void writePowerHelpPage() {
+        System.out.println("--------------------------------------------------------------------------------------------");
         System.out.println("PowerSource\n" +
                 "\n" +
                 "Used for giving eletricity to switches, or to generate constant 0 or 1 signal to a device.\n" +
@@ -51,6 +52,7 @@ public class HelpCmd extends Command {
                 "off - turns off the electricity\n" +
                 "\n" +
                 "You can use these uniqe functions by typing \"power <your powersource name> <on or off>\"");
+        System.out.println("--------------------------------------------------------------------------------------------");
     }
 
     private void writeSwitchHelpPage() {
