@@ -17,7 +17,6 @@ public class MenuCmd extends Command {
         Printer.println("list [type]");
         Printer.println("connect <name> to <name>");
         Printer.println("show <input | output> <name> <index>");
-        Printer.println("show info <name>");
         Printer.println("device <name> <uniqe method> [method arguments]");
         Printer.println("help <type>");
         Printer.println("exit");
