@@ -79,7 +79,7 @@ public class HelpCmd extends Command {
                 "Junction devices have access to a special connectall function. With this, you can connect multiple devices\n" +
                 "to your Junction at the same time\n" +
                 "\n" +
-                "To use this uniqe function, type: \"junction <your junction name> connectall <you device names>\"");
+                "To use this uniqe function, type: \"junction <your junction name> connectall <you device names separated by spaces>\"");
     }
 
     private void writeGatesHelpPage() {
