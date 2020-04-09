@@ -16,7 +16,7 @@ public class HelpCmd extends Command {
         // FORMAT
         // help <type>
 
-        if(cmd.length < 2) throw new NotEnoughArgsException(cmd[0], 2, cmd.length - 1);
+        if(cmd.length < 2) throw new NotEnoughArgsException(cmd[0], 1, cmd.length - 1);
 
         if(!DeviceType.ALL.contains(cmd[1].toLowerCase())) {
             Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
