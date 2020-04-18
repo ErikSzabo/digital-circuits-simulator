@@ -21,7 +21,9 @@ public abstract class ConnectableDevice implements Device {
     @Override
     public Device connect(Device device) {
         try {
-            new Cable(getFreeOutputPin(), device.getFreeInputPin());
+            Pin outputPin = getFreeOutputPin();
+            new Cable(outputPin, device.getFreeInputPin());
+            transferValue(outputPin);
         } catch (NoMorePinException err) {
             Printer.printErr(err);
         }
@@ -43,6 +45,7 @@ public abstract class ConnectableDevice implements Device {
             Pin targetInputPin = device.getInputPin(targetInputIndex);
             if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
+            transferValue(outputPin);
         } catch(NoMorePinException | PinAlreadyInUseException | PinNotExistsException err) {
             Printer.printErr(err);
         }
@@ -66,6 +69,7 @@ public abstract class ConnectableDevice implements Device {
             if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, outputIndex);
             if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
             new Cable(outputPin, targetInputPin);
+            transferValue(outputPin);
         } catch (PinAlreadyInUseException | PinNotExistsException err) {
             Printer.printErr(err);
         }
