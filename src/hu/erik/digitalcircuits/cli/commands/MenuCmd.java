@@ -21,8 +21,12 @@ public class MenuCmd extends Command {
         System.out.println("\tlists created devices.");
         Printer.println("connect <name> to <name>");
         System.out.println("\tConnects the first device first output pin to the second device first free input pin.");
+        Printer.println("disconnect <name> from <name>");
+        System.out.println("\tDisconnects the first device output pin from the second device input pin.");
         Printer.println("show <input | output> <name> <index>");
         System.out.println("\tShow the current value for the given pin on the given device.");
+        Printer.println("devicetypes");
+        System.out.println("\tLists all available device type.");
         Printer.println("help <type>");
         System.out.println("\tShows help for the specified device type.");
         System.out.println("\tYou can view here the unique methods for a device.");
