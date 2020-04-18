@@ -1,6 +1,6 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.devices.build.Device;
+import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.errors.clierror.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.clierror.NullDeviceException;
 import hu.erik.digitalcircuits.errors.clierror.RedundantKeyException;

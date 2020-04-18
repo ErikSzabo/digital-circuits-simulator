@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.devices.build.Device;
+import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.errors.clierror.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.clierror.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;

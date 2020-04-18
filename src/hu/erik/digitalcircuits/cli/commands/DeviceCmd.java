@@ -5,7 +5,7 @@ import hu.erik.digitalcircuits.cli.DeviceType;
 import hu.erik.digitalcircuits.devices.Junction;
 import hu.erik.digitalcircuits.devices.PowerSource;
 import hu.erik.digitalcircuits.devices.Switch;
-import hu.erik.digitalcircuits.devices.build.Device;
+import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.errors.clierror.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.clierror.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;

@@ -1,6 +1,6 @@
 package hu.erik.digitalcircuits.errors;
 
-import hu.erik.digitalcircuits.devices.build.Device;
+import hu.erik.digitalcircuits.devices.Device;
 
 public class NoMorePinException extends Exception {
     private Device device;

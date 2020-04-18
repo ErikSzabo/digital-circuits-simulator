@@ -1,4 +1,4 @@
-package hu.erik.digitalcircuits.devices.build;
+package hu.erik.digitalcircuits.devices;
 
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
@@ -74,6 +74,28 @@ public abstract class ConnectableDevice implements Device {
             Printer.printErr(err);
         }
         return device;
+    }
+
+    /**
+     * Disconnects this device all output pins from the
+     * target device all input pins.
+     *
+     * @param device    The device we disconnect from
+     */
+    @Override
+    public void disconnect(Device device) {
+        Pin[] outputPins = getAllOutputPins();
+        for(Pin p : outputPins) {
+            Pin targetPin = p.getConnectionCable().getOtherPin(p);
+            Device targetDevice = targetPin.getParentDevice();
+            if(targetDevice == device) {
+                p.setConnectionCable(null);
+                targetPin.setConnectionCable(null);
+                targetPin.setValue(false);
+                targetDevice.calcOutput();
+                targetDevice.sendOutput();
+            }
+        }
     }
 
     /**

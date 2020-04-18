@@ -1,4 +1,4 @@
-package hu.erik.digitalcircuits.devices.build;
+package hu.erik.digitalcircuits.devices;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package hu.erik.digitalcircuits.devices.build;
+package hu.erik.digitalcircuits.devices;
 
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
@@ -17,7 +17,7 @@ public interface Device extends Serializable {
     void calcOutput();
 
     /**
-     * Method to find an unconnected input pin on the Device
+     * Method to find an unconnected input pin on the Device.
      *
      * @return Pin or null if there isn't a free input pin
      * @throws NoMorePinException If the device doesn't have any more free input pins.
@@ -25,7 +25,7 @@ public interface Device extends Serializable {
     Pin getFreeInputPin() throws NoMorePinException;
 
     /**
-     * Method to find an unconnected output pin on the Device
+     * Method to find an unconnected output pin on the Device.
      *
      * @return Pin or null if there isn't a free output pin
      * @throws NoMorePinException If the device doesn't have any more free output pins.
@@ -49,6 +49,20 @@ public interface Device extends Serializable {
      * @throws PinNotExistsException If the selected pin is not exists
      */
     Pin getOutputPin(int index) throws PinNotExistsException;
+
+    /**
+     * Method to get all of the input pins on the Device.
+     *
+     * @return All of the input pins on the Device.
+     */
+    Pin[] getAllInputPins();
+
+    /**
+     * Method to get all of the output pins on the Device.
+     *
+     * @return All of the output pins on the Device.
+     */
+    Pin[] getAllOutputPins();
 
     /**
      * Connects this device next free output pin to the
@@ -79,6 +93,15 @@ public interface Device extends Serializable {
      * @return Target device
      */
     Device connect(Device device, int outputIndex, int targetInputIndex);
+
+
+    /**
+     * Disconnects this device output pin from the
+     * target device input pin.
+     *
+     * @param device           The device we disconnect from
+     */
+    void disconnect(Device device);
 
     /**
      * This method should take care of signal transfer and auto update

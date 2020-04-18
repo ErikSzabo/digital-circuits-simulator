@@ -194,9 +194,6 @@ public class DigitalCircuits {
     }
 
     public static void main(String[] args) {
-//        kotelezoFeladat();
-//        System.out.println("-----------------------------------------------------");
-//        szavazogep();
         CliController cliController = new CliController();
         cliController.listen();
     }
