@@ -90,8 +90,10 @@ public abstract class ConnectableDevice implements Device {
             Device targetDevice = targetPin.getParentDevice();
             if(targetDevice == device) {
                 p.setConnectionCable(null);
+                p.setAvailability(true);
                 targetPin.setConnectionCable(null);
                 targetPin.setValue(false);
+                targetPin.setAvailability(true);
                 targetDevice.calcOutput();
                 targetDevice.sendOutput();
             }
