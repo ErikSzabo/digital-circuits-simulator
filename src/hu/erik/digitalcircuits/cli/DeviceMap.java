@@ -6,6 +6,7 @@ import hu.erik.digitalcircuits.errors.RedundantKeyException;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class DeviceMap {
@@ -31,8 +32,8 @@ public class DeviceMap {
         return device;
     }
 
-    public HashMap<String, Device> getMap() {
-        return (HashMap<String, Device>) Collections.unmodifiableMap(map);
+    public Map<String, Device> getMap() {
+        return Collections.unmodifiableMap(map);
     }
 
 }
