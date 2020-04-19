@@ -9,7 +9,7 @@ public class Printer {
 
     public static void printTitle(String title) {
         int remainingWidth = CONSOLEWIDTH - title.length() - 2;
-        String side = lineBuilder("-", remainingWidth);
+        String side = lineBuilder("-", remainingWidth/2);
         System.out.println(side + " " + title + " " + side);
     }
 
