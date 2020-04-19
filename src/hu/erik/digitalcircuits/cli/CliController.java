@@ -25,6 +25,7 @@ public class CliController {
         commands.put("list", new ListCmd("list"));
         commands.put("menu", new MenuCmd("menu"));
         commands.put("show", new ShowCmd("show"));
+        commands.put("disconnect", new DisconnectCmd("disconnect"));
     }
 
     public void listen() {
