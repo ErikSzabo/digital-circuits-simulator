@@ -4,8 +4,17 @@ import hu.erik.digitalcircuits.devices.CircuitBox;
 
 import java.io.*;
 
+/**
+ * Class to save and load circuits.
+ */
 public class FileHandler {
 
+    /**
+     * Load a circuit with the given name.
+     *
+     * @param circuitName Name of the circuit you want to load
+     * @return Loaded circuit or null
+     */
     public static CircuitBox loadCircuit(String circuitName) {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(circuitName + ".ser"));
@@ -21,6 +30,11 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Save a given circuit.
+     *
+     * @param box CircuitBox you want to save
+     */
     public static void saveCircuit(CircuitBox box) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(box.getName() + ".ser"));
