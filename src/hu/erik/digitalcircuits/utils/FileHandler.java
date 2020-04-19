@@ -8,31 +8,26 @@ public class FileHandler {
 
     public static CircuitBox loadCircuit(String circuitName) {
         try {
-            FileInputStream fileIn = new FileInputStream(circuitName + ".ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            CircuitBox b = (CircuitBox) in.readObject();
-            in.close();
-            fileIn.close();
-            return b;
-        } catch (IOException i) {
-            Printer.printErr(i);
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(circuitName + ".ser"));
+            CircuitBox box = (CircuitBox) inputStream.readObject();
+            inputStream.close();
+            return box;
+        } catch (IOException err) {
+            Printer.printErr(err);
             return null;
-        } catch (ClassNotFoundException c) {
-            Printer.printErr(new Exception("Error while loading class!"));
-            c.printStackTrace();
+        } catch (ClassNotFoundException err) {
+            Printer.printErr(new Exception("Error while loading circuit!"));
             return null;
         }
     }
 
     public static void saveCircuit(CircuitBox box) {
         try {
-            FileOutputStream fileOut = new FileOutputStream(box.getName() + ".ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(box);
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(box.getName() + ".ser"));
+            outputStream.writeObject(box);
+            outputStream.close();
+        } catch (IOException err) {
+            Printer.printErr(err);
         }
     }
 }
