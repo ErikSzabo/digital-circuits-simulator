@@ -2,15 +2,16 @@ package hu.erik.digitalcircuits.errors;
 
 import hu.erik.digitalcircuits.devices.CircuitBox;
 
-public class BoundException extends Exception {
-    private CircuitBox box;
+public class BoundException extends DeviceException {
+    private String boxName;
 
     public BoundException(CircuitBox box) {
-        this.box = box;
+        super(box);
+        this.boxName = box.getName();
     }
 
     @Override
     public String getMessage() {
-        return "[" +box + "] " + box.getName() + " >> this pin is already bound!";
+        return "[" + getDevice() + "] " + boxName + " >> this pin is already bound!";
     }
 }

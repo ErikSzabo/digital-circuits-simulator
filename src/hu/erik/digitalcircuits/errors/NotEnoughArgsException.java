@@ -1,13 +1,12 @@
-package hu.erik.digitalcircuits.errors.clierror;
+package hu.erik.digitalcircuits.errors;
 
 
-public class NotEnoughArgsException extends Exception {
-    private String cmd;
+public class NotEnoughArgsException extends CliException {
     private int reqArgNum;
     private int givenArgNum;
 
     public NotEnoughArgsException(String cmd, int reqArgNum, int givenArgNum) {
-        this.cmd = cmd;
+        super(cmd);
         this.reqArgNum = reqArgNum;
         this.givenArgNum = givenArgNum;
     }
@@ -15,7 +14,7 @@ public class NotEnoughArgsException extends Exception {
     @Override
     public String getMessage() {
         return "In command: " +
-                cmd +
+                getCmdOrName() +
                 ", You only specified " +
                 givenArgNum +
                 " argument(s). You have to specify at least " +

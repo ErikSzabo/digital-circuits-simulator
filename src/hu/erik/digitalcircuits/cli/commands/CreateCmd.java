@@ -3,7 +3,10 @@ package hu.erik.digitalcircuits.cli.commands;
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.devices.DeviceType;
 import hu.erik.digitalcircuits.devices.*;
-import hu.erik.digitalcircuits.errors.clierror.*;
+import hu.erik.digitalcircuits.errors.InvalidArgumentException;
+import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.RedundantKeyException;
+import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 public class CreateCmd extends Command {
@@ -16,7 +19,7 @@ public class CreateCmd extends Command {
         // FORMAT:
         // create <type> <name> [inputnum] [outputnum]
 
-        if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 3, cmd.length - 1);
+        if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 2, cmd.length - 1);
         if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         String type, name;
@@ -54,10 +57,10 @@ public class CreateCmd extends Command {
                     storage.add(name, new AndGate(Integer.parseInt(cmd[3])));
                     break;
                 default:
-                    throw new InvalidDeviceTypeException(type);
+                    throw new InvalidArgumentException(cmd[0], type);
             }
             Printer.println("Device added!");
-        } catch (RedundantKeyException | NullDeviceException | InvalidDeviceTypeException err) {
+        } catch (RedundantKeyException | InvalidArgumentException err) {
             Printer.printErr(err);
         } catch (NumberFormatException | IndexOutOfBoundsException err) {
             Printer.printErr(new Exception("Invalid or missing parameters!"));

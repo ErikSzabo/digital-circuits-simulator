@@ -1,9 +1,8 @@
 package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.devices.Device;
-import hu.erik.digitalcircuits.errors.clierror.DeviceNotExistsException;
-import hu.erik.digitalcircuits.errors.clierror.NullDeviceException;
-import hu.erik.digitalcircuits.errors.clierror.RedundantKeyException;
+import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
+import hu.erik.digitalcircuits.errors.RedundantKeyException;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -15,9 +14,8 @@ public class DeviceMap {
         this.map = new HashMap<>();
     }
 
-    public void add(String name, Device device) throws RedundantKeyException, NullDeviceException {
+    public void add(String name, Device device) throws RedundantKeyException {
         if(map.get(name) != null) throw new RedundantKeyException(name);
-        if(device == null) throw new NullDeviceException();
         map.put(name, device);
     }
 

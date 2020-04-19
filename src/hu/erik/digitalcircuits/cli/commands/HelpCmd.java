@@ -2,8 +2,8 @@ package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.devices.DeviceType;
-import hu.erik.digitalcircuits.errors.clierror.InvalidArgumentException;
-import hu.erik.digitalcircuits.errors.clierror.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.InvalidArgumentException;
+import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 public class HelpCmd extends Command {

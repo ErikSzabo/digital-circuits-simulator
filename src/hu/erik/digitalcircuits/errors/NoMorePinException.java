@@ -2,17 +2,16 @@ package hu.erik.digitalcircuits.errors;
 
 import hu.erik.digitalcircuits.devices.Device;
 
-public class NoMorePinException extends Exception {
-    private Device device;
+public class NoMorePinException extends DeviceException {
     private String pinType;
 
     public NoMorePinException(Device device, String pinType) {
-        this.device = device;
+        super(device);
         this.pinType = pinType;
     }
 
     @Override
     public String getMessage() {
-        return device + "doesn't have more " + pinType + "pin.";
+        return getDevice() + " doesn't have more " + pinType + "pin.";
     }
 }

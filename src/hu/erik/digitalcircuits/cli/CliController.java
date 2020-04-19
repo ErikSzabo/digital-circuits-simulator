@@ -2,7 +2,7 @@ package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.cli.commands.*;
 import hu.erik.digitalcircuits.devices.DeviceType;
-import hu.erik.digitalcircuits.errors.clierror.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 import java.util.HashMap;

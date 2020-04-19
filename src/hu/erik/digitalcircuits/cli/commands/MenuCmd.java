@@ -18,9 +18,9 @@ public class MenuCmd extends Command {
         Printer.println("delete <name>");
         System.out.println("\tDelete a device with the given name.");
         Printer.println("list [type]");
-        System.out.println("\tlists created devices.");
+        System.out.println("\tLists created devices.");
         Printer.println("connect <name> to <name>");
-        System.out.println("\tConnects the first device first output pin to the second device first free input pin.");
+        System.out.println("\tConnects the first device first free output pin to the second device first free input pin.");
         Printer.println("disconnect <name> from <name>");
         System.out.println("\tDisconnects the first device output pin from the second device input pin.");
         Printer.println("show <input | output> <name> <index>");

@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.errors.clierror.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 
 public abstract class Command {
     private String name;
