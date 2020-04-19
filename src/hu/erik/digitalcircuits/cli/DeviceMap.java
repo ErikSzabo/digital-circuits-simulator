@@ -4,6 +4,7 @@ import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.RedundantKeyException;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -30,11 +31,8 @@ public class DeviceMap {
         return device;
     }
 
-    public String getDeviceType(String name) {
-        return map.get(name).toString();
+    public HashMap<String, Device> getMap() {
+        return (HashMap<String, Device>) Collections.unmodifiableMap(map);
     }
 
-    public Set<String> keySet() {
-        return map.keySet();
-    }
 }

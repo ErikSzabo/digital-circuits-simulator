@@ -10,27 +10,39 @@ public class MenuCmd extends Command {
 
     @Override
     public void action(DeviceMap storage, String[] cmd) {
+        String[] commands = {
+                "menu",
+                "create <type> <name> [inputnum] [outputnum]",
+                "delete <name>",
+                "list [type]",
+                "connect <name> to <name>",
+                "disconnect <name> from <name>",
+                "show <input | output> <name> <index>",
+                "devicetypes",
+                "help <type>",
+                "exit"
+        };
+
+        String[] descriptions = {
+                "\tShows the menu.",
+                "\tCreates a device with the given parameters.",
+                "\tDelete a device with the given name.",
+                "\tLists created devices.",
+                "\tConnects the first device first free output pin to the second device first free input pin.",
+                "\tDisconnects the first device output pin from the second device input pin.",
+                "\tShow the current value for the given pin on the given device.",
+                "\tLists all available device type.",
+                "\tShows help for the specified device type.\n\tYou can view here the unique methods for a device.",
+                "\tCloses the program."
+        };
+
         Printer.printTitle("Digital Circuits");
-        Printer.println("menu");
-        System.out.println("\tShows the menu.");
-        Printer.println("create <type> <name> [inputnum] [outputnum]");
-        System.out.println("\tCreates a device with the given parameters.");
-        Printer.println("delete <name>");
-        System.out.println("\tDelete a device with the given name.");
-        Printer.println("list [type]");
-        System.out.println("\tLists created devices.");
-        Printer.println("connect <name> to <name>");
-        System.out.println("\tConnects the first device first free output pin to the second device first free input pin.");
-        Printer.println("disconnect <name> from <name>");
-        System.out.println("\tDisconnects the first device output pin from the second device input pin.");
-        Printer.println("show <input | output> <name> <index>");
-        System.out.println("\tShow the current value for the given pin on the given device.");
-        Printer.println("devicetypes");
-        System.out.println("\tLists all available device type.");
-        Printer.println("help <type>");
-        System.out.println("\tShows help for the specified device type.");
-        System.out.println("\tYou can view here the unique methods for a device.");
-        Printer.println("exit");
+
+        for (int i = 0; i < commands.length; i++) {
+            Printer.println(commands[i]);
+            System.out.println(descriptions[i]);
+        }
+
         Printer.printSeparatorLine("-");
     }
 }

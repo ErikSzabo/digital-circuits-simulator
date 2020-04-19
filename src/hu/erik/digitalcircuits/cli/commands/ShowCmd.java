@@ -33,8 +33,10 @@ public class ShowCmd extends Command {
                 default:
                     throw new InvalidArgumentException(cmd[0], cmd[1]);
             }
-        } catch (InvalidArgumentException | DeviceNotExistsException | PinNotExistsException | NumberFormatException err) {
+        } catch (InvalidArgumentException | DeviceNotExistsException | PinNotExistsException  err) {
             Printer.printErr(err);
+        } catch (NumberFormatException err) {
+            Printer.printErr(new InvalidArgumentException(cmd[0], cmd[3]));
         }
 
 
