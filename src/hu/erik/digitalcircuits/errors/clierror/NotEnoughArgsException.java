@@ -20,6 +20,6 @@ public class NotEnoughArgsException extends Exception {
                 givenArgNum +
                 " argument(s). You have to specify at least " +
                 reqArgNum +
-                " argument!";
+                " arguments!";
     }
 }

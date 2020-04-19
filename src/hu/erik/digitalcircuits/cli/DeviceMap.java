@@ -33,8 +33,7 @@ public class DeviceMap {
     }
 
     public String getDeviceType(String name) {
-        String[] raw = map.get(name).getClass().getName().split("\\.");
-        return raw[raw.length - 1];
+        return map.get(name).toString();
     }
 
     public Set<String> keySet() {

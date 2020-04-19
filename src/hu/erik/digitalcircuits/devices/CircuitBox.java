@@ -47,7 +47,7 @@ public class CircuitBox extends MultipinDevice {
             Pin boxPin = getInputPin(boxPinIndex);
             if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
             if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
-            if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
+            if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
             getAllInputPins()[boxPinIndex] = bindPin;
         } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
             Printer.printErr(err);
@@ -69,7 +69,7 @@ public class CircuitBox extends MultipinDevice {
             Pin boxPin = getOutputPin(boxPinIndex);
             if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
             if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
-            if(!boxPin.getParentDevice().toString().equals("CircuitBox")) throw new BoundException(this);
+            if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
             getAllOutputPins()[boxPinIndex] = bindPin;
         } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
             Printer.printErr(err);
@@ -94,6 +94,6 @@ public class CircuitBox extends MultipinDevice {
      */
     @Override
     public String toString() {
-        return "CircuitBox";
+        return DeviceType.CIRCUITBOX;
     }
 }

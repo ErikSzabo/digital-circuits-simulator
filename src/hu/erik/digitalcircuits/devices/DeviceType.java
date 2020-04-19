@@ -1,4 +1,4 @@
-package hu.erik.digitalcircuits.cli;
+package hu.erik.digitalcircuits.devices;
 
 import java.util.ArrayList;
 import java.util.Arrays;

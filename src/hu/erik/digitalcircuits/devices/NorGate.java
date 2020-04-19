@@ -31,6 +31,6 @@ public class NorGate extends Gate {
 
     @Override
     public String toString() {
-        return "NorGate";
+        return DeviceType.NORGATE;
     }
 }

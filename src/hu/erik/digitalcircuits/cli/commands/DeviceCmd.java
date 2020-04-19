@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.cli.DeviceType;
+import hu.erik.digitalcircuits.devices.DeviceType;
 import hu.erik.digitalcircuits.devices.Junction;
 import hu.erik.digitalcircuits.devices.PowerSource;
 import hu.erik.digitalcircuits.devices.Switch;
@@ -25,7 +25,7 @@ public class DeviceCmd extends Command {
 
         if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 4, cmd.length - 1);
 
-        switch (cmd[0]) {
+        switch (cmd[0].toLowerCase()) {
             case DeviceType.JUNCTION:
                 handleJunction(storage, cmd);
                 break;

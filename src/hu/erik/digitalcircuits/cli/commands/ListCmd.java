@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.cli.DeviceType;
+import hu.erik.digitalcircuits.devices.DeviceType;
 import hu.erik.digitalcircuits.errors.clierror.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.clierror.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;

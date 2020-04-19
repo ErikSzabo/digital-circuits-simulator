@@ -16,6 +16,6 @@ public class Inverter extends SimpleDevice {
 
     @Override
     public String toString() {
-        return "Inverter";
+        return DeviceType.INVERTER;
     }
 }

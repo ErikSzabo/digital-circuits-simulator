@@ -18,7 +18,7 @@ public class ShowCmd extends Command {
         // FORMAT
         // show <output | input> <name> <index>
 
-        if(cmd.length < 4) throw new NotEnoughArgsException(cmd[0], 4, cmd.length - 1);
+        if(cmd.length < 4) throw new NotEnoughArgsException(cmd[0], 3, cmd.length - 1);
 
         try {
             Device device = storage.get(cmd[2]);
