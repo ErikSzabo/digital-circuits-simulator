@@ -31,6 +31,6 @@ public class MenuCmd extends Command {
         System.out.println("\tShows help for the specified device type.");
         System.out.println("\tYou can view here the unique methods for a device.");
         Printer.println("exit");
-        Printer.printTitle("");
+        Printer.printSeparatorLine("-");
     }
 }
