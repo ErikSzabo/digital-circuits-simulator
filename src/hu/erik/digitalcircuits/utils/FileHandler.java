@@ -1,8 +1,11 @@
 package hu.erik.digitalcircuits.utils;
 
 import hu.erik.digitalcircuits.devices.CircuitBox;
+import hu.erik.digitalcircuits.devices.Pin;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Class to save and load circuits.
@@ -36,7 +39,16 @@ public class FileHandler {
      * @param box CircuitBox you want to save
      */
     public static void saveCircuit(CircuitBox box) {
+        ArrayList<Pin> pins = new ArrayList<>();
+        pins.addAll(Arrays.asList(box.getAllInputPins()));
+        pins.addAll(Arrays.asList(box.getAllOutputPins()));
         try {
+            for(Pin p : pins) {
+                if(!p.isFree()) {
+                    Printer.printErr(new Exception("You can only save a box if its input and output pins are not connected to anything!"));
+                    return;
+                }
+            }
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(box.getName() + ".ser"));
             outputStream.writeObject(box);
             outputStream.close();
