@@ -8,10 +8,16 @@ import hu.erik.digitalcircuits.utils.Printer;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Class to handle CLI events or commands.
+ */
 public class CliController {
     private DeviceMap devices;
     private HashMap<String, Command> commands;
 
+    /**
+     * Default constructor to initialize the store, and the commands.
+     */
     public CliController() {
         devices = new DeviceMap();
         commands = new HashMap<>();
@@ -28,6 +34,9 @@ public class CliController {
         commands.put("disconnect", new DisconnectCmd("disconnect"));
     }
 
+    /**
+     * Method to listen for commands in an infinite loop.
+     */
     public void listen() {
         Scanner sc = new Scanner(System.in);
 
