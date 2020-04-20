@@ -36,6 +36,15 @@ public class Printer {
     }
 
     /**
+     * Prints the given error's message with a ">>" prefix.
+     *
+     * @param msg Error message you want to print
+     */
+    public static void printErr(String msg) {
+        System.err.println(">> " + msg);
+    }
+
+    /**
      * Prints a simple separator line by duplicating the string that you gave it.
      *
      * @param material Material of the line
