@@ -59,8 +59,8 @@ public class CliController {
             } catch (NotEnoughArgsException err) {
                 Printer.printErr(err);
             } catch (NullPointerException err) {
-                Printer.printErr(new Exception("There isn't any command with this name: " + splittedCMD[0] + "!"));
-                Printer.printErr(new Exception("Too see the available commands, use the menu command!"));
+                Printer.printErr("There isn't any command with this name: " + splittedCMD[0] + "!");
+                Printer.printErr("Too see the available commands, use the menu command!");
             }
 
         }

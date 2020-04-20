@@ -31,12 +31,12 @@ public class ShowCmd extends Command {
                     Printer.println(cmd[2] + " outputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])).getValue());
                     break;
                 default:
-                    throw new InvalidArgumentException(cmd[0], cmd[1]);
+                    Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
             }
-        } catch (InvalidArgumentException | DeviceNotExistsException | PinNotExistsException  err) {
+        } catch (DeviceNotExistsException | PinNotExistsException  err) {
             Printer.printErr(err);
         } catch (NumberFormatException err) {
-            Printer.printErr(new InvalidArgumentException(cmd[0], cmd[3]));
+            Printer.printErr("Pin index must be number! (counting starts at 0)");
         }
 
 

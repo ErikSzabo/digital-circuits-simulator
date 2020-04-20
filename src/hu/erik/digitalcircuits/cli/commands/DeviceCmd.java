@@ -119,7 +119,7 @@ public class DeviceCmd extends Command {
             if(cmd[2].equalsIgnoreCase("load")) {
                 box = FileHandler.loadCircuit(cmd[1]);
                 if(box == null) {
-                    Printer.printErr(new Exception("There isn't any saved circuit with this name: " + cmd[1]));
+                    Printer.printErr("There isn't any saved circuit with this name: " + cmd[1]);
                     return;
                 }
                 storage.add(box.getName(), box);
@@ -146,14 +146,14 @@ public class DeviceCmd extends Command {
             }
             // None of the above
             else {
-                Printer.printErr(new Exception("Invalid unique method!"));
+                Printer.printErr("Invalid unique method!");
             }
         } catch (RedundantKeyException | DeviceNotExistsException err) {
             Printer.printErr(err);
         } catch (NumberFormatException err) {
-            Printer.printErr(new Exception("Pin indexes must be numbers!"));
+            Printer.printErr("Pin indexes must be numbers!");
         } catch (ClassCastException err) {
-            Printer.printErr(new Exception("You should try this again with a circuit box, shouldn't you?"));
+            Printer.printErr("You should try this again with a circuit box, shouldn't you?");
         }
 
     }

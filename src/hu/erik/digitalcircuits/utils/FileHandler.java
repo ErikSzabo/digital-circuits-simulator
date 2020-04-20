@@ -28,7 +28,7 @@ public class FileHandler {
             Printer.printErr(err);
             return null;
         } catch (ClassNotFoundException err) {
-            Printer.printErr(new Exception("Error while loading circuit!"));
+            Printer.printErr("Error while loading circuit!");
             return null;
         }
     }
@@ -45,7 +45,7 @@ public class FileHandler {
         try {
             for(Pin p : pins) {
                 if(!p.isFree()) {
-                    Printer.printErr(new Exception("You can only save a box if its input and output pins are not connected to anything!"));
+                    Printer.printErr("You can only save a box if its input and output pins are not connected to anything!");
                     return;
                 }
             }

@@ -57,13 +57,14 @@ public class CreateCmd extends Command {
                     storage.add(name, new AndGate(Integer.parseInt(cmd[3])));
                     break;
                 default:
-                    throw new InvalidArgumentException(cmd[0], type);
+                    Printer.printErr(new InvalidArgumentException(cmd[0], type));
+                    return;
             }
             Printer.println("Device added!");
-        } catch (RedundantKeyException | InvalidArgumentException err) {
+        } catch (RedundantKeyException err) {
             Printer.printErr(err);
         } catch (NumberFormatException | IndexOutOfBoundsException err) {
-            Printer.printErr(new Exception("Invalid or missing parameters!"));
+            Printer.printErr("Invalid or missing parameters!");
         }
     }
 }
