@@ -129,7 +129,6 @@ public class DeviceCmd extends Command {
             else if(cmd[2].equalsIgnoreCase("save")) {
                 box = (CircuitBox) storage.get(cmd[1]);
                 FileHandler.saveCircuit(box);
-                Printer.println(cmd[1] + " saved successfully!");
             }
             // Bind input pin command
             else if(cmd[2].equalsIgnoreCase("bindinputpin")) {

@@ -40,6 +40,7 @@ public class FileHandler {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(box.getName() + ".ser"));
             outputStream.writeObject(box);
             outputStream.close();
+            Printer.println("Saved successfully!");
         } catch (IOException err) {
             Printer.printErr(err);
         }
