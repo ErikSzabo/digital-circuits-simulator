@@ -1,13 +1,11 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.devices.DeviceType;
-import hu.erik.digitalcircuits.devices.Junction;
-import hu.erik.digitalcircuits.devices.PowerSource;
-import hu.erik.digitalcircuits.devices.Switch;
-import hu.erik.digitalcircuits.devices.Device;
+import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.RedundantKeyException;
+import hu.erik.digitalcircuits.utils.FileHandler;
 import hu.erik.digitalcircuits.utils.Printer;
 
 import java.util.ArrayList;
@@ -39,6 +37,7 @@ public class DeviceCmd extends Command {
                 handlePower(storage, cmd);
                 break;
             default:
+                Printer.printErr(new Exception("There isn't any special function for type: " + cmd[0]));
                 break;
         }
     }
@@ -107,7 +106,57 @@ public class DeviceCmd extends Command {
         }
     }
 
-    private void handleCircuitBox(DeviceMap storage, String[] cmd) {
-        Printer.println("This functionality hasn't implemented yet, sorry! :(");
+    private void handleCircuitBox(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
+        // FORMATS
+        // circuitbox <name> save
+        // circuitbox <name> load
+        // circuitbox <name> bindinputping <target name> <target pin index> <box pin index>
+        // circuitbox <name> bindoutputpin <target name> <target pin index> <box pin index>
+        CircuitBox box;
+
+        try {
+            // Load circuit command
+            if(cmd[2].equalsIgnoreCase("load")) {
+                box = FileHandler.loadCircuit(cmd[1]);
+                if(box == null) {
+                    Printer.printErr(new Exception("There isn't any saved circuit with this name: " + cmd[1]));
+                    return;
+                }
+                storage.add(box.getName(), box);
+                Printer.println(cmd[1] + " loaded successfully!");
+            }
+            // Save circuit command
+            else if(cmd[2].equalsIgnoreCase("save")) {
+                box = (CircuitBox) storage.get(cmd[1]);
+                FileHandler.saveCircuit(box);
+                Printer.println(cmd[1] + " saved successfully!");
+            }
+            // Bind input pin command
+            else if(cmd[2].equalsIgnoreCase("bindinputpin")) {
+                if(cmd.length < 6) throw new NotEnoughArgsException(cmd[0] + " bindinputpin", 5, cmd.length - 1);
+                box = (CircuitBox) storage.get(cmd[1]);
+                box.bindInputPin(storage.get(cmd[3]), Integer.parseInt(cmd[4]), Integer.parseInt(cmd[5]));
+                Printer.println("Pins now bounded!");
+            }
+            // Bind output pin command
+            else if(cmd[2].equalsIgnoreCase("bindoutputpin")) {
+                if(cmd.length < 6) throw new NotEnoughArgsException(cmd[0] + " bindoutputpin", 5, cmd.length - 1);
+                box = (CircuitBox) storage.get(cmd[1]);
+                box.bindOutputPin(storage.get(cmd[3]), Integer.parseInt(cmd[4]), Integer.parseInt(cmd[5]));
+                Printer.println("Pins now bounded!");
+            }
+            // None of the above
+            else {
+                Printer.printErr(new Exception("Invalid unique method!"));
+            }
+        } catch (RedundantKeyException | DeviceNotExistsException err) {
+            Printer.printErr(err);
+        } catch (NumberFormatException err) {
+            Printer.printErr(new Exception("Pin indexes must be numbers!"));
+        } catch (ClassCastException err) {
+            Printer.printErr(new Exception("You should try this again with a circuit box, shouldn't you?"));
+        }
+
     }
+
 }
