@@ -18,7 +18,7 @@ public class Pin implements Serializable {
      *
      * @param parentDevice Device to which it will be connected.
      */
-    public Pin(Device parentDevice) {
+    protected Pin(Device parentDevice) {
         this.parentDevice = parentDevice;
         this.value = false;
         this.free = true;

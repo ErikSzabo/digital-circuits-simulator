@@ -2,65 +2,67 @@ package hu.erik.digitalcircuits.devices;
 
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
+import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 import java.io.Serializable;
 
 /**
- * Interface to create Devices for
- * digital circuits.
+ * Interface to represent functionalities of a Device.
  */
 public interface Device extends Serializable {
     /**
-     * Calculate and set the Device OutputPin values based on it's input pins.
+     * Calculates and sets the Device OutputPin values.
      */
     void calcOutput();
 
     /**
-     * Method to find an unconnected input pin on the Device.
+     * Returns an unconnected input pin on the device.
      *
-     * @return Pin or null if there isn't a free input pin
-     * @throws NoMorePinException If the device doesn't have any more free input pins.
+     * @return                      unconnected input pin
+     * @throws NoMorePinException   If the device doesn't have any more free input pin.
      */
     Pin getFreeInputPin() throws NoMorePinException;
 
     /**
-     * Method to find an unconnected output pin on the Device.
+     * Returns an unconnected output pin on the device.
      *
-     * @return Pin or null if there isn't a free output pin
-     * @throws NoMorePinException If the device doesn't have any more free output pins.
+     * @return                      unconnected output pin
+     * @throws NoMorePinException   If the device doesn't have any more free output pin.
      */
     Pin getFreeOutputPin() throws NoMorePinException;
 
     /**
-     * Method to get a specified input pin.
+     * Returns an input pin based on the given index.
+     * This pin might be in use.
      *
-     * @param index Index of the required input pin.
-     * @return Pin or null if there isn't any pin at the given index.
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     Pin getInputPin(int index) throws PinNotExistsException;
 
     /**
-     * Method to get a specified output pin.
+     * Returns an output pin based on the given index.
+     * This pin might be in use.
      *
-     * @param index Index of the required output pin
-     * @return Pin or null if there isn't any pin at the given index
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     Pin getOutputPin(int index) throws PinNotExistsException;
 
     /**
-     * Method to get all of the input pins on the Device.
+     * Returns all of the input pins on the device.
      *
-     * @return All of the input pins on the Device.
+     * @return all input pins on the device
      */
     Pin[] getAllInputPins();
 
     /**
-     * Method to get all of the output pins on the Device.
+     * Returns all of the output pins on the device.
      *
-     * @return All of the output pins on the Device.
+     * @return all output pins on the device
      */
     Pin[] getAllOutputPins();
 
@@ -68,43 +70,48 @@ public interface Device extends Serializable {
      * Connects this device next free output pin to the
      * target Device next free input pin.
      *
-     * @param device Target device for the connection
-     * @return Target device
+     * @param device                target device for the connection
+     * @return                      target device
+     * @throws NoMorePinException   If there isn't any more free pins on any of the devices.
      */
-    Device connect(Device device);
+    Device connect(Device device) throws NoMorePinException;
 
     /**
      * Connects this device next free output pin to the
      * required input pin on the target device.
      *
-     * @param device           Target device for the connection
-     * @param targetInputIndex The index of the target device input pin
-     * @return Target device
+     * @param device                    target device for the connection
+     * @param targetInputIndex          index of the target device input pin
+     * @return                          target device
+     * @throws PinAlreadyInUseException If the target pin is already in use.
+     * @throws NoMorePinException       If there isn't any more free pins on any of the devices.
+     * @throws PinNotExistsException    If there aren't any pin at the given index.
      */
-    Device connect(Device device, int targetInputIndex);
+    Device connect(Device device, int targetInputIndex) throws PinAlreadyInUseException, NoMorePinException, PinNotExistsException;
 
     /**
-     * Connects this device specified output pin to the
+     * Connects this device next free output pin to the
      * required input pin on the target device.
      *
-     * @param device           Target device for the connection
-     * @param outputIndex      The output pin index of this device
-     * @param targetInputIndex The index of the target device input pin
-     * @return Target device
+     * @param device                    target device for the connection
+     * @param targetInputIndex          index of the target device input pin
+     * @return                          target device
+     * @throws PinAlreadyInUseException If the target pin is already in use.
+     * @throws PinNotExistsException    If there aren't any pin at the given index.
      */
-    Device connect(Device device, int outputIndex, int targetInputIndex);
+    Device connect(Device device, int outputIndex, int targetInputIndex) throws PinAlreadyInUseException, PinNotExistsException;
 
 
     /**
-     * Disconnects this device output pin from the
-     * target device input pin.
+     * Disconnects this device output pins from the
+     * target device input pins.
      *
-     * @param device           The device we disconnect from
+     * @param device the device we disconnect from
      */
     void disconnect(Device device);
 
     /**
-     * This method should take care of signal transfer and auto update
+     * Sends output pin values to the connected pins.
      */
     void sendOutput();
 

@@ -5,19 +5,8 @@ package hu.erik.digitalcircuits.devices;
  */
 public class PowerSource extends SimpleDevice {
 
-
     /**
-     * Default constructor.
-     * This will create exactly one input and output pin.
-     */
-    public PowerSource() {
-        super();
-    }
-
-
-    /**
-     * This will turn on the electricity and updates the device
-     * that is connected to it.
+     * Sets the output signal to true.
      */
     public void on() {
         getInputPin().setValue(true);
@@ -26,8 +15,7 @@ public class PowerSource extends SimpleDevice {
     }
 
     /**
-     * This will turn off the electricity and updates the device
-     * that is connected to it.
+     * Sets the output signal to false.
      */
     public void off() {
         getInputPin().setValue(false);
@@ -35,9 +23,8 @@ public class PowerSource extends SimpleDevice {
         sendOutput();
     }
 
-
     /**
-     * Calculates if there is power or not.
+     * Calculates the output purely based on the input pin value.
      */
     @Override
     public void calcOutput() {

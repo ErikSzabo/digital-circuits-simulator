@@ -20,18 +20,10 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Sends the output to connected devices and update them as well
-     */
-    @Override
-    public void sendOutput() {
-        transferValue(outputPin);
-    }
-
-    /**
-     * Get a free input pin from the Device.
+     * Returns it's input pin if it is unconnected.
      *
-     * @return Free input pin
-     * @throws NoMorePinException If there isn't any more free input pin on the device
+     * @return                      unconnected input pin
+     * @throws NoMorePinException   If the it's input is already connected to something.
      */
     @Override
     public Pin getFreeInputPin() throws NoMorePinException {
@@ -40,10 +32,10 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Get a free output pin from the Device.
+     * Returns it's output pin if it is free.
      *
-     * @return Free output pin
-     * @throws NoMorePinException If there isn't any more free output pin on the device
+     * @return                      unconnected output pin
+     * @throws NoMorePinException   If the device doesn't have any more free output pin.
      */
     @Override
     public Pin getFreeOutputPin() throws NoMorePinException {
@@ -52,11 +44,11 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Get the selected input pin from the Device.
+     * Returns an input pin if the given index is 0.
      *
-     * @param index Index of the required input pin.
-     * @return Free input pin
-     * @throws PinNotExistsException If the selected input pin does not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getInputPin(int index) throws PinNotExistsException {
@@ -65,11 +57,12 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Get the selected output pin from the Device.
+     * Returns an output pin if the given index is 0.
+     * This pin might be in use.
      *
-     * @param index Index of the required output pin
-     * @return Free output pin
-     * @throws PinNotExistsException If the selected output pin does not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getOutputPin(int index) throws PinNotExistsException {
@@ -78,9 +71,9 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get all of the input pins on the Device.
+     * Returns it's input pin in an array.
      *
-     * @return All of the input pins on the Device.
+     * @return all input pins on the device
      */
     @Override
     public Pin[] getAllInputPins() {
@@ -88,9 +81,9 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get all of the output pins on the Device.
+     * Returns it's output pins in an array.
      *
-     * @return All of the output pins on the Device.
+     * @return all output pins on the device
      */
     @Override
     public Pin[] getAllOutputPins() {
@@ -98,20 +91,18 @@ public abstract class SimpleDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get the input pin.
-     * Should only be used in subclasses.
+     * Returns the input pin.
      *
-     * @return The input pin
+     * @return the input pin
      */
     protected Pin getInputPin() {
         return inputPin;
     }
 
     /**
-     * Method to get the output pin.
-     * Should only be used in subclasses.
+     * Returns the output pin.
      *
-     * @return The output pin
+     * @return the output pin
      */
     protected Pin getOutputPin() {
         return outputPin;

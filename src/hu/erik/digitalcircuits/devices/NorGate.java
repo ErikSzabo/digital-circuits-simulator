@@ -6,9 +6,9 @@ package hu.erik.digitalcircuits.devices;
 public class NorGate extends Gate {
 
     /**
-     * Constructor to create an Nor gate.
+     * Constructor to create a Nor gate with the given number of input pins.
      *
-     * @param numOfInputPins Required amount of input pins
+     * @param numOfInputPins number of input pins
      */
     public NorGate(int numOfInputPins) {
         super(numOfInputPins);

@@ -16,7 +16,7 @@ public abstract class DispenserDevice extends ConnectableDevice {
      * Basic constructor to create DispenserDevices with the
      * specified number of output pins.
      *
-     * @param numOfOutputPins Number of required output pins
+     * @param numOfOutputPins number of output pins
      */
     public DispenserDevice(int numOfOutputPins) {
         this.inputPin = new Pin(this);
@@ -25,10 +25,10 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to find an unconnected input pin on the Device.
+     * Returns it's input pin if it is unconnected.
      *
-     * @return Pin or null if there isn't a free input pin
-     * @throws NoMorePinException If the device doesn't have any more free input pins.
+     * @return                      unconnected input pin
+     * @throws NoMorePinException   If the it's input is already connected to something.
      */
     @Override
     public Pin getFreeInputPin() throws NoMorePinException {
@@ -37,10 +37,10 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to find an unconnected output pin on the Device.
+     * Returns an unconnected output pin on the device.
      *
-     * @return Pin or null if there isn't a free output pin
-     * @throws NoMorePinException If the device doesn't have any more free output pins.
+     * @return                      unconnected output pin
+     * @throws NoMorePinException   If the device doesn't have any more free output pin.
      */
     @Override
     public Pin getFreeOutputPin() throws NoMorePinException {
@@ -51,11 +51,11 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get a specified input pin.
+     * Returns an input pin if the given index is 0.
      *
-     * @param index Index of the required input pin.
-     * @return Pin or null if there isn't any pin at the given index.
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getInputPin(int index) throws PinNotExistsException {
@@ -64,11 +64,12 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get a specified output pin.
+     * Returns an output pin based on the given index.
+     * This pin might be in use.
      *
-     * @param index Index of the required output pin
-     * @return Pin or null if there isn't any pin at the given index
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getOutputPin(int index) throws PinNotExistsException {
@@ -77,20 +78,9 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * This method should take care of signal transfer and auto update
-     * on all output pins.
-     */
-    @Override
-    public void sendOutput() {
-        for(Pin pin : outputPins) {
-            transferValue(pin);
-        }
-    }
-
-    /**
-     * Method to get all of the input pins on the Device.
+     * Returns it's input pin in an array.
      *
-     * @return All of the input pins on the Device.
+     * @return all input pins on the device
      */
     @Override
     public Pin[] getAllInputPins() {
@@ -98,9 +88,9 @@ public abstract class DispenserDevice extends ConnectableDevice {
     }
 
     /**
-     * Method to get all of the output pins on the Device.
+     * Returns all of the output pins on the device.
      *
-     * @return All of the output pins on the Device.
+     * @return all output pins on the device
      */
     @Override
     public Pin[] getAllOutputPins() {
@@ -109,9 +99,8 @@ public abstract class DispenserDevice extends ConnectableDevice {
 
     /**
      * Returns the input pin.
-     * Should only be used in subclasses
      *
-     * @return The input pin
+     * @return the input pin
      */
     protected Pin getInputPin() {
         return inputPin;

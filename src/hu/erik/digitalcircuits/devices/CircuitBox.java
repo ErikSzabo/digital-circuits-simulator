@@ -3,21 +3,20 @@ package hu.erik.digitalcircuits.devices;
 import hu.erik.digitalcircuits.errors.BoundException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
-import hu.erik.digitalcircuits.utils.Printer;
 
 /**
- * Class to create Circuit Boxes.
+ * Represents a digital circuit in a box.
  */
 public class CircuitBox extends MultipinDevice {
     private String name;
 
     /**
-     * Constructor to create Circuit Boxes whit the given name
+     * Constructor to create Circuit Boxes with the given name
      * and numbers of input and output pins.
      *
-     * @param name              Name of the CircuitBox
-     * @param numOfInputPins    Number of input pins
-     * @param numOfOutputPins   Number of output pins
+     * @param name              name of the CircuitBox
+     * @param numOfInputPins    number of input pins
+     * @param numOfOutputPins   number of output pins
      */
     public CircuitBox(String name, int numOfInputPins, int numOfOutputPins) {
         super(numOfInputPins, numOfOutputPins);
@@ -25,8 +24,7 @@ public class CircuitBox extends MultipinDevice {
     }
 
     /**
-     * This will calculate the CircuitBox output.
-     * Actually... This will never run...
+     * Empty method. No need for it because of reference pin binding.
      */
     @Override
     public void calcOutput() {
@@ -34,50 +32,49 @@ public class CircuitBox extends MultipinDevice {
     }
 
     /**
-     * With this method you can bind the device input pin with
-     * the box input pin. The two will be the same after the binding.
+     * Binds the target device input pin with the box input pin based on the given indexes.
      *
-     * @param d             Device you want to bind
-     * @param pinIndex      Pin index on the device
-     * @param boxPinIndex   Pin index on the box
+     * @param d             device to bind
+     * @param pinIndex      pin index on the device
+     * @param boxPinIndex   pin index on the box
+     * @throws PinAlreadyInUseException If the pin is already connected to something.
+     * @throws BoundException           if an already bound pin is targeted on the box.
+     * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
-    public void bindInputPin(Device d, int pinIndex, int boxPinIndex) {
-        try {
-            Pin bindPin = d.getInputPin(pinIndex);
-            Pin boxPin = getInputPin(boxPinIndex);
-            if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
-            if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
-            if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
-            getAllInputPins()[boxPinIndex] = bindPin;
-        } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
-            Printer.printErr(err);
-        }
+    public void bindInputPin(Device d, int pinIndex, int boxPinIndex) throws PinAlreadyInUseException, BoundException, PinNotExistsException {
+        Pin bindPin = d.getInputPin(pinIndex);
+        Pin boxPin = getInputPin(boxPinIndex);
+        if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
+        if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
+        if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
+        getAllInputPins()[boxPinIndex] = bindPin;
     }
 
 
     /**
-     * With this method you can bind the device output pin with
-     * the box output pin. The two will be the same after the binding.
+     * Binds the target device output pin with the box output pin based on the given indexes.
      *
-     * @param d             Device you want to bind
-     * @param pinIndex      Pin index on the device
-     * @param boxPinIndex   Pin index on the box
+     * @param d             device to bind
+     * @param pinIndex      pin index on the device
+     * @param boxPinIndex   pin index on the box
+     * @throws PinAlreadyInUseException If the pin is already connected to something.
+     * @throws BoundException           if an already bound pin is targeted on the box.
+     * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
-    public void bindOutputPin(Device d, int pinIndex, int boxPinIndex) {
-        try {
-            Pin bindPin = d.getOutputPin(pinIndex);
-            Pin boxPin = getOutputPin(boxPinIndex);
-            if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
-            if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
-            if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
-            getAllOutputPins()[boxPinIndex] = bindPin;
-        } catch (PinAlreadyInUseException | PinNotExistsException | BoundException err) {
-            Printer.printErr(err);
-        }
+    public void bindOutputPin(Device d, int pinIndex, int boxPinIndex) throws PinAlreadyInUseException, BoundException, PinNotExistsException {
+        Pin bindPin = d.getOutputPin(pinIndex);
+        Pin boxPin = getOutputPin(boxPinIndex);
+        if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
+        if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
+        if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
+        getAllOutputPins()[boxPinIndex] = bindPin;
     }
 
     /**
-     * @return The name of CircuitBox
+     * Returns the name of the Box. This will be used in saving and loading
+     * circuits from/to file.
+     *
+     * @return the name of the CircuitBox
      */
     public String getName() {
         return name;
@@ -85,12 +82,10 @@ public class CircuitBox extends MultipinDevice {
 
 
     /**
-     * This toString will return CircuitBox.
-     * It's very important to do not change this!
-     * If you change this, you have to change in the bind methods as well,
-     * otherwise the bind methods won't work.
+     * Returns the device type specified in the DeviceType static class.
+     * CircuitBox binding methods are using this. Changes should be made very carefully.
      *
-     * @return The type of the Device
+     * @return the type of the Device
      */
     @Override
     public String toString() {

@@ -3,11 +3,30 @@ package hu.erik.digitalcircuits.cli.commands;
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.utils.Printer;
 
+/**
+ * Class to handle commands prefixed with "menu".
+ */
 public class MenuCmd extends Command {
+
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public MenuCmd(String name) {
         super(name);
     }
 
+    /**
+     * Prints the menu to the console. It shows the available commands
+     * and a brief description for all of them.
+     *
+     * Command format:
+     * menu
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) {
         String[] commands = {

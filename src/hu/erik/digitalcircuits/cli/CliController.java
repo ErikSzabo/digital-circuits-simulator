@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * Class to handle CLI events or commands.
+ * Class to handle CLI events and commands.
  */
 public class CliController {
     private DeviceMap devices;
@@ -35,7 +35,7 @@ public class CliController {
     }
 
     /**
-     * Method to listen for commands in an infinite loop.
+     * Listens for commands in an infinite loop.
      */
     public void listen() {
         Scanner sc = new Scanner(System.in);

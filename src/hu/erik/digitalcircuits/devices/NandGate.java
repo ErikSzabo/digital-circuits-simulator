@@ -6,9 +6,9 @@ package hu.erik.digitalcircuits.devices;
 public class NandGate extends Gate {
 
     /**
-     * Constructor to create an Nand gate.
+     * Constructor to create a Nand gate with the given number of input pins.
      *
-     * @param numOfInputPins Required amount of input pins
+     * @param numOfInputPins number of input pins
      */
     public NandGate(int numOfInputPins) {
         super(numOfInputPins);

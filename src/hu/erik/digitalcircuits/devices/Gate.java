@@ -14,7 +14,7 @@ public abstract class Gate extends ConnectableDevice {
     /**
      * Creates a Gate with a specified number of input pins.
      *
-     * @param numOfInputPins Number of required input pins
+     * @param numOfInputPins number of input pins
      */
     public Gate(int numOfInputPins) {
         this.outputPin = new Pin(this);
@@ -23,10 +23,10 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to find an unconnected input pin on the Gate
+     * Returns an unconnected input pin on the device.
      *
-     * @return Pin or null if there isn't a free input pin
-     * @throws NoMorePinException If the device doesn't have any more free input pins.
+     * @return                      unconnected input pin
+     * @throws NoMorePinException   If the device doesn't have any more free input pin.
      */
     @Override
     public Pin getFreeInputPin() throws NoMorePinException {
@@ -37,10 +37,10 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to find an unconnected output pin on the Gate
+     * Returns it's output pin if it is free.
      *
-     * @return Pin or null if there isn't a free output pin
-     * @throws NoMorePinException If the device doesn't have any more free output pins.
+     * @return                      unconnected output pin
+     * @throws NoMorePinException   If the device doesn't have any more free output pin.
      */
     @Override
     public Pin getFreeOutputPin() throws NoMorePinException {
@@ -49,11 +49,12 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to get a specified input pin.
+     * Returns an input pin based on the given index.
+     * This pin might be in use.
      *
-     * @param index Index of the required input pin.
-     * @return Pin or null if there isn't any pin at the given index.
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getInputPin(int index) throws PinNotExistsException {
@@ -62,13 +63,12 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to get a specified output pin.
-     * On gates, there are only one output pin, so only the 0 index
-     * will be valid.
+     * Returns an output pin if the given index is 0.
+     * This pin might be in use.
      *
-     * @param index Index of the required output pin
-     * @return Pin or null if there isn't any pin at the given index
-     * @throws PinNotExistsException If the selected pin is not exists
+     * @param index                     index of the required pin
+     * @return                          pin at the given index
+     * @throws PinNotExistsException    If the selected pin is not exists.
      */
     @Override
     public Pin getOutputPin(int index) throws PinNotExistsException {
@@ -77,17 +77,9 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Transfer the value from the output pin to the target device.
-     */
-    @Override
-    public void sendOutput() {
-        transferValue(outputPin);
-    }
-
-    /**
-     * Method to get all of the input pins on the Gate.
+     * Returns all of the input pins on the device.
      *
-     * @return All of the input pins on the Device.
+     * @return all input pins on the device
      */
     @Override
     public Pin[] getAllInputPins() {
@@ -95,9 +87,9 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to get all of the output pins on the Gate.
+     * Returns it's output pins in an array.
      *
-     * @return All of the output pins on the Device.
+     * @return all output pins on the device
      */
     @Override
     public Pin[] getAllOutputPins() {
@@ -105,10 +97,9 @@ public abstract class Gate extends ConnectableDevice {
     }
 
     /**
-     * Method to get a Gate output pin.
-     * This method should only be used in the subclasses.
+     * Returns gate output pin.
      *
-     * @return Gate output pin
+     * @return gate output pin
      */
     protected Pin getOutputPin() {
         return outputPin;

@@ -3,7 +3,10 @@ package hu.erik.digitalcircuits.devices;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DeviceType {
+/**
+ * Stores unified device types.
+ */
+public final class DeviceType {
     public static final String SWITCH = "switch";
     public static final String POWER = "powersource";
     public static final String INVERTER = "inverter";

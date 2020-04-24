@@ -22,11 +22,11 @@ public class DeviceMap {
     }
 
     /**
-     * Add a device to the data structure.
+     * Adds a device to the data structure.
      *
-     * @param name                      Name of the device
-     * @param device                    The device you want to add
-     * @throws RedundantKeyException    When the device is already exists
+     * @param name                      name of the device
+     * @param device                    the device which will be added
+     * @throws RedundantKeyException    If the device already exists.
      */
     public void add(String name, Device device) throws RedundantKeyException {
         if(map.get(name) != null) throw new RedundantKeyException(name);
@@ -34,10 +34,10 @@ public class DeviceMap {
     }
 
     /**
-     * Remove a device from the data structure
+     * Removes the device with the give name from the data structure.
      *
-     * @param name                      Name of the device
-     * @throws DeviceNotExistsException When there isn't any mapping for the device
+     * @param name                      name of the device which will be removed
+     * @throws DeviceNotExistsException If there isn't any mapping for the device.
      */
     public void remove(String name) throws DeviceNotExistsException {
         Device d = map.remove(name);
@@ -45,11 +45,11 @@ public class DeviceMap {
     }
 
     /**
-     * Get a device from the data structure.
+     * Gets the device with the given name from the data structure if it exists.
      *
-     * @param name                      Name of the device
-     * @return                          The device
-     * @throws DeviceNotExistsException When there isn't any mapping for the device
+     * @param name                      name of the device
+     * @return                          the device
+     * @throws DeviceNotExistsException If there isn't any mapping for the device.
      */
     public Device get(String name) throws DeviceNotExistsException {
         Device device = map.get(name);
@@ -61,7 +61,7 @@ public class DeviceMap {
      * Returns the full device map in an unmodifiable format.
      * Useful for iterations.
      *
-     * @return The unmodifiable data structure
+     * @return unmodifiable data structure/map
      */
     public Map<String, Device> getMap() {
         return Collections.unmodifiableMap(map);

@@ -3,20 +3,37 @@ package hu.erik.digitalcircuits.cli.commands;
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
+import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
+/**
+ * Class to handle commands prefixed with "connect".
+ */
 public class ConnectCmd extends Command{
+
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public ConnectCmd(String name) {
         super(name);
     }
 
+    /**
+     * Connects the two devices if both of them exists.
+     *
+     * Command format:
+     * connect {@literal <}name{@literal >} to {@literal <}name{@literal >}
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     * @throws NotEnoughArgsException   If the number of arguments are less then 3.
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // FORMAT
-        // connect <name> to <name>
-
         if(cmd.length < 4) throw new NotEnoughArgsException(cmd[0], 3, cmd.length - 1);
         if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
@@ -25,9 +42,8 @@ public class ConnectCmd extends Command{
             Device d2 = storage.get(cmd[3]);
             d1.connect(d2);
             Printer.println("Connected!");
-        } catch (DeviceNotExistsException err) {
+        } catch (DeviceNotExistsException | NoMorePinException err) {
             Printer.printErr(err);
         }
-
     }
 }

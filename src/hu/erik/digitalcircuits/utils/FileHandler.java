@@ -10,13 +10,18 @@ import java.util.Arrays;
 /**
  * Class to save and load circuits.
  */
-public class FileHandler {
+public final class FileHandler {
+    /**
+     * Private default constructor to prevent instance creation.
+     */
+    private FileHandler() {}
 
     /**
-     * Load a circuit with the given name.
+     * Loads a circuit with the given name or null if there isn't any
+     * circuit with the given name.
      *
-     * @param circuitName Name of the circuit you want to load
-     * @return Loaded circuit or null
+     * @param circuitName   name of the circuit which will be loaded
+     * @return              loaded circuit or null
      */
     public static CircuitBox loadCircuit(String circuitName) {
         try {
@@ -36,7 +41,7 @@ public class FileHandler {
     /**
      * Save a given circuit.
      *
-     * @param box CircuitBox you want to save
+     * @param box circuitbox which will be saved
      */
     public static void saveCircuit(CircuitBox box) {
         ArrayList<Pin> pins = new ArrayList<>();

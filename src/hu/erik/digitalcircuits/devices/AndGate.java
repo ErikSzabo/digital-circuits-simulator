@@ -6,9 +6,9 @@ package hu.erik.digitalcircuits.devices;
 public class AndGate extends Gate {
 
     /**
-     * Constructor to create an And gate.
+     * Constructor to create an And gate with the given number of input pins.
      *
-     * @param numOfInputPins Required amount of input pins
+     * @param numOfInputPins required amount of input pins
      */
     public AndGate(int numOfInputPins) {
         super(numOfInputPins);
@@ -16,7 +16,7 @@ public class AndGate extends Gate {
 
     /**
      * Calculates the output signal based on the input pins.
-     * It"s using the and gate truth table.
+     * It's using the and gate truth table.
      */
     @Override
     public void calcOutput() {

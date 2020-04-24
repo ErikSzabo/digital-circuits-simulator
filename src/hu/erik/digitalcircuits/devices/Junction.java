@@ -1,5 +1,8 @@
 package hu.erik.digitalcircuits.devices;
 
+import hu.erik.digitalcircuits.errors.NoMorePinException;
+import hu.erik.digitalcircuits.utils.Printer;
+
 /**
  * Class to create Junctions.
  */
@@ -33,7 +36,11 @@ public class Junction extends DispenserDevice {
      */
     public void connectAll(Device... devices) {
         for(Device device : devices) {
-            connect(device);
+            try {
+                connect(device);
+            } catch (NoMorePinException err) {
+                Printer.printErr(err);
+            }
         }
     }
 

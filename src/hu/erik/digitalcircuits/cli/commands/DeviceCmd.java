@@ -2,26 +2,40 @@ package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.devices.*;
-import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
-import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
-import hu.erik.digitalcircuits.errors.RedundantKeyException;
+import hu.erik.digitalcircuits.errors.*;
 import hu.erik.digitalcircuits.utils.FileHandler;
 import hu.erik.digitalcircuits.utils.Printer;
 
 import java.util.ArrayList;
 
+/**
+ * Class to handle commands prefixed with a device type.
+ * Handles unique method calls on special devices like switch and circuitbox.
+ */
 public class DeviceCmd extends Command {
 
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public DeviceCmd(String name) {
         super(name);
     }
 
+    /**
+     * Handle device unique methods.
+     *
+     * Command format:
+     * {@literal <}devicetype{@literal >} {@literal <}name{@literal >} {@literal <}uniqe method{@literal >} {@literal <}args...{@literal >}
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     * @throws NotEnoughArgsException   If the number of arguments are less then 2.
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // Format
-        // <devicetype> <name> <uniqe method> <args...>
-
-        if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 4, cmd.length - 1);
+        if(cmd.length < 3) throw new NotEnoughArgsException("device", 2, cmd.length - 1);
 
         switch (cmd[0].toLowerCase()) {
             case DeviceType.JUNCTION:
@@ -42,6 +56,15 @@ public class DeviceCmd extends Command {
         }
     }
 
+    /**
+     * Handles powersource specific unique methods like ON and OFF.
+     *
+     * Command format:
+     * powersource <name> <on or off>
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     */
     private void handlePower(DeviceMap storage, String[] cmd) {
         try {
             PowerSource power = (PowerSource) storage.get(cmd[1]);
@@ -50,9 +73,9 @@ public class DeviceCmd extends Command {
                 Printer.println("It's turned on!");
             } else if(cmd[2].equalsIgnoreCase("off")) {
                 power.off();
-                Printer.println("Success, Paks deactivated!");
+                Printer.println("It's turned off!");
             } else {
-                Printer.printErr(new Exception("Invalid method for " + DeviceType.POWER + ": " + cmd[2]));
+                Printer.printErr("Invalid method for " + DeviceType.POWER + ": " + cmd[2]);
             }
         } catch (ClassCastException err) {
             Printer.printErr(new Exception(cmd[1] + " is not a " + DeviceType.POWER + "!"));
@@ -61,6 +84,15 @@ public class DeviceCmd extends Command {
         }
     }
 
+    /**
+     * Handles switch specific unique methods like ON and OFF.
+     *
+     * Command format:
+     * switch <name> <on or off>
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     */
     private void handleSwitch(DeviceMap storage, String[] cmd) {
         try {
             Switch switchy = (Switch) storage.get(cmd[1]);
@@ -74,44 +106,67 @@ public class DeviceCmd extends Command {
                 Printer.printErr(new Exception("Invalid method for " + DeviceType.SWITCH + ": " + cmd[2]));
             }
         } catch (ClassCastException err) {
-            Printer.printErr(new Exception(cmd[1] + " is not a " + DeviceType.SWITCH + "!"));
+            Printer.printErr(cmd[1] + " is not a " + DeviceType.SWITCH + "!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
         }
     }
 
+    /**
+     * Handles powersource specific unique methods like CONNECTALL.
+     *
+     * Command format:
+     * junction {@literal <}name{@literal >} connectall {@literal <}devices...{@literal >}
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     */
     private void handleJunction(DeviceMap storage, String[] cmd) {
         try {
             Junction junction = (Junction) storage.get(cmd[1]);
             ArrayList<Device> devicesToConnect = new ArrayList<>();
             if(cmd[2].equalsIgnoreCase("connectall")) {
+                if(cmd.length < 4) {
+                    Printer.printErr("You didn't specify any device!");
+                    return;
+                }
+
                 // This step ensures that, if any of the device names are incorrect
                 // then no device will be connected to the junction
                 for (int i = 3; i < cmd.length; i++) {
                     devicesToConnect.add(storage.get(cmd[i]));
                 }
-                // Although here, we can have free pin issues.
-                // If the junction doesn't have more free output pin
-                // or the device doesn't have free input pin, well
-                // these devices won't be connected to the junction.
+
                 for(Device d : devicesToConnect) {
-                    junction.connect(d);
-                    Printer.println("Connected!");
+                    try {
+                        junction.connect(d);
+                        Printer.println("Connected!");
+                    } catch (NoMorePinException err) {
+                        Printer.printErr(err);
+                    }
                 }
             }
         } catch (ClassCastException err) {
-            Printer.printErr(new Exception(cmd[1] + " is not a " + DeviceType.JUNCTION + "!"));
+            Printer.printErr(cmd[1] + " is not a " + DeviceType.JUNCTION + "!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
         }
     }
 
+    /**
+     * Handles circuit box specific unique methods like SAVE, LOAD, BINDINPUTPIN, BINDOUTPUTPIN.
+     *
+     * Command formats:
+     * circuitbox {@literal <}name{@literal >} bindinputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}
+     * circuitbox {@literal <}name{@literal >} bindoutputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}
+     * circuitbox {@literal <}name{@literal >} save
+     * circuitbox {@literal <}name{@literal >} load
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     * @throws NotEnoughArgsException   If the number of arguments are less then 5 in case of bind methods.
+     */
     private void handleCircuitBox(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // FORMATS
-        // circuitbox <name> save
-        // circuitbox <name> load
-        // circuitbox <name> bindinputping <target name> <target pin index> <box pin index>
-        // circuitbox <name> bindoutputpin <target name> <target pin index> <box pin index>
         CircuitBox box;
 
         try {
@@ -148,12 +203,12 @@ public class DeviceCmd extends Command {
             else {
                 Printer.printErr("Invalid unique method!");
             }
-        } catch (RedundantKeyException | DeviceNotExistsException err) {
+        } catch (RedundantKeyException | DeviceNotExistsException | BoundException | PinNotExistsException | PinAlreadyInUseException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
+        } catch(NumberFormatException err) {
             Printer.printErr("Pin indexes must be numbers!");
         } catch (ClassCastException err) {
-            Printer.printErr("You should try this again with a circuit box, shouldn't you?");
+            Printer.printErr(cmd[1] + " is not a " + DeviceType.CIRCUITBOX + "!");
         }
 
     }

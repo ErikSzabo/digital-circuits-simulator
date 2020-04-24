@@ -4,19 +4,37 @@ import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.devices.DeviceType;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
+/**
+ * Class to handle commands prefixed with "help".
+ */
 public class HelpCmd extends Command {
+
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public HelpCmd(String name) {
         super(name);
     }
 
+    /**
+     * Writes the required help page to the console.
+     *
+     * Command format:
+     * help {@literal <}device type{@literal >}
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     * @throws NotEnoughArgsException   If the number of arguments are less then 1.
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // FORMAT
-        // help <type>
-
         if(cmd.length < 2) throw new NotEnoughArgsException(cmd[0], 1, cmd.length - 1);
+        if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         if(!DeviceType.ALL.contains(cmd[1].toLowerCase())) {
             Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
@@ -38,6 +56,10 @@ public class HelpCmd extends Command {
 
     }
 
+    /**
+     * Write the power source help page to the console.
+     * It contains information about creation, and unique methods.
+     */
     private void writePowerHelpPage() {
         Printer.printSeparatorLine("-");
         System.out.println("PowerSource\n" +
@@ -51,10 +73,14 @@ public class HelpCmd extends Command {
                 "on - turns on the electricity\n" +
                 "off - turns off the electricity\n" +
                 "\n" +
-                "You can use these uniqe functions by typing \"power <your powersource name> <on or off>\"");
+                "You can use these uniqe functions by typing \"powersource <your powersource name> <on or off>\"");
         Printer.printSeparatorLine("-");
     }
 
+    /**
+     * Write the switch help page to the console.
+     * It contains information about creation, and unique methods.
+     */
     private void writeSwitchHelpPage() {
         Printer.printSeparatorLine("-");
         System.out.println("Switch\n" +
@@ -72,6 +98,10 @@ public class HelpCmd extends Command {
         Printer.printSeparatorLine("-");
     }
 
+    /**
+     * Write the junction help page to the console.
+     * It contains information about creation, and unique methods.
+     */
     private void writeJunctionHelpPage() {
         Printer.printSeparatorLine("-");
         System.out.println("Junction\n" +
@@ -88,22 +118,29 @@ public class HelpCmd extends Command {
         Printer.printSeparatorLine("-");
     }
 
+    /**
+     * Write the gates and inverter help page to the console.
+     * It contains information about creation, and unique methods.
+     */
     private void writeGatesHelpPage() {
         Printer.printSeparatorLine("-");
         System.out.println("Gates\n" +
                 "\n" +
-                "A Gate or Inverter is responsible for the circuit logic.\n" +
-                "For more information about gates, visit Google :) \n" +
+                "A Gate or an Inverter is responsible for the circuit logic.\n" +
                 "\n" +
                 "To create a Gate: \"create <gatetype or inverter> <name> [input pin number if it is a gate] ");
         Printer.printSeparatorLine("-");
     }
 
+    /**
+     * Write the circuit box help page to the console.
+     * It contains information about creation, and unique methods.
+     */
     private void writeCircuitBoxHelpPage() {
         Printer.printSeparatorLine("-");
         System.out.println("CircuitBox\n" +
                 "\n" +
-                "With this tool, you can put your whole circuit to box. And the reason to that, well, you can save and load\n" +
+                "With this tool, you can put your whole circuit to a box. And the reason to that, well, you can save and load\n" +
                 "your boxes. So next time if you want to use the same circuit, the only thing you need is to load your box.\n" +
                 "\n" +
                 "To create: \"create circuitbox <name> <box input pins> <box output pins>\"\n" +
@@ -118,6 +155,7 @@ public class HelpCmd extends Command {
                 "- Save and load\n" +
                 "      - To save, type: \"circuitbox <box name> save\"\n" +
                 "      - To load, type: \"circuitbox <boxname> load\"\n" +
+                "     Save won't work if the box is connected to something!\"\n" +
                 "     After loading, you can connect your box as usual.");
         Printer.printSeparatorLine("-");
     }

@@ -9,16 +9,33 @@ import hu.erik.digitalcircuits.errors.RedundantKeyException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
+/**
+ * Class to handle commands prefixed with "create".
+ */
 public class CreateCmd extends Command {
+
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public CreateCmd(String name) {
         super(name);
     }
 
+    /**
+     * Creates a device with the given name and type and uses
+     * the optional pin numbers if it's needed.
+     *
+     * Command format:
+     * create {@literal <}type{@literal >} {@literal <}name{@literal >} [inputnum] [outputnum]
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     * @throws NotEnoughArgsException   If the number of arguments are less then 2.
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // FORMAT:
-        // create <type> <name> [inputnum] [outputnum]
-
         if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 2, cmd.length - 1);
         if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0]));
 

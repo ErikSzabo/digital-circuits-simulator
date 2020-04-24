@@ -8,7 +8,7 @@ public class OrGate extends Gate {
     /**
      * Constructor to create an Or gate.
      *
-     * @param numOfInputPins Required amount of input pins
+     * @param numOfInputPins number of input pins
      */
     public OrGate(int numOfInputPins) {
         super(numOfInputPins);

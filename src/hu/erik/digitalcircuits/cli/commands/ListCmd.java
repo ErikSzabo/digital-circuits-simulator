@@ -9,16 +9,32 @@ import hu.erik.digitalcircuits.utils.Printer;
 
 import java.util.Map;
 
+/**
+ * Class to handle commands prefixed with "list".
+ */
 public class ListCmd extends Command {
+
+    /**
+     * Constructor to setup the command's name.
+     *
+     * @param name Name of the command.
+     */
     public ListCmd(String name) {
         super(name);
     }
 
+    /**
+     * Lists the name and type of the created devices.
+     * It supports filtering by device type.
+     *
+     * Command format:
+     * list [type]
+     *
+     * @param storage                   cli data structure
+     * @param cmd                       command, splitted by spaces
+     */
     @Override
     public void action(DeviceMap storage, String[] cmd) {
-        // FORMAT:
-        // list [type]
-
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         Map<String, Device> devices = storage.getMap();

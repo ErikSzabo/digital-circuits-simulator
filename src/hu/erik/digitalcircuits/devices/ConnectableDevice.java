@@ -4,10 +4,9 @@ package hu.erik.digitalcircuits.devices;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
-import hu.erik.digitalcircuits.utils.Printer;
 
 /**
- * Abstract class for Device which implements the connection methods
+ * Abstract class for Device which implements the connection methods.
  */
 public abstract class ConnectableDevice implements Device {
 
@@ -15,18 +14,15 @@ public abstract class ConnectableDevice implements Device {
      * Connects this device next free output pin to the
      * target Device next free input pin.
      *
-     * @param device Target device for the connection
-     * @return Target device
+     * @param device                target device for the connection
+     * @return                      target device
+     * @throws NoMorePinException   If there isn't any more free pins on any of the devices.
      */
     @Override
-    public Device connect(Device device) {
-        try {
-            Pin outputPin = getFreeOutputPin();
-            new Cable(outputPin, device.getFreeInputPin());
-            transferValue(outputPin);
-        } catch (NoMorePinException err) {
-            Printer.printErr(err);
-        }
+    public Device connect(Device device) throws NoMorePinException {
+        Pin outputPin = getFreeOutputPin();
+        new Cable(outputPin, device.getFreeInputPin());
+        transferValue(outputPin);
         return device;
     }
 
@@ -34,58 +30,55 @@ public abstract class ConnectableDevice implements Device {
      * Connects this device next free output pin to the
      * required input pin on the target device.
      *
-     * @param device           Target device for the connection
-     * @param targetInputIndex The index of the target device input pin
-     * @return Target device
+     * @param device                    target device for the connection
+     * @param targetInputIndex          index of the target device input pin
+     * @return                          target device
+     * @throws PinAlreadyInUseException If the target pin is already in use.
+     * @throws NoMorePinException       If there isn't any more free pins on any of the devices.
+     * @throws PinNotExistsException    If there aren't any pin at the given index.
      */
     @Override
-    public Device connect(Device device, int targetInputIndex) {
-        try {
-            Pin outputPin = getFreeOutputPin();
-            Pin targetInputPin = device.getInputPin(targetInputIndex);
-            if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
-            new Cable(outputPin, targetInputPin);
-            transferValue(outputPin);
-        } catch(NoMorePinException | PinAlreadyInUseException | PinNotExistsException err) {
-            Printer.printErr(err);
-        }
+    public Device connect(Device device, int targetInputIndex) throws PinAlreadyInUseException, NoMorePinException, PinNotExistsException {
+        Pin outputPin = getFreeOutputPin();
+        Pin targetInputPin = device.getInputPin(targetInputIndex);
+        if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
+        new Cable(outputPin, targetInputPin);
+        transferValue(outputPin);
         return device;
     }
 
     /**
-     * Connects this device specified output pin to the
+     * Connects this device next free output pin to the
      * required input pin on the target device.
      *
-     * @param device           Target device for the connection
-     * @param outputIndex      The output pin index of this device
-     * @param targetInputIndex The index of the target device input pin
-     * @return Target device
+     * @param device                    target device for the connection
+     * @param targetInputIndex          index of the target device input pin
+     * @return                          target device
+     * @throws PinAlreadyInUseException If the target pin is already in use.
+     * @throws PinNotExistsException    If there aren't any pin at the given index.
      */
     @Override
-    public Device connect(Device device, int outputIndex, int targetInputIndex) {
-        try {
-            Pin outputPin = getOutputPin(outputIndex);
-            Pin targetInputPin = device.getInputPin(targetInputIndex);
-            if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, outputIndex);
-            if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
-            new Cable(outputPin, targetInputPin);
-            transferValue(outputPin);
-        } catch (PinAlreadyInUseException | PinNotExistsException err) {
-            Printer.printErr(err);
-        }
+    public Device connect(Device device, int outputIndex, int targetInputIndex) throws PinAlreadyInUseException, PinNotExistsException {
+        Pin outputPin = getOutputPin(outputIndex);
+        Pin targetInputPin = device.getInputPin(targetInputIndex);
+        if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, outputIndex);
+        if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
+        new Cable(outputPin, targetInputPin);
+        transferValue(outputPin);
         return device;
     }
 
     /**
-     * Disconnects this device all output pins from the
-     * target device all input pins.
+     * Disconnects this device output pins from the
+     * target device input pins.
      *
-     * @param device    The device we disconnect from
+     * @param device the device we disconnect from
      */
     @Override
     public void disconnect(Device device) {
         Pin[] outputPins = getAllOutputPins();
         for(Pin p : outputPins) {
+            if(p.isFree()) continue;
             Pin targetPin = p.getConnectionCable().getOtherPin(p);
             Device targetDevice = targetPin.getParentDevice();
             if(targetDevice == device) {
@@ -97,6 +90,16 @@ public abstract class ConnectableDevice implements Device {
                 targetDevice.calcOutput();
                 targetDevice.sendOutput();
             }
+        }
+    }
+
+    /**
+     * Sends output pin values to the connected pins.
+     */
+    @Override
+    public void sendOutput() {
+        for(Pin outputPin : getAllOutputPins()) {
+            transferValue(outputPin);
         }
     }
 

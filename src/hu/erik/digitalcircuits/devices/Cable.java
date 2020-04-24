@@ -10,10 +10,12 @@ public class Cable implements Serializable {
     private Pin p2;
 
     /**
-     * Connects the two given pin.
+     * Connects two given pin by setting the pins connection cable to this Cable.
+     * Sets the pins availability to false, so the given pins are not connectable
+     * anymore.
      *
-     * @param p1 The first pin
-     * @param p2 The second pin
+     * @param p1 first pin
+     * @param p2 second pin
      */
     protected Cable(Pin p1, Pin p2) {
         this.p1 = p1;
@@ -25,10 +27,10 @@ public class Cable implements Serializable {
     }
 
     /**
-     * Get the pin which is not the one what is given
+     * Returns the pin that is positioned at the other end of this Cable.
      *
-     * @param pin The opposite pin
-     * @return The other pin which is not the same as the parameter
+     * @param pin   one of the cable's pins
+     * @return      the other pin on the Cable
      */
     public Pin getOtherPin(Pin pin) {
         if(p1.equals(pin)) {
