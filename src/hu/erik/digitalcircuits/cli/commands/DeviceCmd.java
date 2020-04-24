@@ -78,7 +78,7 @@ public class DeviceCmd extends Command {
                 Printer.printErr("Invalid method for " + DeviceType.POWER + ": " + cmd[2]);
             }
         } catch (ClassCastException err) {
-            Printer.printErr(new Exception(cmd[1] + " is not a " + DeviceType.POWER + "!"));
+            Printer.printErr(cmd[1] + " is not a " + DeviceType.POWER + "!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
         }
@@ -103,7 +103,7 @@ public class DeviceCmd extends Command {
                 switchy.off();
                 Printer.println("Your switch state is now FALSE(0)");
             } else {
-                Printer.printErr(new Exception("Invalid method for " + DeviceType.SWITCH + ": " + cmd[2]));
+                Printer.printErr("Invalid method for " + DeviceType.SWITCH + ": " + cmd[2]);
             }
         } catch (ClassCastException err) {
             Printer.printErr(cmd[1] + " is not a " + DeviceType.SWITCH + "!");
