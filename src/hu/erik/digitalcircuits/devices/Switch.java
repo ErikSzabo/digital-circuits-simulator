@@ -41,16 +41,34 @@ public class Switch extends SimpleDevice {
 
     /**
      * Calculate the Switch output based on available power source and the Switch status.
-     * Output will never be true if there aren't any powersource type devices connected to
-     * the switch input pin.
+     * Output will never be true if there aren't any PowerSource type devices connected to
+     * the switch input pin. PowerSource can be connected via a junction as well.
      */
     @Override
     public void calcOutput() {
+        // If there isn't any input, it most be false
         if(getInputPin().isFree()) {
             getOutputPin().setValue(false);
-        } else {
+        }
+        // If we got some input...
+        else {
+            // If the input is a nice PowerSource
             Device inputDevice = getInputPin().getConnectionCable().getOtherPin(getInputPin()).getParentDevice();
-            getOutputPin().setValue(getInputPin().getValue() && status && inputDevice instanceof PowerSource);
+            if(inputDevice instanceof PowerSource) {
+                getOutputPin().setValue(getInputPin().getValue() && status);
+            }
+            // If it's not but it's at least a junction
+            else if(inputDevice instanceof Junction) {
+                Pin juncInputPin = inputDevice.getAllInputPins()[0];
+                // If the junction's input pin are actually connected to something
+                if(!juncInputPin.isFree()) {
+                    Device juncInputDevice = juncInputPin.getConnectionCable().getOtherPin(juncInputPin).getParentDevice();
+                    // If the something is a PowerSource
+                    if(juncInputDevice instanceof PowerSource) {
+                        getOutputPin().setValue(getInputPin().getValue() && status);
+                    }
+                }
+            }
         }
     }
 
