@@ -7,6 +7,12 @@ import java.util.Arrays;
  * Stores unified device types.
  */
 public final class DeviceType {
+
+    /**
+     * Private default constructor to prevent instance creation.
+     */
+    private DeviceType() {}
+
     public static final String SWITCH = "switch";
     public static final String POWER = "powersource";
     public static final String INVERTER = "inverter";

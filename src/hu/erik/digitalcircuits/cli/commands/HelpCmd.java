@@ -142,6 +142,7 @@ public class HelpCmd extends Command {
                 "\n" +
                 "With this tool, you can put your whole circuit to a box. And the reason to that, well, you can save and load\n" +
                 "your boxes. So next time if you want to use the same circuit, the only thing you need is to load your box.\n" +
+                "Don't bind switch pins to input pins! You won't be able to interact with the switch after loading.(on off methods)\n" +
                 "\n" +
                 "To create: \"create circuitbox <name> <box input pins> <box output pins>\"\n" +
                 "\n" +
@@ -150,12 +151,10 @@ public class HelpCmd extends Command {
                 "          \"circuitbox <box name> bindinputpin <target device name> <target pin index> <box pin index>\"\n" +
                 "     - To bind an output pin, type:\n" +
                 "          \"circuitbox <box name> bindoutputpin <target device name> <target pin index> <box pin index>\"\n" +
-                "     In order to bind pins, the target device pins can't be connected to anything.\n" +
                 "\n" +
                 "- Save and load\n" +
                 "      - To save, type: \"circuitbox <box name> save\"\n" +
                 "      - To load, type: \"circuitbox <boxname> load\"\n" +
-                "     Save won't work if the box is connected to something!\"\n" +
                 "     After loading, you can connect your box as usual.");
         Printer.printSeparatorLine("-");
     }

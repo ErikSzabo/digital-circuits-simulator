@@ -201,7 +201,7 @@ public class DeviceCmd extends Command {
             else {
                 Printer.printErr("Invalid unique method!");
             }
-        } catch (RedundantKeyException | DeviceNotExistsException | BoundException | PinNotExistsException | PinAlreadyInUseException err) {
+        } catch (RedundantKeyException | DeviceNotExistsException | BoundException | PinNotExistsException err) {
             Printer.printErr(err);
         } catch(NumberFormatException err) {
             Printer.printErr("Pin indexes must be numbers!");

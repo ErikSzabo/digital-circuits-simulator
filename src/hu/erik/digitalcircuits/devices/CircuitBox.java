@@ -1,7 +1,6 @@
 package hu.erik.digitalcircuits.devices;
 
 import hu.erik.digitalcircuits.errors.BoundException;
-import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
 /**
@@ -37,15 +36,12 @@ public class CircuitBox extends MultipinDevice {
      * @param d             device to bind
      * @param pinIndex      pin index on the device
      * @param boxPinIndex   pin index on the box
-     * @throws PinAlreadyInUseException If the pin is already connected to something.
      * @throws BoundException           if an already bound pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
-    public void bindInputPin(Device d, int pinIndex, int boxPinIndex) throws PinAlreadyInUseException, BoundException, PinNotExistsException {
+    public void bindInputPin(Device d, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
         Pin bindPin = d.getInputPin(pinIndex);
         Pin boxPin = getInputPin(boxPinIndex);
-        if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
-        if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
         if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
         getAllInputPins()[boxPinIndex] = bindPin;
     }
@@ -57,15 +53,12 @@ public class CircuitBox extends MultipinDevice {
      * @param d             device to bind
      * @param pinIndex      pin index on the device
      * @param boxPinIndex   pin index on the box
-     * @throws PinAlreadyInUseException If the pin is already connected to something.
      * @throws BoundException           if an already bound pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
-    public void bindOutputPin(Device d, int pinIndex, int boxPinIndex) throws PinAlreadyInUseException, BoundException, PinNotExistsException {
+    public void bindOutputPin(Device d, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
         Pin bindPin = d.getOutputPin(pinIndex);
         Pin boxPin = getOutputPin(boxPinIndex);
-        if(!bindPin.isFree()) throw new PinAlreadyInUseException(d, pinIndex);
-        if(!boxPin.isFree()) throw new PinAlreadyInUseException(this, boxPinIndex);
         if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
         getAllOutputPins()[boxPinIndex] = bindPin;
     }
