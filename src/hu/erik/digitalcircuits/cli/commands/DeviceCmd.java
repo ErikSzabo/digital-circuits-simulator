@@ -6,6 +6,7 @@ import hu.erik.digitalcircuits.errors.*;
 import hu.erik.digitalcircuits.utils.FileHandler;
 import hu.erik.digitalcircuits.utils.Printer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -173,10 +174,6 @@ public class DeviceCmd extends Command {
             // Load circuit command
             if(cmd[2].equalsIgnoreCase("load")) {
                 box = FileHandler.loadCircuit(cmd[1]);
-                if(box == null) {
-                    Printer.printErr("There isn't any saved circuit with this name: " + cmd[1]);
-                    return;
-                }
                 storage.add(box.getName(), box);
                 Printer.println(cmd[1] + " loaded successfully!");
             }
@@ -184,6 +181,7 @@ public class DeviceCmd extends Command {
             else if(cmd[2].equalsIgnoreCase("save")) {
                 box = (CircuitBox) storage.get(cmd[1]);
                 FileHandler.saveCircuit(box);
+                Printer.println("Saved successfully!");
             }
             // Bind input pin command
             else if(cmd[2].equalsIgnoreCase("bindinputpin")) {
@@ -209,6 +207,8 @@ public class DeviceCmd extends Command {
             Printer.printErr("Pin indexes must be numbers!");
         } catch (ClassCastException err) {
             Printer.printErr(cmd[1] + " is not a " + DeviceType.CIRCUITBOX + "!");
+        } catch (IOException | ClassNotFoundException err) {
+            Printer.printErr("Error while trying to save or load a circuit!");
         }
 
     }
