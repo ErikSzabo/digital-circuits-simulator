@@ -18,6 +18,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
  */
 public class CreateCmd extends Command {
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
+
     /**
      * Constructor to setup the command's name and it's possible actions.
      *

@@ -1,7 +1,8 @@
 package hu.erik.digitalcircuits.devices;
 
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.utils.Printer;
+
+import java.util.ArrayList;
 
 /**
  * Class to create Junctions.
@@ -32,15 +33,24 @@ public class Junction extends DispenserDevice {
     /**
      * Connects all of the given devices to the junction output pins.
      *
-     * @param devices Array of devices you want to connect
+     * @param devices               Array of devices you want to connect
+     * @throws NoMorePinException   If any of the devices doesn't have more free pins.
      */
-    public void connectAll(Device... devices) {
+    public void connectAll(Device... devices) throws NoMorePinException {
         for(Device device : devices) {
-            try {
-                connect(device);
-            } catch (NoMorePinException err) {
-                Printer.printErr(err);
-            }
+            connect(device);
+        }
+    }
+
+    /**
+     * Connects all of the given devices to the junction output pins.
+     *
+     * @param devices               Array of devices you want to connect
+     * @throws NoMorePinException   If any of the devices doesn't have more free pins.
+     */
+    public void connectAll(ArrayList<Device> devices) throws NoMorePinException {
+        for(Device device : devices) {
+            connect(device);
         }
     }
 
