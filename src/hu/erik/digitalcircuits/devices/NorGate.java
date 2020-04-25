@@ -12,6 +12,7 @@ public class NorGate extends Gate {
      */
     public NorGate(int numOfInputPins) {
         super(numOfInputPins);
+        getOutputPin().setValue(true);
     }
 
     /**

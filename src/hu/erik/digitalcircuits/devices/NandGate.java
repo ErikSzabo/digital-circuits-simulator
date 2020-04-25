@@ -12,6 +12,7 @@ public class NandGate extends Gate {
      */
     public NandGate(int numOfInputPins) {
         super(numOfInputPins);
+        getOutputPin().setValue(true);
     }
 
     /**
