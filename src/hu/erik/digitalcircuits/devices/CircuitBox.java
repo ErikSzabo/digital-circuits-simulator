@@ -3,11 +3,15 @@ package hu.erik.digitalcircuits.devices;
 import hu.erik.digitalcircuits.errors.BoundException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
 
+import java.util.Arrays;
+
 /**
  * Represents a digital circuit in a box.
  */
 public class CircuitBox extends MultipinDevice {
     private String name;
+    private Boolean[] boundedInputs;
+    private Boolean[] boundedOutputs;
 
     /**
      * Constructor to create Circuit Boxes with the given name
@@ -20,6 +24,10 @@ public class CircuitBox extends MultipinDevice {
     public CircuitBox(String name, int numOfInputPins, int numOfOutputPins) {
         super(numOfInputPins, numOfOutputPins);
         this.name = name;
+        boundedInputs = new Boolean[numOfInputPins];
+        boundedOutputs = new Boolean[numOfOutputPins];
+        Arrays.fill(boundedInputs, Boolean.FALSE);
+        Arrays.fill(boundedOutputs, Boolean.FALSE);
     }
 
     /**
@@ -33,34 +41,34 @@ public class CircuitBox extends MultipinDevice {
     /**
      * Binds the target device input pin with the box input pin based on the given indexes.
      *
-     * @param d             device to bind
-     * @param pinIndex      pin index on the device
-     * @param boxPinIndex   pin index on the box
+     * @param d                         device to bind
+     * @param pinIndex                  pin index on the device
+     * @param boxPinIndex               pin index on the box
      * @throws BoundException           if an already bound pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
     public void bindInputPin(Device d, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
-        Pin bindPin = d.getInputPin(pinIndex);
-        Pin boxPin = getInputPin(boxPinIndex);
-        if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
-        getAllInputPins()[boxPinIndex] = bindPin;
+        if(boxPinIndex > getAllInputPins().length - 1) throw new PinNotExistsException(this, boxPinIndex);
+        if(boundedInputs[boxPinIndex]) throw new BoundException(this);
+        getAllInputPins()[boxPinIndex] = d.getInputPin(pinIndex);
+        boundedInputs[boxPinIndex] = true;
     }
 
 
     /**
      * Binds the target device output pin with the box output pin based on the given indexes.
      *
-     * @param d             device to bind
-     * @param pinIndex      pin index on the device
-     * @param boxPinIndex   pin index on the box
+     * @param d                         device to bind
+     * @param pinIndex                  pin index on the device
+     * @param boxPinIndex               pin index on the box
      * @throws BoundException           if an already bound pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
     public void bindOutputPin(Device d, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
-        Pin bindPin = d.getOutputPin(pinIndex);
-        Pin boxPin = getOutputPin(boxPinIndex);
-        if(!boxPin.getParentDevice().toString().equals(DeviceType.CIRCUITBOX)) throw new BoundException(this);
-        getAllOutputPins()[boxPinIndex] = bindPin;
+        if(boxPinIndex > getAllOutputPins().length - 1) throw new PinNotExistsException(this, boxPinIndex);
+        if(boundedOutputs[boxPinIndex]) throw new BoundException(this);
+        getAllOutputPins()[boxPinIndex] = d.getOutputPin(pinIndex);
+        boundedOutputs[boxPinIndex] = true;
     }
 
     /**
@@ -76,7 +84,6 @@ public class CircuitBox extends MultipinDevice {
 
     /**
      * Returns the device type specified in the DeviceType static class.
-     * CircuitBox binding methods are using this. Changes should be made very carefully.
      *
      * @return the type of the Device
      */
