@@ -38,7 +38,7 @@ public class DeleteCmd extends Command {
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         try {
-            Device d = storage.get(cmd[1]);
+            Device d = storage.get(cmd[1]).getDevice();
             connectionReset(d.getAllInputPins(), "input");
             connectionReset(d.getAllOutputPins(), "output");
             storage.remove(cmd[1]);

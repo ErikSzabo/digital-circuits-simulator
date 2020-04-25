@@ -31,31 +31,59 @@ public class ShowCmd extends Command {
      */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        // FORMAT
-        // show <output | input> <name> <index>
 
         if(cmd.length < 4) throw new NotEnoughArgsException(cmd[0], 3, cmd.length - 1);
         if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
-        try {
-            Device device = storage.get(cmd[2]);
+        Device device;
+        int index;
 
-            switch (cmd[1]) {
-                case "input":
-                    Printer.println(cmd[2] + " inputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])).getValue());
-                    break;
-                case "output":
-                    Printer.println(cmd[2] + " outputpin(" + cmd[3] +"): " + device.getInputPin(Integer.parseInt(cmd[3])).getValue());
-                    break;
-                default:
-                    Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
-            }
-        } catch (DeviceNotExistsException | PinNotExistsException  err) {
+        try {
+            device = storage.get(cmd[2]).getDevice();
+            index = Integer.parseInt(cmd[3]);
+        } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
+            return;
         } catch (NumberFormatException err) {
-            Printer.printErr("Pin index must be number! (counting starts at 0)");
+            Printer.printErr("Pin indexes must be numbers! (counting starts at 0)");
+            return;
         }
 
-
+        if(cmd[1].equalsIgnoreCase("input")) {
+            showInput(device, cmd[2], index);
+        } else if(cmd[1].equalsIgnoreCase("output")) {
+            showOutput(device, cmd[2], index);
+        }
     }
+
+    /**
+     * Shows the device input value at the given index.
+     *
+     * @param device device that has the pin
+     * @param name   name of the device
+     * @param index  index of the pin
+     */
+    private void showInput(Device device, String name, int index) {
+        try {
+            Printer.println(name + " inputpin(" + index +"): " + device.getInputPin(index).getValue());
+        } catch (PinNotExistsException err) {
+            Printer.printErr(err);
+        }
+    }
+
+    /**
+     * Shows the device output value at the given index.
+     *
+     * @param device device that has the pin
+     * @param name   name of the device
+     * @param index  index of the pin
+     */
+    private void showOutput(Device device, String name, int index) {
+        try {
+            Printer.println(name + " outputpin(" + index +"): " + device.getOutputPin(index).getValue());
+        } catch (PinNotExistsException err) {
+            Printer.printErr(err);
+        }
+    }
+
 }

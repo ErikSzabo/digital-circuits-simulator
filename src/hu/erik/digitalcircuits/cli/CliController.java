@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.cli.commands.*;
-import hu.erik.digitalcircuits.devices.DeviceType;
+import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;
 
@@ -43,7 +43,7 @@ public class CliController {
         String[] initCMD = {"menu"};
         try {
             commands.get("menu").action(devices, initCMD);
-        } catch (NotEnoughArgsException err) {
+        } catch (NotEnoughArgsException | InvalidArgumentException err) {
             // :)
         }
 
@@ -60,12 +60,12 @@ public class CliController {
             String[] splittedCMD = cmd.split(" ");
 
             try {
-                if(DeviceType.ALL.contains(splittedCMD[0])) {
+                if(DeviceType.contains(splittedCMD[0].toLowerCase())) {
                     commands.get("device").action(devices, splittedCMD);
                 } else {
                     commands.get(splittedCMD[0]).action(devices, splittedCMD);
                 }
-            } catch (NotEnoughArgsException err) {
+            } catch (NotEnoughArgsException | InvalidArgumentException err) {
                 Printer.printErr(err);
             } catch (NullPointerException err) {
                 Printer.printErr("There isn't any command with this name: " + splittedCMD[0] + "!");

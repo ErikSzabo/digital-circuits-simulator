@@ -1,11 +1,13 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.devices.DeviceType;
+import hu.erik.digitalcircuits.cli.DeviceType;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
+
+import static hu.erik.digitalcircuits.cli.DeviceType.*;
 
 /**
  * Class to handle commands prefixed with "help".
@@ -32,24 +34,20 @@ public class HelpCmd extends Command {
      * @throws NotEnoughArgsException   If the number of arguments are less then 1.
      */
     @Override
-    public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
+    public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException, InvalidArgumentException {
         if(cmd.length < 2) throw new NotEnoughArgsException(cmd[0], 1, cmd.length - 1);
+        if(!DeviceType.contains(cmd[1].toLowerCase())) throw new InvalidArgumentException(cmd[0], cmd[1]);
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
-        if(!DeviceType.ALL.contains(cmd[1].toLowerCase())) {
-            Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
-            return;
-        }
-
-        if(cmd[1].toLowerCase().contains("gate") || cmd[1].equalsIgnoreCase(DeviceType.INVERTER)) {
+        if(cmd[1].toLowerCase().contains("gate") || cmd[1].equalsIgnoreCase(INVERTER.getValue())) {
             writeGatesHelpPage();
-        } else if(cmd[1].equalsIgnoreCase(DeviceType.POWER)) {
+        } else if(cmd[1].equalsIgnoreCase(POWER.getValue())) {
             writePowerHelpPage();
-        } else if(cmd[1].equalsIgnoreCase(DeviceType.SWITCH)) {
+        } else if(cmd[1].equalsIgnoreCase(SWITCH.getValue())) {
             writeSwitchHelpPage();
-        } else if(cmd[1].equalsIgnoreCase(DeviceType.JUNCTION)) {
+        } else if(cmd[1].equalsIgnoreCase(JUNCTION.getValue())) {
             writeJunctionHelpPage();
-        } else if(cmd[1].equalsIgnoreCase(DeviceType.CIRCUITBOX)) {
+        } else if(cmd[1].equalsIgnoreCase(CIRCUITBOX.getValue())) {
             writeCircuitBoxHelpPage();
         }
 

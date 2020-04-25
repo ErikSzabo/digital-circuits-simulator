@@ -1,8 +1,8 @@
 package hu.erik.digitalcircuits.cli.commands;
 
+import hu.erik.digitalcircuits.cli.DeviceBundle;
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.devices.Device;
-import hu.erik.digitalcircuits.devices.DeviceType;
+import hu.erik.digitalcircuits.cli.DeviceType;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
@@ -34,28 +34,51 @@ public class ListCmd extends Command {
      * @param cmd                       command, splitted by spaces
      */
     @Override
-    public void action(DeviceMap storage, String[] cmd) {
+    public void action(DeviceMap storage, String[] cmd) throws InvalidArgumentException {
+        if(cmd.length == 2 && !DeviceType.contains(cmd[1].toLowerCase())) throw new InvalidArgumentException(cmd[0], cmd[1]);
+
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
-        Map<String, Device> devices = storage.getMap();
-
         if(cmd.length == 1) {
-            for(String name : devices.keySet()) {
-                Printer.println("[Name]: " + name + ", [Type]: " + devices.get(name));
-            }
+            listAll(storage);
         } else {
-            if(!DeviceType.ALL.contains(cmd[1])) {
-                Printer.printErr(new InvalidArgumentException(cmd[0], cmd[1]));
-                return;
-            }
-            for(String name : devices.keySet()) {
-                String type = devices.get(name).toString();
-                if(type.equalsIgnoreCase(cmd[1])) {
-                    Printer.println("[Name]: " + name + ", [Type]: " + type);
-                }
+            listFiltered(storage, cmd[1].toLowerCase());
+        }
+
+    }
+
+    /**
+     * Lists all of the current devices with their name and type.
+     *
+     * @param storage    cli data structure
+     */
+    private void listAll(DeviceMap storage) {
+        Map<String, DeviceBundle> devices = storage.getMap();
+
+        for(String name : devices.keySet()) {
+            Printer.println("[Name]: " + name + ", [Type]: " + devices.get(name).getType());
+        }
+
+        Printer.println("Done!");
+    }
+
+    /**
+     * Lists all of the current devices with their name and type if the
+     * given type is equals to the device type.
+     *
+     * @param storage   cli data structure
+     * @param type      filter criteria
+     */
+    private void listFiltered(DeviceMap storage, String type) {
+        Map<String, DeviceBundle> devices = storage.getMap();
+
+        for(String name : devices.keySet()) {
+            String currentType = devices.get(name).getType();
+            if(currentType.equals(type)) {
+                Printer.println("[Name]: " + name + ", [Type]: " + type);
             }
         }
-        Printer.println("Done!");
 
+        Printer.println("Done!");
     }
 }

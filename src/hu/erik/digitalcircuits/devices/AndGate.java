@@ -31,6 +31,6 @@ public class AndGate extends Gate {
 
     @Override
     public String toString() {
-        return DeviceType.ANDGATE;
+        return "AndGate";
     }
 }

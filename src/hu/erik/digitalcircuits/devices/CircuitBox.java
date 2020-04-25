@@ -89,6 +89,6 @@ public class CircuitBox extends MultipinDevice {
      */
     @Override
     public String toString() {
-        return DeviceType.CIRCUITBOX;
+        return "CircuitBox";
     }
 }

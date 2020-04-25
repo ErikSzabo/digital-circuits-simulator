@@ -46,6 +46,6 @@ public class Junction extends DispenserDevice {
 
     @Override
     public String toString() {
-        return DeviceType.JUNCTION;
+        return "Junction";
     }
 }

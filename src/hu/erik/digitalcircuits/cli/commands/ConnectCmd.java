@@ -38,8 +38,8 @@ public class ConnectCmd extends Command{
         if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         try {
-            Device d1 = storage.get(cmd[1]);
-            Device d2 = storage.get(cmd[3]);
+            Device d1 = storage.get(cmd[1]).getDevice();
+            Device d2 = storage.get(cmd[3]).getDevice();
             d1.connect(d2);
             Printer.println("Connected!");
         } catch (DeviceNotExistsException | NoMorePinException err) {

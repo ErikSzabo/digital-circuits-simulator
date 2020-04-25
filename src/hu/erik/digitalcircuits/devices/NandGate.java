@@ -32,6 +32,6 @@ public class NandGate extends Gate {
 
     @Override
     public String toString() {
-        return DeviceType.NANDGATE;
+        return "NandGate";
     }
 }

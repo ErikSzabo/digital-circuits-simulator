@@ -50,6 +50,6 @@ public class Switch extends SimpleDevice {
 
     @Override
     public String toString() {
-        return DeviceType.SWITCH;
+        return "Switch";
     }
 }

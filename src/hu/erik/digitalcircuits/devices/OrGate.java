@@ -31,6 +31,6 @@ public class OrGate extends Gate {
 
     @Override
     public String toString() {
-        return DeviceType.ORGATE;
+        return "OrGate";
     }
 }

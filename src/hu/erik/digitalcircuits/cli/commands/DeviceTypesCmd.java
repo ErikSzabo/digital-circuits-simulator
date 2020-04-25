@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli.commands;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
-import hu.erik.digitalcircuits.devices.DeviceType;
+import hu.erik.digitalcircuits.cli.DeviceType;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
@@ -32,8 +32,8 @@ public class DeviceTypesCmd extends Command {
     public void action(DeviceMap storage, String[] cmd) {
         if(cmd.length > 1) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
-        for(String type : DeviceType.ALL) {
-            Printer.println(type);
+        for(DeviceType type : DeviceType.values()) {
+            Printer.println(type.getValue());
         }
     }
 }

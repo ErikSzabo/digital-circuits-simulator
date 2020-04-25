@@ -33,6 +33,6 @@ public class PowerSource extends SimpleDevice {
 
     @Override
     public String toString() {
-        return DeviceType.POWER;
+        return "PowerSource";
     }
 }
