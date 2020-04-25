@@ -4,6 +4,7 @@ package hu.erik.digitalcircuits.devices;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.errors.PinAlreadyInUseException;
 import hu.erik.digitalcircuits.errors.PinNotExistsException;
+import hu.erik.digitalcircuits.utils.Printer;
 
 /**
  * Abstract class for Device which implements the connection methods.
@@ -106,15 +107,21 @@ public abstract class ConnectableDevice implements Device {
     /**
      * Transfers value from a pin to another pin if it is possible.
      *
-     * @param outputPin OutputPin you want to transfer the value from
+     * @param outputPin outputPin you want to transfer the value from
      */
     protected void transferValue(Pin outputPin) {
-        if(outputPin.isFree()) return;
-        Pin connectedPin = outputPin.getConnectionCable().getOtherPin(outputPin);
-        connectedPin.setValue(outputPin.getValue());
-        Device device = connectedPin.getParentDevice();
-        device.calcOutput();
-        device.sendOutput();
+        try {
+            if(outputPin.isFree()) return;
+            Pin connectedPin = outputPin.getConnectionCable().getOtherPin(outputPin);
+            connectedPin.setValue(outputPin.getValue());
+            Device device = connectedPin.getParentDevice();
+            device.calcOutput();
+            device.sendOutput();
+        } catch (StackOverflowError err) {
+            // "protection" against oscillation
+            Printer.printErr("Oscillation occurred in your circuit. Signal transfers are stopped!");
+            Printer.printErr("Please fix your circuit!");
+        }
     }
 
 }

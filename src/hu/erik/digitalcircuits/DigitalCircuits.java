@@ -31,7 +31,11 @@ public class DigitalCircuits {
             Printer.printErr(err);
         }
 
-        csomopont.connectAll(A, B, C, D, E);
+        try {
+            csomopont.connectAll(A, B, C, D, E);
+        } catch (NoMorePinException e) {
+            e.printStackTrace();
+        }
 
         try {
             A.connect(inverter1).connect(NandKapu);
