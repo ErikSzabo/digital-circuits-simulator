@@ -3,8 +3,13 @@ package hu.erik.digitalcircuits.utils;
 /**
  * Util class to print nice looking messages to the console.
  */
-public class Printer {
+public final class Printer {
     private static int CONSOLEWIDTH = 120;
+
+    /**
+     * Private constructor to prevent instance creation.
+     */
+    private Printer() {}
 
     /**
      * Prints the given text to the console with ">>" prefix.
