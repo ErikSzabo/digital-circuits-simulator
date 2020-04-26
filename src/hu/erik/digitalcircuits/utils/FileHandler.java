@@ -33,7 +33,9 @@ public final class FileHandler {
     }
 
     /**
-     * Save a given circuit.
+     * Save a given circuit. This process will reset the input and output pins of the box
+     * to save it as a default blackbox. In this way, after loading, user can connect anything to
+     * the box without any problem. After the save, the pins and box state will be the same as before.
      *
      * @param box circuitbox which will be saved
      */
@@ -45,7 +47,14 @@ public final class FileHandler {
         circuitRunThrough(box);
 
         // Save the circuit
-        saveCircuitToFile(box);
+        try {
+            saveCircuitToFile(box);
+        } catch (IOException err) {
+            restorePins(box.inputPins(), inputCables, "input");
+            restorePins(box.outputPins(), outputCables, "output");
+            circuitRunThrough(box);
+            throw err;
+        }
 
         // Restore the circuit
         restorePins(box.inputPins(), inputCables, "input");
