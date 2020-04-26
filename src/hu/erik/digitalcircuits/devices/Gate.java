@@ -36,7 +36,7 @@ public abstract class Gate extends AbstractDevice {
     }
 
     /**
-     * Returns it's output pins in an array.
+     * Returns it's output pin in an array.
      *
      * @return all output pins on the device
      */

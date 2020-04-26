@@ -13,7 +13,7 @@ import hu.erik.digitalcircuits.utils.Printer;
 public class DisconnectCmd extends Command {
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format and description.
      */
     public DisconnectCmd() {
         super(

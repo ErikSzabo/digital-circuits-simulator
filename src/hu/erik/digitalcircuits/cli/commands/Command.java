@@ -22,7 +22,7 @@ public abstract class Command {
     private String briefDescription;
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format and description.
      *
      * @param name              name of the command
      * @param format            format of the command

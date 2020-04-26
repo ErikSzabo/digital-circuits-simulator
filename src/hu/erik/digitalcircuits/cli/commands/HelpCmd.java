@@ -15,7 +15,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
 public class HelpCmd extends Command {
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format and description.
      */
     public HelpCmd() {
         super(

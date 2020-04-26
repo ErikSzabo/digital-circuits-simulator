@@ -61,7 +61,7 @@ public final class FileHandler {
     }
 
     /**
-     * Resets the given pins based their type, then returns the
+     * Resets the given pins based on their type, then returns the
      * connection cables that they had, in order to have the chance of
      * restoration.
      *
@@ -112,7 +112,7 @@ public final class FileHandler {
     }
 
     /**
-     * Saves the given to a serialized file. File name will be the same as the box name.
+     * Saves the given CircuitBox to a serialized file. File name will be the same as the box name.
      *
      * @param box           circuit box to save
      * @throws IOException  If the save fails.

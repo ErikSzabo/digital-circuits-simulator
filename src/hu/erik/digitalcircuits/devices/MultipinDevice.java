@@ -6,7 +6,7 @@ package hu.erik.digitalcircuits.devices;
  */
 public abstract class MultipinDevice extends AbstractDevice {
     /**
-     * Hold all of the input pins.
+     * Holds all of the input pins.
      */
     private Pin[] inputPins;
     /**
@@ -18,8 +18,8 @@ public abstract class MultipinDevice extends AbstractDevice {
      * Basic constructor to create Devices with the specified numbers of input
      * and output pins.
      *
-     * @param numOfInputPins    Number of the required input pins
-     * @param numOfOutputPins   Number of the required output pins
+     * @param numOfInputPins    number of input pins
+     * @param numOfOutputPins   number of output pins
      */
     public MultipinDevice(int numOfInputPins, int numOfOutputPins) {
         this.inputPins = new Pin[numOfInputPins];

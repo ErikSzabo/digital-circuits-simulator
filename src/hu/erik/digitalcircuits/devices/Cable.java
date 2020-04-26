@@ -7,11 +7,11 @@ import java.io.Serializable;
  */
 public class Cable implements Serializable {
     /**
-     * Pin at one end of the cable
+     * Pin at one end of the cable.
      */
     private Pin p1;
     /**
-     * Pin at the other end of the cable
+     * Pin at the other end of the cable.
      */
     private Pin p2;
 
@@ -33,7 +33,7 @@ public class Cable implements Serializable {
     }
 
     /**
-     * Returns the pin that is positioned at the other end of this Cable.
+     * Returns the pin that is positioned at the other end of the Cable.
      *
      * @param pin   one of the cable's pins
      * @return      the other pin on the Cable

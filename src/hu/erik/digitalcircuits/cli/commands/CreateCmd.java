@@ -23,7 +23,7 @@ public class CreateCmd extends Command {
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
     /**
-     * Constructor to setup the command's name and it's possible actions.
+     * Constructor to setup the command's name, format, description and it's possible actions.
      */
     public CreateCmd() {
         super(

@@ -16,7 +16,7 @@ import java.util.function.BiConsumer;
 import static hu.erik.digitalcircuits.cli.DeviceType.*;
 
 /**
- * Class to handle commands prefixed with a device type.
+ * Class to handle commands prefixed with "device".
  * Handles unique method calls on special devices like switch and circuitbox.
  */
 public class DeviceCmd extends Command {
@@ -26,7 +26,7 @@ public class DeviceCmd extends Command {
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format, description and it's possible actions.
      */
     public DeviceCmd() {
         super(

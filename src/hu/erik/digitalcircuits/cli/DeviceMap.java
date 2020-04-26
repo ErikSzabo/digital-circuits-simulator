@@ -37,7 +37,7 @@ public class DeviceMap {
     }
 
     /**
-     * Removes the device with the give name from the data structure.
+     * Removes the device with the given name from the data structure.
      *
      * @param name                      name of the device which will be removed
      * @throws DeviceNotExistsException If there isn't any mapping for the device.

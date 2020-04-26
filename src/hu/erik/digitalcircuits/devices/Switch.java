@@ -42,7 +42,7 @@ public class Switch extends SimpleDevice {
 
 
     /**
-     * Calculates the Switch output based it's status or state and it's input pin value.
+     * Calculates the Switch output based on it's status or state and it's input pin value.
      * Output will only be true, if the input is true as well as the status.
      */
     @Override

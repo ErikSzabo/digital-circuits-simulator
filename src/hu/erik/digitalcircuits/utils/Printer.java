@@ -5,7 +5,7 @@ package hu.erik.digitalcircuits.utils;
  */
 public final class Printer {
     /**
-     * With of the console in characters.
+     * Width of the console in characters.
      */
     private static final int CONSOLEWIDTH = 120;
 

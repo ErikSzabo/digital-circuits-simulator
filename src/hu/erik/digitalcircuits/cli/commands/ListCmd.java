@@ -15,7 +15,7 @@ import java.util.Map;
 public class ListCmd extends Command {
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format and description.
      */
     public ListCmd() {
         super(

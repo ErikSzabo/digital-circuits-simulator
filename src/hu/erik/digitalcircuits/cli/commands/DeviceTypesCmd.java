@@ -11,7 +11,7 @@ import hu.erik.digitalcircuits.utils.Printer;
 public class DeviceTypesCmd extends Command {
 
     /**
-     * Constructor to setup the command's name.
+     * Constructor to setup the command's name, format and description.
      */
     public DeviceTypesCmd() {
         super(
