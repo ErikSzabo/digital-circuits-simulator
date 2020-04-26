@@ -17,14 +17,16 @@ public abstract class Command {
      */
     private String format;
     /**
-     * One/two line description about the command.
+     * One/two sentence description about the command.
      */
     private String briefDescription;
 
     /**
      * Constructor to setup the command's name.
      *
-     * @param name Name of the command.
+     * @param name              name of the command
+     * @param format            format of the command
+     * @param briefDescription  command description in one/two sentence
      */
     public Command(String name, String format, String briefDescription) {
         this.name = name;
