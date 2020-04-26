@@ -12,17 +12,19 @@ public class DeviceTypesCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public DeviceTypesCmd(String name) {
-        super(name);
+    public DeviceTypesCmd() {
+        super(
+                "devicetypes",
+                "devicetypes",
+                "Lists all available device type."
+        );
     }
 
     /**
-     * Lists the available device types.
+     * Lists the available device types.<br>
      *
-     * Command format:
+     * Command format:<br>
      * devicetypes
      *
      * @param storage                   cli data structure

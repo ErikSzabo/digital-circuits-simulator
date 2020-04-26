@@ -15,17 +15,19 @@ public class DeleteCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public DeleteCmd(String name) {
-        super(name);
+    public DeleteCmd() {
+        super(
+                "delete",
+                "delete <name>",
+                "Delete a device with the given name."
+        );
     }
 
     /**
-     * Deletes a device with the given name.
+     * Deletes a device with the given name.<br>
      *
-     * Command format:
+     * Command format:<br>
      * delete {@literal <}name{@literal >}
      *
      * @param storage                   cli data structure

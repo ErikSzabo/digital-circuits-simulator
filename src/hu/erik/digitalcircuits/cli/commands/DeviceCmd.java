@@ -27,11 +27,13 @@ public class DeviceCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public DeviceCmd(String name) {
-        super(name);
+    public DeviceCmd() {
+        super(
+                "device",
+                "device <devicetype> <name> <uniqe method> <args...>",
+                "Access device specific functions."
+        );
         actions = new HashMap<>();
         actions.put(SWITCH.getValue(), this::handleSwitch);
         actions.put(POWER.getValue(), this::handlePower);
@@ -40,10 +42,10 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handle device unique methods.
+     * Handle device unique methods.<br>
      *
-     * Command format:
-     * {@literal <}devicetype{@literal >} {@literal <}name{@literal >} {@literal <}uniqe method{@literal >} {@literal <}args...{@literal >}
+     * Command format:<br>
+     * device {@literal <}devicetype{@literal >} {@literal <}name{@literal >} {@literal <}uniqe method{@literal >} {@literal <}args...{@literal >}
      *
      * @param storage                   cli data structure
      * @param cmd                       command, split by spaces
@@ -51,9 +53,9 @@ public class DeviceCmd extends Command {
      */
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
-        if(cmd.length < 3) throw new NotEnoughArgsException("device", 2, cmd.length - 1);
+        if(cmd.length < 4) throw new NotEnoughArgsException("device", 3, cmd.length - 1);
 
-        String type = cmd[0].toLowerCase();
+        String type = cmd[1].toLowerCase();
         try {
             actions.get(type).accept(storage, cmd);
         } catch (NullPointerException err) {
@@ -66,10 +68,10 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles powersource specific unique methods like ON and OFF.
+     * Handles powersource specific unique methods like ON and OFF.<br>
      *
-     * Command format:
-     * powersource {@literal <}name{@literal >} {@literal <}on or off{@literal >}
+     * Command format:<br>
+     * device powersource {@literal <}name{@literal >} {@literal <}on or off{@literal >}
      *
      * @param storage   cli data structure
      * @param cmd       command, split by spaces
@@ -78,21 +80,21 @@ public class DeviceCmd extends Command {
         Device device;
 
         try {
-            device = storage.get(cmd[1]).getDevice();
+            device = storage.get(cmd[2]).getDevice();
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
         }
 
         if(!(device instanceof PowerSource)) {
-            Printer.printErr(cmd[1] + " is not a "+ POWER +"!");
+            Printer.printErr(cmd[2] + " is not a "+ POWER +"!");
             return;
         }
 
-        if(cmd[2].equalsIgnoreCase("on")) {
+        if(cmd[3].equalsIgnoreCase("on")) {
             ((PowerSource) device).on();
             Printer.println("Your switch state is now TRUE(1)");
-        } else if(cmd[2].equalsIgnoreCase("off")) {
+        } else if(cmd[3].equalsIgnoreCase("off")) {
             ((PowerSource) device).off();
             Printer.println("Your switch state is now FALSE(0)");
         } else {
@@ -101,10 +103,10 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles switch specific unique methods like ON and OFF.
+     * Handles switch specific unique methods like ON and OFF.<br>
      *
-     * Command format:
-     * switch {@literal <}name{@literal >} {@literal <}on or off{@literal >}
+     * Command format:<br>
+     * device switch {@literal <}name{@literal >} {@literal <}on or off{@literal >}
      *
      * @param storage   cli data structure
      * @param cmd       command, splitted by spaces
@@ -113,33 +115,33 @@ public class DeviceCmd extends Command {
         Device device;
 
         try {
-            device = storage.get(cmd[1]).getDevice();
+            device = storage.get(cmd[2]).getDevice();
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
         }
 
         if(!(device instanceof Switch)) {
-            Printer.printErr(cmd[1] + " is not a "+ SWITCH +"!");
+            Printer.printErr(cmd[2] + " is not a "+ SWITCH +"!");
             return;
         }
 
-        if(cmd[2].equalsIgnoreCase("on")) {
+        if(cmd[3].equalsIgnoreCase("on")) {
             ((Switch) device).on();
             Printer.println("Your switch state is now TRUE(1)");
-        } else if(cmd[2].equalsIgnoreCase("off")) {
+        } else if(cmd[3].equalsIgnoreCase("off")) {
             ((Switch) device).off();
             Printer.println("Your switch state is now FALSE(0)");
         } else {
-            Printer.printErr("Invalid method for " + SWITCH + ": " + cmd[2]);
+            Printer.printErr("Invalid method for " + SWITCH + ": " + cmd[3]);
         }
     }
 
     /**
-     * Handles junction specific unique methods like CONNECTALL.
+     * Handles junction specific unique methods like CONNECTALL.<br>
      *
-     * Command format:
-     * junction {@literal <}name{@literal >} connectall {@literal <}devices...{@literal >}
+     * Command format:<br>
+     * device junction {@literal <}name{@literal >} connectall {@literal <}devices...{@literal >}
      *
      * @param storage   cli data structure
      * @param cmd       command, splitted by spaces
@@ -148,7 +150,7 @@ public class DeviceCmd extends Command {
         Device device;
 
         try {
-            device = storage.get(cmd[1]).getDevice();
+            device = storage.get(cmd[2]).getDevice();
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
@@ -167,12 +169,12 @@ public class DeviceCmd extends Command {
      */
     private boolean hasJunctionError(Device device, String[] cmd) {
         if(!(device instanceof Junction)) {
-            Printer.printErr(cmd[1] + " is not a "+ JUNCTION +"!");
+            Printer.printErr(cmd[2] + " is not a "+ JUNCTION +"!");
             return true;
-        } else if(!cmd[2].equalsIgnoreCase("connectall")) {
+        } else if(!cmd[3].equalsIgnoreCase("connectall")) {
             Printer.printErr("Invalid method for " + JUNCTION + ": " + cmd[2]);
             return true;
-        } else if(cmd.length < 4) {
+        } else if(cmd.length < 5) {
             Printer.printErr("You have to specify the devices you want to connect!");
             return true;
         }
@@ -190,7 +192,7 @@ public class DeviceCmd extends Command {
     private void junctionConnectAll(Device device, String[] cmd, DeviceMap storage) {
         ArrayList<Device> devices = new ArrayList<>();
 
-        for (int i = 3; i < cmd.length; i++) {
+        for (int i = 4; i < cmd.length; i++) {
             try {
                 devices.add(storage.get(cmd[i]).getDevice());
             } catch (DeviceNotExistsException err) {
@@ -209,32 +211,32 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles circuit box specific unique methods like SAVE, LOAD, BINDINPUTPIN, BINDOUTPUTPIN.
+     * Handles circuit box specific unique methods like SAVE, LOAD, BINDINPUTPIN, BINDOUTPUTPIN.<br>
      *
-     * Command formats:
-     * circuitbox {@literal <}name{@literal >} bindinputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}
-     * circuitbox {@literal <}name{@literal >} bindoutputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}
-     * circuitbox {@literal <}name{@literal >} save
-     * circuitbox {@literal <}name{@literal >} load
+     * Command formats:<br>
+     * device circuitbox {@literal <}name{@literal >} bindinputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}<br>
+     * device circuitbox {@literal <}name{@literal >} bindoutputpin {@literal <}target name{@literal >} {@literal <}target pin index{@literal >} {@literal <}box pin index{@literal >}<br>
+     * device circuitbox {@literal <}name{@literal >} save<br>
+     * device circuitbox {@literal <}name{@literal >} load
      *
      * @param storage                   cli data structure
      * @param cmd                       command, splitted by spaces
      */
     private void handleCircuitBox(DeviceMap storage, String[] cmd) {
         // Load circuit command
-        if(cmd[2].equalsIgnoreCase("load")) {
-            loadCircuit(cmd[1], storage);
+        if(cmd[3].equalsIgnoreCase("load")) {
+            loadCircuit(cmd[2], storage);
         }
         // Save circuit command
-        else if(cmd[2].equalsIgnoreCase("save")) {
-            saveCircuit(cmd[1], storage);
+        else if(cmd[3].equalsIgnoreCase("save")) {
+            saveCircuit(cmd[2], storage);
         }
         // Bind input pin command
-        else if(cmd[2].equalsIgnoreCase("bindinputpin")) {
+        else if(cmd[3].equalsIgnoreCase("bindinputpin")) {
            bindCircuitInput(storage, cmd);
         }
         // Bind output pin command
-        else if(cmd[2].equalsIgnoreCase("bindoutputpin")) {
+        else if(cmd[3].equalsIgnoreCase("bindoutputpin")) {
             bindCircuitOutput(storage, cmd);
         }
         // None of the above
@@ -296,15 +298,15 @@ public class DeviceCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void bindCircuitInput(DeviceMap storage, String[] cmd) {
-        if(cmd.length < 6) {
+        if(cmd.length < 7) {
             Printer.printErr(new NotEnoughArgsException(cmd[0] + " bindinputpin", 5, cmd.length - 1));
             return;
         }
 
         Device box, other;
         try {
-            box = storage.get(cmd[1]).getDevice();
-            other = storage.get(cmd[3]).getDevice();
+            box = storage.get(cmd[2]).getDevice();
+            other = storage.get(cmd[4]).getDevice();
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
@@ -313,7 +315,7 @@ public class DeviceCmd extends Command {
         if(checkCircuitBox(box)) return;
 
         try {
-            ((CircuitBox) box).bindInputPin(other, Integer.parseInt(cmd[4]), Integer.parseInt(cmd[5]));
+            ((CircuitBox) box).bindInputPin(other, Integer.parseInt(cmd[5]), Integer.parseInt(cmd[6]));
             Printer.println("Pins now bounded!");
         } catch (BoundException | PinNotExistsException err) {
             Printer.printErr(err);
@@ -331,15 +333,15 @@ public class DeviceCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void bindCircuitOutput(DeviceMap storage, String[] cmd) {
-        if(cmd.length < 6) {
+        if(cmd.length < 7) {
             Printer.printErr(new NotEnoughArgsException(cmd[0] + " bindoutputpin", 5, cmd.length - 1));
             return;
         }
 
         Device box, other;
         try {
-            box = storage.get(cmd[1]).getDevice();
-            other = storage.get(cmd[3]).getDevice();
+            box = storage.get(cmd[2]).getDevice();
+            other = storage.get(cmd[4]).getDevice();
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
@@ -348,7 +350,7 @@ public class DeviceCmd extends Command {
         if(checkCircuitBox(box)) return;
 
         try {
-            ((CircuitBox) box).bindOutputPin(other, Integer.parseInt(cmd[4]), Integer.parseInt(cmd[5]));
+            ((CircuitBox) box).bindOutputPin(other, Integer.parseInt(cmd[5]), Integer.parseInt(cmd[6]));
             Printer.println("Pins now bounded!");
         } catch (BoundException | PinNotExistsException err) {
             Printer.printErr(err);

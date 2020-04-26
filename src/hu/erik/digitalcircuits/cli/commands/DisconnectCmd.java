@@ -14,17 +14,19 @@ public class DisconnectCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public DisconnectCmd(String name) {
-        super(name);
+    public DisconnectCmd() {
+        super(
+                "disconnect",
+                "disconnect <name> from <name>",
+                "Disconnects the first device output pin from the second device input pin."
+        );
     }
 
     /**
-     * Fully disconnects the two given device.
+     * Fully disconnects the two given device.<br>
      *
-     * Command format:
+     * Command format:<br>
      * disconnect {@literal <}name{@literal >} from {@literal <}name{@literal >}
      *
      * @param storage                   cli data structure

@@ -12,14 +12,24 @@ public abstract class Command {
      * Name of the command.
      */
     private String name;
+    /**
+     * How the command should be used. Format first word must be the name.
+     */
+    private String format;
+    /**
+     * One/two line description about the command.
+     */
+    private String briefDescription;
 
     /**
      * Constructor to setup the command's name.
      *
      * @param name Name of the command.
      */
-    public Command(String name) {
+    public Command(String name, String format, String briefDescription) {
         this.name = name;
+        this.format = format;
+        this.briefDescription = briefDescription;
     }
 
     /**
@@ -27,6 +37,20 @@ public abstract class Command {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return One/two line description about the command.
+     */
+    public String getBriefDescription() {
+        return briefDescription;
+    }
+
+    /**
+     * @return How the command should be used.
+     */
+    public String getFormat() {
+        return format;
     }
 
     /**

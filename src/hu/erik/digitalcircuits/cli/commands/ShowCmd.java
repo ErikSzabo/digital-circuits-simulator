@@ -12,18 +12,20 @@ public class ShowCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public ShowCmd(String name) {
-        super(name);
+    public ShowCmd() {
+        super(
+                "show",
+                "show <input | output> <name> <index>",
+                "Show the current value for the given pin on the given device."
+        );
     }
 
     /**
-     * Shows information about a pin on a device at the given index.
+     * Shows information about a pin on a device at the given index.<br>
      *
-     * Command format:
-     * create {@literal <}output | input{@literal >} {@literal <}name{@literal >} {@literal <}pin index{@literal >}
+     * Command format:<br>
+     * show {@literal <}output | input{@literal >} {@literal <}name{@literal >} {@literal <}pin index{@literal >}
      *
      * @param storage                   cli data structure
      * @param cmd                       command, splitted by spaces

@@ -1,6 +1,7 @@
 package hu.erik.digitalcircuits;
 
 import hu.erik.digitalcircuits.cli.CliController;
+import hu.erik.digitalcircuits.cli.commands.*;
 import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.utils.Printer;
@@ -63,6 +64,11 @@ public class DigitalCircuits {
      */
     public static void main(String[] args) {
         CliController cliController = new CliController();
+        cliController.addCommands(
+                new ConnectCmd(), new CreateCmd(), new DeleteCmd(),
+                new DeviceCmd(), new DeviceTypesCmd(), new DisconnectCmd(),
+                new HelpCmd(), new ListCmd(), new ShowCmd()
+        );
         cliController.listen();
     }
 }

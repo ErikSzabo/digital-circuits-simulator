@@ -24,11 +24,13 @@ public class CreateCmd extends Command {
 
     /**
      * Constructor to setup the command's name and it's possible actions.
-     *
-     * @param name Name of the command.
      */
-    public CreateCmd(String name) {
-        super(name);
+    public CreateCmd() {
+        super(
+                "create",
+                "create <type> <name> [inputnum] [outputnum]",
+                "Creates a device with the given parameters."
+        );
         actions = new HashMap<>();
         actions.put(SWITCH.getValue(), this::createSwitch);
         actions.put(POWER.getValue(), this::createPower);
@@ -43,9 +45,9 @@ public class CreateCmd extends Command {
 
     /**
      * Creates a device with the given name and type and uses
-     * the optional pin numbers if it's needed.
+     * the optional pin numbers if it's needed.<br>
      *
-     * Command format:
+     * Command format:<br>
      * create {@literal <}type{@literal >} {@literal <}name{@literal >} [inputnum] [outputnum]
      *
      * @param storage                   cli data structure

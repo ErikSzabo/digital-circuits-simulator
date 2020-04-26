@@ -14,18 +14,20 @@ import hu.erik.digitalcircuits.utils.Printer;
 public class ConnectCmd extends Command{
 
     /**
-     * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
+     * Constructor to setup the command's name, format and description.
      */
-    public ConnectCmd(String name) {
-        super(name);
+    public ConnectCmd() {
+        super(
+                "connect",
+                "connect <name> to <name>",
+                "Connects the first device first free output pin to the second device first free input pin."
+        );
     }
 
     /**
-     * Connects the two devices if both of them exists.
+     * Connects the two devices if both of them exists.<br>
      *
-     * Command format:
+     * Command format:<br>
      * connect {@literal <}name{@literal >} to {@literal <}name{@literal >}
      *
      * @param storage                   cli data structure

@@ -16,17 +16,19 @@ public class HelpCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public HelpCmd(String name) {
-        super(name);
+    public HelpCmd() {
+        super(
+                "help",
+                "help [devicetype]",
+                "Shows help for the specified device type. You can view here the unique methods for a device."
+        );
     }
 
     /**
-     * Writes the required help page to the console.
+     * Writes the required help page to the console.<br>
      *
-     * Command format:
+     * Command format:<br>
      * help {@literal <}device type{@literal >}
      *
      * @param storage                   cli data structure

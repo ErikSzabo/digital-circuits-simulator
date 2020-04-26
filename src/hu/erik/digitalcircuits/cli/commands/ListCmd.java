@@ -16,18 +16,20 @@ public class ListCmd extends Command {
 
     /**
      * Constructor to setup the command's name.
-     *
-     * @param name Name of the command.
      */
-    public ListCmd(String name) {
-        super(name);
+    public ListCmd() {
+        super(
+                "list",
+                "list [type]",
+                "Lists all available device type."
+        );
     }
 
     /**
      * Lists the name and type of the created devices.
-     * It supports filtering by device type.
+     * It supports filtering by device type.<br>
      *
-     * Command format:
+     * Command format:<br>
      * list [type]
      *
      * @param storage                   cli data structure
