@@ -62,7 +62,7 @@ public class DeleteCmd extends Command {
                 otherPin.setConnectionCable(null);
                 otherPin.setAvailability(true);
                 if(type.equals("output")) {
-                    otherPin.setValue(false);
+                    otherPin.setSignal(false);
                     otherPin.getParentDevice().calcOutput();
                     otherPin.getParentDevice().sendOutput();
                 }

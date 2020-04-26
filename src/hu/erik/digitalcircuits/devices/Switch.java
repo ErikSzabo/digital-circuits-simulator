@@ -45,7 +45,7 @@ public class Switch extends SimpleDevice {
      */
     @Override
     public void calcOutput() {
-        getOutputPin().setValue(getInputPin().getValue() && status);
+        getOutputPin().setSignal(getInputPin().getSignal() && status);
     }
 
     @Override

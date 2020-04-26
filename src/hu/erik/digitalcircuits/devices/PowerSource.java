@@ -9,7 +9,7 @@ public class PowerSource extends SimpleDevice {
      * Sets the output signal to true.
      */
     public void on() {
-        getInputPin().setValue(true);
+        getInputPin().setSignal(true);
         calcOutput();
         sendOutput();
     }
@@ -18,7 +18,7 @@ public class PowerSource extends SimpleDevice {
      * Sets the output signal to false.
      */
     public void off() {
-        getInputPin().setValue(false);
+        getInputPin().setSignal(false);
         calcOutput();
         sendOutput();
     }
@@ -28,7 +28,7 @@ public class PowerSource extends SimpleDevice {
      */
     @Override
     public void calcOutput() {
-        getOutputPin().setValue(getInputPin().getValue());
+        getOutputPin().setSignal(getInputPin().getSignal());
     }
 
     @Override

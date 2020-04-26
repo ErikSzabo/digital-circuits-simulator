@@ -49,10 +49,10 @@ public class DigitalCircuits {
         C.on();
         E.on();
 
-        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.inputPins()[0].getValue());
+        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.inputPins()[0].getSignal());
         C.off();
         A.on();
-        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.outputPins()[0].getValue());
+        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.outputPins()[0].getSignal());
 
     }
 

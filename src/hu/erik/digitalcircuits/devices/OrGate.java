@@ -21,12 +21,12 @@ public class OrGate extends Gate {
     @Override
     public void calcOutput() {
         for(Pin inputPin: inputPins()) {
-            if(inputPin.getValue()) {
-                getOutputPin().setValue(true);
+            if(inputPin.getSignal()) {
+                getOutputPin().setSignal(true);
                 return;
             }
         }
-        getOutputPin().setValue(false);
+        getOutputPin().setSignal(false);
     }
 
     @Override

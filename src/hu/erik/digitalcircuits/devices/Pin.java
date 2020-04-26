@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Pin implements Serializable {
     private Cable connectionCable;
     private Device parentDevice;
-    private boolean value;
+    private boolean signal;
     private boolean free;
 
     /**
@@ -20,7 +20,7 @@ public class Pin implements Serializable {
      */
     protected Pin(Device parentDevice) {
         this.parentDevice = parentDevice;
-        this.value = false;
+        this.signal = false;
         this.free = true;
     }
 
@@ -41,8 +41,8 @@ public class Pin implements Serializable {
     /**
      * @return Value that the pin has right now.
      */
-    public boolean getValue() {
-        return value;
+    public boolean getSignal() {
+        return signal;
     }
 
     /**
@@ -60,8 +60,8 @@ public class Pin implements Serializable {
      *
      * @param value New value
      */
-    public void setValue(boolean value) {
-        this.value = value;
+    public void setSignal(boolean value) {
+        this.signal = value;
     }
 
     /**

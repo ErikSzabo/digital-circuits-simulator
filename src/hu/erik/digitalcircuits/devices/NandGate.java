@@ -12,7 +12,7 @@ public class NandGate extends Gate {
      */
     public NandGate(int numOfInputPins) {
         super(numOfInputPins);
-        getOutputPin().setValue(true);
+        getOutputPin().setSignal(true);
     }
 
     /**
@@ -22,12 +22,12 @@ public class NandGate extends Gate {
     @Override
     public void calcOutput() {
         for(Pin inputPin : inputPins()) {
-            if(!inputPin.getValue()) {
-                getOutputPin().setValue(true);
+            if(!inputPin.getSignal()) {
+                getOutputPin().setSignal(true);
                 return;
             }
         }
-        getOutputPin().setValue(false);
+        getOutputPin().setSignal(false);
     }
 
     @Override

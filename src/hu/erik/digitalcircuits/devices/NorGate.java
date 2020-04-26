@@ -12,7 +12,7 @@ public class NorGate extends Gate {
      */
     public NorGate(int numOfInputPins) {
         super(numOfInputPins);
-        getOutputPin().setValue(true);
+        getOutputPin().setSignal(true);
     }
 
     /**
@@ -22,12 +22,12 @@ public class NorGate extends Gate {
     @Override
     public void calcOutput() {
         for(Pin inputPin: inputPins()) {
-            if(inputPin.getValue()) {
-                getOutputPin().setValue(false);
+            if(inputPin.getSignal()) {
+                getOutputPin().setSignal(false);
                 return;
             }
         }
-        getOutputPin().setValue(true);
+        getOutputPin().setSignal(true);
     }
 
     @Override

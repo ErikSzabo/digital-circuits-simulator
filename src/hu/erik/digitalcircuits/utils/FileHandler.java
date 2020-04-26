@@ -70,11 +70,11 @@ public final class FileHandler {
      */
     private static ArrayList<Cable> resetPins(Pin[] pins, String type) {
         ArrayList<Cable> cables = new ArrayList<>();
-        for (Pin p : pins) {
-            cables.add(p.getConnectionCable());
-            p.setConnectionCable(null);
-            p.setAvailability(true);
-            if(type.equals("input")) p.setValue(false);
+        for (Pin pin : pins) {
+            cables.add(pin.getConnectionCable());
+            pin.setConnectionCable(null);
+            pin.setAvailability(true);
+            if(type.equals("input")) pin.setSignal(false);
         }
         return cables;
     }
@@ -93,7 +93,7 @@ public final class FileHandler {
             if (cables.get(i) != null) {
                 pins[i].setConnectionCable(cables.get(i));
                 pins[i].setAvailability(false);
-                if(type.equals("input")) pins[i].setValue(cables.get(i).getOtherPin(pins[i]).getValue());
+                if(type.equals("input")) pins[i].setSignal(cables.get(i).getOtherPin(pins[i]).getSignal());
             }
         }
     }

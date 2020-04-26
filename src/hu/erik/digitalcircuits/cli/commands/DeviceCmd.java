@@ -354,6 +354,13 @@ public class DeviceCmd extends Command {
         }
     }
 
+    /**
+     * Checks if the given device is a CircuitBox or not.
+     * Will print the error message as well.
+     *
+     * @param device    device to check
+     * @return          true if the device is a CircuitBox
+     */
     private boolean checkCircuitBox(Device device) {
         if(!(device instanceof CircuitBox)) {
             Printer.printErr("This device is not a CircuitBox!");

@@ -97,7 +97,7 @@ public abstract class ConnectableDevice implements Device {
                 p.setConnectionCable(null);
                 p.setAvailability(true);
                 targetPin.setConnectionCable(null);
-                targetPin.setValue(false);
+                targetPin.setSignal(false);
                 targetPin.setAvailability(true);
                 targetDevice.calcOutput();
                 targetDevice.sendOutput();
@@ -124,7 +124,7 @@ public abstract class ConnectableDevice implements Device {
         try {
             if(outputPin.isFree()) return;
             Pin connectedPin = outputPin.getConnectionCable().getOtherPin(outputPin);
-            connectedPin.setValue(outputPin.getValue());
+            connectedPin.setSignal(outputPin.getSignal());
             Device device = connectedPin.getParentDevice();
             device.calcOutput();
             device.sendOutput();
