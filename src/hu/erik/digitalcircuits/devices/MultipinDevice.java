@@ -5,7 +5,13 @@ package hu.erik.digitalcircuits.devices;
  * with multiple input and output pins.
  */
 public abstract class MultipinDevice extends AbstractDevice {
+    /**
+     * Hold all of the input pins.
+     */
     private Pin[] inputPins;
+    /**
+     * Holds all of the output pins.
+     */
     private Pin[] outputPins;
 
     /**

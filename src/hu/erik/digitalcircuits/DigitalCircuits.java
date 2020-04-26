@@ -56,6 +56,11 @@ public class DigitalCircuits {
 
     }
 
+    /**
+     * Application entry point.
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         CliController cliController = new CliController();
         cliController.listen();

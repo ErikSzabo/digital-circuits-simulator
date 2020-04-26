@@ -5,7 +5,13 @@ package hu.erik.digitalcircuits.devices;
  * have one input and output pin.
  */
 public abstract class SimpleDevice extends AbstractDevice {
+    /**
+     * SimpleDevice single input pin.
+     */
     private Pin inputPin;
+    /**
+     * SimpleDevice single output pin.
+     */
     private Pin outputPin;
 
     /**

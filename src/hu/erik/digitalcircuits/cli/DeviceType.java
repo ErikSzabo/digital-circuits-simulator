@@ -15,16 +15,33 @@ public enum DeviceType {
     ANDGATE("andgate"),
     ORGATE("orgate");
 
+    /**
+     * String value of the enum. Used for user created devices.
+     */
     private String value;
 
+    /**
+     * Constructor to initialize the value of the enum.
+     *
+     * @param value string value of the enum
+     */
     DeviceType(String value) {
         this.value = value;
     }
 
+    /**
+     * @return string value of the enum
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Checks if any of the enums has the same string value.
+     *
+     * @param type string value to check
+     * @return     true if one of the enums' value is the same as the parameter
+     */
     public static boolean contains(String type) {
         for(DeviceType type1: values()) {
             if(type1.value.equals(type)) return true;

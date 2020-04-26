@@ -5,8 +5,10 @@ package hu.erik.digitalcircuits.devices;
  * These switches will most likely be your variables in circuits.
  */
 public class Switch extends SimpleDevice {
+    /**
+     * Shows whether the switch is on or off.
+     */
     private boolean status;
-
 
     /**
      * Default constructor for Switch.

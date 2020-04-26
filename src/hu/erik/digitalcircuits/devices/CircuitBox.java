@@ -9,8 +9,21 @@ import java.util.Arrays;
  * Represents a digital circuit in a box.
  */
 public class CircuitBox extends MultipinDevice {
+    /**
+     * Name of the box.
+     */
     private String name;
+    /**
+     * Stores records about the already bounded input pins.
+     * Holds the same amount of elements as the input pin array.
+     * If at an index the value is true, that pin at this index is already bounded.
+     */
     private Boolean[] boundedInputs;
+    /**
+     * Stores records about the already bounded output pins.
+     * Holds the same amount of elements as the output pin array.
+     * If at an index the value is true, that pin at this index is already bounded.
+     */
     private Boolean[] boundedOutputs;
 
     /**

@@ -4,7 +4,14 @@ package hu.erik.digitalcircuits.devices;
  * Abstract class which defines the default behavior of Gates.
  */
 public abstract class Gate extends AbstractDevice {
+    /**
+     * Holds all of the input pins.
+     */
     private Pin[] inputPins;
+
+    /**
+     * Single output pin for Gates.
+     */
     private Pin outputPin;
 
     /**

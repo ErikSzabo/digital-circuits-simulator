@@ -8,9 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for storing user created devices.
+ * Data structure for storing user created devices.
  */
 public class DeviceMap {
+    /**
+     * Stores user created devices where the key is the device name,
+     * and the DeviceBundle is the created Device with it's type.
+     */
     private HashMap<String , DeviceBundle> map;
 
     /**

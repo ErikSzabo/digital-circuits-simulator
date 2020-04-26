@@ -7,7 +7,13 @@ import hu.erik.digitalcircuits.utils.Printer;
  * Class to handle commands prefixed with "menu".
  */
 public class MenuCmd extends Command {
+    /**
+     * List of the available Cli commands.
+     */
     String[] commands;
+    /**
+     * List of brief descriptions for available Cli command.
+     */
     String[] descriptions;
 
     /**

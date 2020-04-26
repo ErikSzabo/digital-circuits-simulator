@@ -20,6 +20,9 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
  * Handles unique method calls on special devices like switch and circuitbox.
  */
 public class DeviceCmd extends Command {
+    /**
+     * Action methods that Device command can perform based on a device type.
+     */
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
     /**

@@ -6,7 +6,14 @@ package hu.erik.digitalcircuits.devices;
  *  input pin.
  */
 public abstract class DispenserDevice extends AbstractDevice {
+    /**
+     * The one and only input pin on a DispenserDevice
+     */
     private Pin inputPin;
+
+    /**
+     * Holds all of the output pins.
+     */
     private Pin[] outputPins;
 
     /**

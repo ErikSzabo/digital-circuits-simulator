@@ -8,6 +8,9 @@ import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
  * Abstract class to create Commands.
  */
 public abstract class Command {
+    /**
+     * Name of the command.
+     */
     private String name;
 
     /**

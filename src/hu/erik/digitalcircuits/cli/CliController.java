@@ -12,7 +12,14 @@ import java.util.Scanner;
  * Class to handle CLI events and commands.
  */
 public class CliController {
+    /**
+     * Data structure for the controller.
+     * User created device will be stored here.
+     */
     private DeviceMap devices;
+    /**
+     * Stores every command what is available for users.
+     */
     private HashMap<String, Command> commands;
 
     /**

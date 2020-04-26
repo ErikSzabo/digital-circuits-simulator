@@ -6,7 +6,13 @@ import java.io.Serializable;
  * Cable is used to create connection between two pins.
  */
 public class Cable implements Serializable {
+    /**
+     * Pin at one end of the cable
+     */
     private Pin p1;
+    /**
+     * Pin at the other end of the cable
+     */
     private Pin p2;
 
     /**

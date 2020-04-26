@@ -17,6 +17,9 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
  * Class to handle commands prefixed with "create".
  */
 public class CreateCmd extends Command {
+    /**
+     * Action methods that Create command can perform, like createSwitch()
+     */
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
     /**

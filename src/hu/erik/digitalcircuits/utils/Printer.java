@@ -4,7 +4,10 @@ package hu.erik.digitalcircuits.utils;
  * Util class to print nice looking messages to the console.
  */
 public final class Printer {
-    private static int CONSOLEWIDTH = 120;
+    /**
+     * With of the console in characters.
+     */
+    private static final int CONSOLEWIDTH = 120;
 
     /**
      * Private constructor to prevent instance creation.

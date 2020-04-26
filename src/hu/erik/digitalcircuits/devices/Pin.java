@@ -7,9 +7,22 @@ import java.io.Serializable;
  * Devices can only connect to each other through Pins.
  */
 public class Pin implements Serializable {
+
+    /**
+     * Cable which is connected to the pin.
+     */
     private Cable connectionCable;
+    /**
+     * Device that holds this pin.
+     */
     private Device parentDevice;
+    /**
+     * True or false signal that is used for logic.
+     */
     private boolean signal;
+    /**
+     * Whether the pin is connected to something or not.
+     */
     private boolean free;
 
     /**
