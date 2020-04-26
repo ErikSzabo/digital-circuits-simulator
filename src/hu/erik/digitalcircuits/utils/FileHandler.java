@@ -49,17 +49,14 @@ public final class FileHandler {
         // Save the circuit
         try {
             saveCircuitToFile(box);
-        } catch (IOException err) {
+        } finally {
+            // Restore the circuit
             restorePins(box.inputPins(), inputCables, "input");
             restorePins(box.outputPins(), outputCables, "output");
             circuitRunThrough(box);
-            throw err;
         }
 
-        // Restore the circuit
-        restorePins(box.inputPins(), inputCables, "input");
-        restorePins(box.outputPins(), outputCables, "output");
-        circuitRunThrough(box);
+
     }
 
     /**
