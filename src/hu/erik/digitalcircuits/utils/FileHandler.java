@@ -37,7 +37,8 @@ public final class FileHandler {
      * to save it as a default blackbox. In this way, after loading, user can connect anything to
      * the box without any problem. After the save, the pins and box state will be the same as before.
      *
-     * @param box circuitbox which will be saved
+     * @param box           circuitbox which will be saved
+     * @throws IOException  If the save fails.
      */
     public static void saveCircuit(CircuitBox box) throws IOException {
 

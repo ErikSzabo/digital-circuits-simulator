@@ -12,7 +12,7 @@ public final class Printer {
     private Printer() {}
 
     /**
-     * Prints the given text to the console with ">>" prefix.
+     * Prints the given text to the console with "{@literal >>}" prefix.
      *
      * @param text text which will be printed to the console
      */
@@ -32,7 +32,7 @@ public final class Printer {
     }
 
     /**
-     * Prints the given error's message with a ">>" prefix.
+     * Prints the given error's message with a "{@literal >>}" prefix.
      *
      * @param e exception which will be printed
      */
@@ -41,7 +41,7 @@ public final class Printer {
     }
 
     /**
-     * Prints the given error's message with a ">>" prefix.
+     * Prints the given error's message with a "{@literal >>}" prefix.
      *
      * @param msg error message which will be printed
      */

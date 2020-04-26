@@ -66,7 +66,7 @@ public class DeviceCmd extends Command {
      * Handles powersource specific unique methods like ON and OFF.
      *
      * Command format:
-     * powersource <name> <on or off>
+     * powersource {@literal <}name{@literal >} {@literal <}on or off{@literal >}
      *
      * @param storage   cli data structure
      * @param cmd       command, split by spaces
@@ -101,7 +101,7 @@ public class DeviceCmd extends Command {
      * Handles switch specific unique methods like ON and OFF.
      *
      * Command format:
-     * switch <name> <on or off>
+     * switch {@literal <}name{@literal >} {@literal <}on or off{@literal >}
      *
      * @param storage   cli data structure
      * @param cmd       command, splitted by spaces
@@ -133,7 +133,7 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles powersource specific unique methods like CONNECTALL.
+     * Handles junction specific unique methods like CONNECTALL.
      *
      * Command format:
      * junction {@literal <}name{@literal >} connectall {@literal <}devices...{@literal >}

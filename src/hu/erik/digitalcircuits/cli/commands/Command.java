@@ -32,6 +32,7 @@ public abstract class Command {
      * @param storage                   cli data structure
      * @param cmd                       command, splitted by spaces
      * @throws NotEnoughArgsException   If the provided arguments aren't enough to preform an action.
+     * @throws InvalidArgumentException If there are any invalid argument in the command.
      */
     public abstract void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException, InvalidArgumentException;
 

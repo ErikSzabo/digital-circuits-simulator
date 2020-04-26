@@ -63,6 +63,7 @@ public interface Device extends Serializable {
      * required input pin on the target device.
      *
      * @param device                    target device for the connection
+     * @param outputIndex               index of the current device output pin
      * @param targetInputIndex          index of the target device input pin
      * @return                          target device
      * @throws PinAlreadyInUseException If the target pin is already in use.
