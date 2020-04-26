@@ -35,6 +35,7 @@ public class CreateCmd extends Command {
         actions.put(NANDGATE.getValue(), this::createNand);
         actions.put(NORGATE.getValue(), this::createNor);
         actions.put(CIRCUITBOX.getValue(), this::createBox);
+        actions.put(JUNCTION.getValue(), this::createJunction);
     }
 
     /**
@@ -199,6 +200,25 @@ public class CreateCmd extends Command {
             Printer.printErr("Pin amount must be a number!");
         } catch (IndexOutOfBoundsException err) {
             Printer.printErr("You must specify the number of input and output pins!");
+        }
+    }
+
+    /**
+     * Creates a Junction.
+     *
+     * @param storage   cli data structure
+     * @param cmd       command, split by spaces
+     */
+    private void createJunction(DeviceMap storage, String[] cmd) {
+        try {
+            storage.add(cmd[2], new DeviceBundle(new Junction(Integer.parseInt(cmd[3])), JUNCTION.getValue()));
+            Printer.println("Junction added!");
+        } catch (RedundantKeyException err) {
+            Printer.printErr(err);
+        } catch (NumberFormatException err) {
+            Printer.printErr("Pin amount must be a number!");
+        } catch (IndexOutOfBoundsException err) {
+            Printer.printErr("You must specify the number of output pins!");
         }
     }
 }
