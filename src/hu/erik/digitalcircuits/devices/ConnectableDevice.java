@@ -21,8 +21,11 @@ public abstract class ConnectableDevice implements Device {
      */
     @Override
     public Device connect(Device device) throws NoMorePinException {
-        Pin outputPin = getFreeOutputPin();
-        new Cable(outputPin, device.getFreeInputPin());
+        Pin outputPin = findFreePin(outputPins());
+        Pin inputPin = findFreePin(device.inputPins());
+        if(outputPin == null) throw new NoMorePinException(this, "output");
+        if(inputPin == null) throw new NoMorePinException(device, "input");
+        new Cable(outputPin, inputPin);
         transferValue(outputPin);
         return device;
     }
@@ -40,9 +43,13 @@ public abstract class ConnectableDevice implements Device {
      */
     @Override
     public Device connect(Device device, int targetInputIndex) throws PinAlreadyInUseException, NoMorePinException, PinNotExistsException {
-        Pin outputPin = getFreeOutputPin();
-        Pin targetInputPin = device.getInputPin(targetInputIndex);
+        Pin outputPin = findFreePin(outputPins());
+        if(outputPin == null) throw new NoMorePinException(this, "output");
+
+        if(targetInputIndex > device.inputPins().length - 1) throw new PinNotExistsException(device, targetInputIndex);
+        Pin targetInputPin = device.inputPins()[targetInputIndex];
         if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
+
         new Cable(outputPin, targetInputPin);
         transferValue(outputPin);
         return device;
@@ -60,10 +67,14 @@ public abstract class ConnectableDevice implements Device {
      */
     @Override
     public Device connect(Device device, int outputIndex, int targetInputIndex) throws PinAlreadyInUseException, PinNotExistsException {
-        Pin outputPin = getOutputPin(outputIndex);
-        Pin targetInputPin = device.getInputPin(targetInputIndex);
-        if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, outputIndex);
+        if(outputIndex > outputPins().length - 1) throw new PinNotExistsException(this, outputIndex);
+        Pin outputPin = outputPins()[outputIndex];
+        if(!outputPin.isFree()) throw new PinAlreadyInUseException(this, targetInputIndex);
+
+        if(targetInputIndex > device.inputPins().length - 1) throw new PinNotExistsException(device, targetInputIndex);
+        Pin targetInputPin = device.inputPins()[targetInputIndex];
         if(!targetInputPin.isFree()) throw new PinAlreadyInUseException(device, targetInputIndex);
+
         new Cable(outputPin, targetInputPin);
         transferValue(outputPin);
         return device;
@@ -77,7 +88,7 @@ public abstract class ConnectableDevice implements Device {
      */
     @Override
     public void disconnect(Device device) {
-        Pin[] outputPins = getAllOutputPins();
+        Pin[] outputPins = outputPins();
         for(Pin p : outputPins) {
             if(p.isFree()) continue;
             Pin targetPin = p.getConnectionCable().getOtherPin(p);
@@ -99,7 +110,7 @@ public abstract class ConnectableDevice implements Device {
      */
     @Override
     public void sendOutput() {
-        for(Pin outputPin : getAllOutputPins()) {
+        for(Pin outputPin : outputPins()) {
             transferValue(outputPin);
         }
     }
@@ -109,7 +120,7 @@ public abstract class ConnectableDevice implements Device {
      *
      * @param outputPin outputPin you want to transfer the value from
      */
-    protected void transferValue(Pin outputPin) {
+    private void transferValue(Pin outputPin) {
         try {
             if(outputPin.isFree()) return;
             Pin connectedPin = outputPin.getConnectionCable().getOtherPin(outputPin);
@@ -122,6 +133,19 @@ public abstract class ConnectableDevice implements Device {
             Printer.printErr("Oscillation occurred in your circuit. Signal transfers are stopped!");
             Printer.printErr("Please fix your circuit!");
         }
+    }
+
+    /**
+     * Returns a free pin or null if all of the pins are already connected to a device.
+     *
+     * @param pins  pins to search in
+     * @return      free pin or null if there isn't any
+     */
+    private Pin findFreePin(Pin[] pins) {
+        for(Pin pin : pins) {
+            if(pin.isFree()) return pin;
+        }
+        return null;
     }
 
 }

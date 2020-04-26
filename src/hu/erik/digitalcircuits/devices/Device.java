@@ -12,59 +12,28 @@ import java.io.Serializable;
  */
 public interface Device extends Serializable {
     /**
-     * Calculates and sets the Device OutputPin values.
-     */
-    void calcOutput();
-
-    /**
-     * Returns an unconnected input pin on the device.
-     *
-     * @return                      unconnected input pin
-     * @throws NoMorePinException   If the device doesn't have any more free input pin.
-     */
-    Pin getFreeInputPin() throws NoMorePinException;
-
-    /**
-     * Returns an unconnected output pin on the device.
-     *
-     * @return                      unconnected output pin
-     * @throws NoMorePinException   If the device doesn't have any more free output pin.
-     */
-    Pin getFreeOutputPin() throws NoMorePinException;
-
-    /**
-     * Returns an input pin based on the given index.
-     * This pin might be in use.
-     *
-     * @param index                     index of the required pin
-     * @return                          pin at the given index
-     * @throws PinNotExistsException    If the selected pin is not exists.
-     */
-    Pin getInputPin(int index) throws PinNotExistsException;
-
-    /**
-     * Returns an output pin based on the given index.
-     * This pin might be in use.
-     *
-     * @param index                     index of the required pin
-     * @return                          pin at the given index
-     * @throws PinNotExistsException    If the selected pin is not exists.
-     */
-    Pin getOutputPin(int index) throws PinNotExistsException;
-
-    /**
      * Returns all of the input pins on the device.
      *
      * @return all input pins on the device
      */
-    Pin[] getAllInputPins();
+    Pin[] inputPins();
 
     /**
      * Returns all of the output pins on the device.
      *
      * @return all output pins on the device
      */
-    Pin[] getAllOutputPins();
+    Pin[] outputPins();
+
+    /**
+     * Calculates and sets the Device OutputPin values.
+     */
+    void calcOutput();
+
+    /**
+     * Sends output pin values to the connected pins.
+     */
+    void sendOutput();
 
     /**
      * Connects this device next free output pin to the
@@ -109,10 +78,5 @@ public interface Device extends Serializable {
      * @param device the device we disconnect from
      */
     void disconnect(Device device);
-
-    /**
-     * Sends output pin values to the connected pins.
-     */
-    void sendOutput();
 
 }

@@ -20,7 +20,7 @@ public class OrGate extends Gate {
      */
     @Override
     public void calcOutput() {
-        for(Pin inputPin: getAllInputPins()) {
+        for(Pin inputPin: inputPins()) {
             if(inputPin.getValue()) {
                 getOutputPin().setValue(true);
                 return;

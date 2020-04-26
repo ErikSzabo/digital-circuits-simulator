@@ -40,16 +40,16 @@ public final class FileHandler {
     public static void saveCircuit(CircuitBox box) throws IOException {
 
         // Reset the whole circuit to a default state
-        ArrayList<Cable> inputCables = resetPins(box.getAllInputPins(), "input");
-        ArrayList<Cable> outputCables = resetPins(box.getAllOutputPins(), "output");
+        ArrayList<Cable> inputCables = resetPins(box.inputPins(), "input");
+        ArrayList<Cable> outputCables = resetPins(box.outputPins(), "output");
         circuitRunThrough(box);
 
         // Save the circuit
         saveCircuitToFile(box);
 
         // Restore the circuit
-        restorePins(box.getAllInputPins(), inputCables, "input");
-        restorePins(box.getAllOutputPins(), outputCables, "output");
+        restorePins(box.inputPins(), inputCables, "input");
+        restorePins(box.outputPins(), outputCables, "output");
         circuitRunThrough(box);
     }
 
@@ -98,7 +98,7 @@ public final class FileHandler {
      * @param box circuit box to run through
      */
     private static void circuitRunThrough(CircuitBox box) {
-        for (Pin p : box.getAllInputPins()) {
+        for (Pin p : box.inputPins()) {
             p.getParentDevice().calcOutput();
             p.getParentDevice().sendOutput();
         }

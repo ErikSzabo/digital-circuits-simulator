@@ -65,9 +65,9 @@ public class ShowCmd extends Command {
      */
     private void showInput(Device device, String name, int index) {
         try {
-            Printer.println(name + " inputpin(" + index +"): " + device.getInputPin(index).getValue());
-        } catch (PinNotExistsException err) {
-            Printer.printErr(err);
+            Printer.println(name + " inputpin(" + index +"): " + device.inputPins()[index].getValue());
+        } catch (IndexOutOfBoundsException err) {
+            Printer.printErr(new PinNotExistsException(device, index));
         }
     }
 
@@ -80,9 +80,9 @@ public class ShowCmd extends Command {
      */
     private void showOutput(Device device, String name, int index) {
         try {
-            Printer.println(name + " outputpin(" + index +"): " + device.getOutputPin(index).getValue());
-        } catch (PinNotExistsException err) {
-            Printer.printErr(err);
+            Printer.println(name + " outputpin(" + index +"): " + device.outputPins()[index].getValue());
+        } catch (IndexOutOfBoundsException err) {
+            Printer.printErr(new PinNotExistsException(device, index));
         }
     }
 

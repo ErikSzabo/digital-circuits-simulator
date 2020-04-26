@@ -39,8 +39,8 @@ public class DeleteCmd extends Command {
 
         try {
             Device d = storage.get(cmd[1]).getDevice();
-            connectionReset(d.getAllInputPins(), "input");
-            connectionReset(d.getAllOutputPins(), "output");
+            connectionReset(d.inputPins(), "input");
+            connectionReset(d.outputPins(), "output");
             storage.remove(cmd[1]);
             Printer.println("Device has been deleted!");
         } catch (DeviceNotExistsException err) {

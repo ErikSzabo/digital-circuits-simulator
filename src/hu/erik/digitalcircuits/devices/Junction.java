@@ -25,7 +25,7 @@ public class Junction extends DispenserDevice {
      */
     @Override
     public void calcOutput() {
-        for(Pin pin : getAllOutputPins()) {
+        for(Pin pin : outputPins()) {
             pin.setValue(getInputPin().getValue());
         }
     }

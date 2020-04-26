@@ -3,7 +3,6 @@ package hu.erik.digitalcircuits;
 import hu.erik.digitalcircuits.cli.CliController;
 import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
-import hu.erik.digitalcircuits.errors.PinNotExistsException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 public class DigitalCircuits {
@@ -50,14 +49,10 @@ public class DigitalCircuits {
         C.on();
         E.on();
 
-        try {
-            System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
-            C.off();
-            A.on();
-            System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.getOutputPin(0).getValue());
-        } catch (PinNotExistsException err) {
-            System.err.println(err.getMessage());
-        }
+        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.inputPins()[0].getValue());
+        C.off();
+        A.on();
+        System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.outputPins()[0].getValue());
 
     }
 
