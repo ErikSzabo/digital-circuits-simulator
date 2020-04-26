@@ -5,7 +5,7 @@ package hu.erik.digitalcircuits.devices;
  *  These type of devices can have multiple output pins but only one
  *  input pin.
  */
-public abstract class DispenserDevice extends ConnectableDevice {
+public abstract class DispenserDevice extends AbstractDevice {
     private Pin inputPin;
     private Pin[] outputPins;
 

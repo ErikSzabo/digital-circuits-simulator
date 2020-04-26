@@ -4,7 +4,7 @@ package hu.erik.digitalcircuits.devices;
  * Abstract class which defines the default behavior of the devices
  * with multiple input and output pins.
  */
-public abstract class MultipinDevice extends ConnectableDevice {
+public abstract class MultipinDevice extends AbstractDevice {
     private Pin[] inputPins;
     private Pin[] outputPins;
 

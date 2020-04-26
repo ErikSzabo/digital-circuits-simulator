@@ -9,7 +9,7 @@ import hu.erik.digitalcircuits.utils.Printer;
 /**
  * Abstract class for Device which implements the connection methods.
  */
-public abstract class ConnectableDevice implements Device {
+public abstract class AbstractDevice implements Device {
 
     /**
      * Connects this device next free output pin to the

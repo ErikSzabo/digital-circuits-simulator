@@ -3,7 +3,7 @@ package hu.erik.digitalcircuits.devices;
 /**
  * Abstract class which defines the default behavior of Gates.
  */
-public abstract class Gate extends ConnectableDevice {
+public abstract class Gate extends AbstractDevice {
     private Pin[] inputPins;
     private Pin outputPin;
 

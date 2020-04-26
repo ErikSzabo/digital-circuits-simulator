@@ -4,7 +4,7 @@ package hu.erik.digitalcircuits.devices;
  * Abstract class which defines the default behavior for Devices which only
  * have one input and output pin.
  */
-public abstract class SimpleDevice extends ConnectableDevice {
+public abstract class SimpleDevice extends AbstractDevice {
     private Pin inputPin;
     private Pin outputPin;
 
