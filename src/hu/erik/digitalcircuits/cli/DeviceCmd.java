@@ -90,10 +90,10 @@ public class DeviceCmd extends Command {
 
         if(cmd[3].equalsIgnoreCase("on")) {
             ((PowerSource) device).on();
-            Printer.println("Your switch state is now TRUE(1)");
+            Printer.println("Your power state is now TRUE(1)");
         } else if(cmd[3].equalsIgnoreCase("off")) {
             ((PowerSource) device).off();
-            Printer.println("Your switch state is now FALSE(0)");
+            Printer.println("Your power state is now FALSE(0)");
         } else {
             Printer.printErr("Invalid method for " + POWER + ": " + cmd[2]);
         }
@@ -202,6 +202,7 @@ public class DeviceCmd extends Command {
 
         try {
             ((Junction) device).connectAll(devices);
+            Printer.println("Connected!");
         } catch (NoMorePinException err) {
             Printer.printErr(err);
             Printer.printErr("After and including " + err.getDevice() + ", none of the devices connected");

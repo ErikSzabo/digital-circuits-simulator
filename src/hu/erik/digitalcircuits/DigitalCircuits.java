@@ -32,8 +32,8 @@ public class DigitalCircuits {
 
         try {
             csomopont.connectAll(A, B, C, D, E);
-        } catch (NoMorePinException e) {
-            e.printStackTrace();
+        } catch (NoMorePinException err) {
+            Printer.printErr(err);
         }
 
         try {
@@ -49,7 +49,7 @@ public class DigitalCircuits {
         C.on();
         E.on();
 
-        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.inputPins()[0].getSignal());
+        System.out.println("5 bementei kombinációra a függvény kimenete: " + NandKapu.outputPins()[0].getSignal());
         C.off();
         A.on();
         System.out.println("Nem 5-ös bemeneti kombinációra a függvény kimenete: " + NandKapu.outputPins()[0].getSignal());
@@ -62,6 +62,7 @@ public class DigitalCircuits {
      * @param args arguments
      */
     public static void main(String[] args) {
+        //kotelezoFeladat();
         CliController cliController = new CliController();
         cliController.addCommands(
                 new ConnectCmd(), new CreateCmd(), new DeleteCmd(),
