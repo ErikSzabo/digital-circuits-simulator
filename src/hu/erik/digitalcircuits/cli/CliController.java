@@ -1,6 +1,5 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.cli.commands.*;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.utils.Printer;
@@ -79,10 +78,14 @@ public class CliController {
      */
     private void showMenu() {
         Printer.printTitle("Digital Circuits v1.0");
+        Printer.println("menu");
+        System.out.println("\tShows this menu.");
         for(String name : commands.keySet()) {
             Printer.println(commands.get(name).getFormat());
             System.out.println("\t" + commands.get(name).getBriefDescription());
         }
+        Printer.println("exit");
+        System.out.println("\tCloses the application.");
         Printer.printSeparatorLine("-");
     }
 

@@ -1,4 +1,4 @@
-package hu.erik.digitalcircuits.cli.commands;
+package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
