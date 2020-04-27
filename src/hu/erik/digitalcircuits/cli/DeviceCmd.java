@@ -14,7 +14,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
 
 /**
  * Class to handle commands prefixed with "device".
- * Handles unique method calls on special devices like switch and circuitbox.
+ * Handles unique method calls on special devices like Switch and CircuitBox.
  */
 public class DeviceCmd extends Command {
     /**
@@ -65,7 +65,7 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles powersource specific unique methods like ON and OFF.<br>
+     * Handles PowerSource specific unique methods like ON and OFF.<br>
      *
      * Command format:<br>
      * device powersource {@literal <}name{@literal >} {@literal <}on or off{@literal >}
@@ -100,13 +100,13 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Handles switch specific unique methods like ON and OFF.<br>
+     * Handles Switch specific unique methods like ON and OFF.<br>
      *
      * Command format:<br>
      * device switch {@literal <}name{@literal >} {@literal <}on or off{@literal >}
      *
      * @param storage   cli data structure
-     * @param cmd       command, splitted by spaces
+     * @param cmd       command, split by spaces
      */
     private void handleSwitch(DeviceMap storage, String[] cmd) {
         Device device;
@@ -141,7 +141,7 @@ public class DeviceCmd extends Command {
      * device junction {@literal <}name{@literal >} connectall {@literal <}devices...{@literal >}
      *
      * @param storage   cli data structure
-     * @param cmd       command, splitted by spaces
+     * @param cmd       command, split by spaces
      */
     private void handleJunction(DeviceMap storage, String[] cmd) {
         Device device;
@@ -159,6 +159,7 @@ public class DeviceCmd extends Command {
 
     /**
      * Checks if there any problem with the junction or with the command.
+     * It will also print the error.
      *
      * @param device    device to test for junction type
      * @param cmd       command, split by spaces
@@ -179,7 +180,7 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Connects the devices to the junction until the junction
+     * Connects the devices to the junction as long as the junction
      * actually has free output pins.
      *
      * @param device    the junction that will connect to the devices
@@ -217,7 +218,7 @@ public class DeviceCmd extends Command {
      * device circuitbox {@literal <}name{@literal >} load
      *
      * @param storage                   cli data structure
-     * @param cmd                       command, splitted by spaces
+     * @param cmd                       command, split by spaces
      */
     private void handleCircuitBox(DeviceMap storage, String[] cmd) {
         // Load circuit command
@@ -243,7 +244,7 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Loads a circuit box into the cli data structure from a file.
+     * Loads a CircuitBox into the cli data structure from a file.
      *
      * @param name      name of the box which will be loaded
      * @param storage   cli data structure
@@ -261,7 +262,7 @@ public class DeviceCmd extends Command {
     }
 
     /**
-     * Saves a circuit box from the cli data structure to a file.
+     * Saves a CircuitBox from the cli data structure to a file.
      *
      * @param boxName   name of the box which will be saved
      * @param storage   cli data structure

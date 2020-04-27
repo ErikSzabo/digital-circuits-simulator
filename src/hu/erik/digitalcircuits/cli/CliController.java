@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class CliController {
     /**
      * Data structure for the controller.
-     * User created device will be stored here.
+     * User created devices will be stored here.
      */
     private DeviceMap devices;
     /**

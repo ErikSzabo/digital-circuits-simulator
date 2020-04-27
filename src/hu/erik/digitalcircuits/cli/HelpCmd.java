@@ -24,7 +24,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Writes the required help page to the console.<br>
+     * Writes the required help page (based on DeviceType) to the console.<br>
      *
      * Command format:<br>
      * help {@literal <}device type{@literal >}
@@ -55,7 +55,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Write the power source help page to the console.
+     * Write the PowerSource help page to the console.
      * It contains information about creation, and unique methods.
      */
     private void writePowerHelpPage() {
@@ -76,7 +76,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Write the switch help page to the console.
+     * Write the Switch help page to the console.
      * It contains information about creation, and unique methods.
      */
     private void writeSwitchHelpPage() {
@@ -97,7 +97,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Write the junction help page to the console.
+     * Write the Junction help page to the console.
      * It contains information about creation, and unique methods.
      */
     private void writeJunctionHelpPage() {
@@ -117,7 +117,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Write the gates and inverter help page to the console.
+     * Write the Gates and Inverter help page to the console.
      * It contains information about creation, and unique methods.
      */
     private void writeGatesHelpPage() {
@@ -131,7 +131,7 @@ public class HelpCmd extends Command {
     }
 
     /**
-     * Write the circuit box help page to the console.
+     * Write the CircuitBox help page to the console.
      * It contains information about creation, and unique methods.
      */
     private void writeCircuitBoxHelpPage() {

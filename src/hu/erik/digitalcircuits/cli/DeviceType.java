@@ -21,7 +21,7 @@ public enum DeviceType {
     private String value;
 
     /**
-     * Constructor to initialize the value of the enum.
+     * Constructor to initialize the value of the enums.
      *
      * @param value string value of the enum
      */

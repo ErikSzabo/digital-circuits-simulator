@@ -51,7 +51,7 @@ public class DeleteCmd extends Command {
 
     /**
      * Resets the pin connections and recalculates the circuit values
-     * if the type of the give pins is output.
+     * if the type of the given pins is output.
      *
      * @param pins  pins which will be reset
      * @param type  type of the pins

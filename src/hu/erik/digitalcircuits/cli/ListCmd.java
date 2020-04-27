@@ -47,7 +47,7 @@ public class ListCmd extends Command {
     }
 
     /**
-     * Lists all of the current devices with their name and type.
+     * Lists all of the stored devices with their name and type.
      *
      * @param storage    cli data structure
      */
@@ -62,7 +62,7 @@ public class ListCmd extends Command {
     }
 
     /**
-     * Lists all of the current devices with their name and type if the
+     * Lists all of the stored devices with their name and type if the
      * given type is equals to the device type.
      *
      * @param storage   cli data structure

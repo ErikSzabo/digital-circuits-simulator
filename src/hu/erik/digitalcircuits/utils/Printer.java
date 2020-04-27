@@ -24,7 +24,7 @@ public final class Printer {
     }
 
     /**
-     * Prints a title to the console.
+     * Prints a title to the console. Title surrounded by lines.
      *
      * @param title text which will be printed as a title
      */

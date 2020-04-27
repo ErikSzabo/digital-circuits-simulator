@@ -16,7 +16,7 @@ public class DeviceBundle {
     private DeviceType type;
 
     /**
-     * Constructor to initialize the device and it's type.
+     * Constructor to initialize user created device and it's type.
      *
      * @param device    stored device
      * @param type      type of the stored device
@@ -27,7 +27,9 @@ public class DeviceBundle {
     }
 
     /**
-     * @return the device what is stored.
+     * Returns the user created device.
+     *
+     * @return the device what is stored
      */
     public Device getDevice() {
         return device;
@@ -35,6 +37,8 @@ public class DeviceBundle {
 
 
     /**
+     * Returns the type of the user created device.
+     *
      * @return type of the device
      */
     public DeviceType getType() {

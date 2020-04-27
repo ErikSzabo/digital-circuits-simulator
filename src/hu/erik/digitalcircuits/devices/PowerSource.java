@@ -7,6 +7,7 @@ public class PowerSource extends SimpleDevice {
 
     /**
      * Sets the output signal to true.
+     * Updates the whole connected circuit.
      */
     public void on() {
         getInputPin().setSignal(true);
@@ -16,6 +17,7 @@ public class PowerSource extends SimpleDevice {
 
     /**
      * Sets the output signal to false.
+     * Updates the whole connected circuit.
      */
     public void off() {
         getInputPin().setSignal(false);

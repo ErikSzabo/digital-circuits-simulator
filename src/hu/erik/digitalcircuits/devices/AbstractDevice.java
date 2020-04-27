@@ -14,6 +14,7 @@ public abstract class AbstractDevice implements Device {
     /**
      * Connects this device next free output pin to the
      * target Device next free input pin.
+     * Updates the whole circuit.
      *
      * @param device                target device for the connection
      * @return                      target device
@@ -33,6 +34,7 @@ public abstract class AbstractDevice implements Device {
     /**
      * Connects this device next free output pin to the
      * required input pin on the target device.
+     * Updates the whole circuit.
      *
      * @param device                    target device for the connection
      * @param targetInputIndex          index of the target device input pin
@@ -58,6 +60,7 @@ public abstract class AbstractDevice implements Device {
     /**
      * Connects this device next free output pin to the
      * required input pin on the target device.
+     * Updates the whole circuit.
      *
      * @param device                    target device for the connection
      * @param targetInputIndex          index of the target device input pin
@@ -83,6 +86,7 @@ public abstract class AbstractDevice implements Device {
     /**
      * Disconnects this device output pins from the
      * target device input pins.
+     * Updates the whole circuit.
      *
      * @param device the device we disconnect from
      */
@@ -117,6 +121,7 @@ public abstract class AbstractDevice implements Device {
 
     /**
      * Transfers value from a pin to another pin if it is possible.
+     * Updates the whole circuit with every value transfer.
      *
      * @param outputPin outputPin you want to transfer the value from
      */

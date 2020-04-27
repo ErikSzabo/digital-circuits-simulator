@@ -52,7 +52,9 @@ public class Pin implements Serializable {
     }
 
     /**
-     * @return Value that the pin has right now.
+     * Returns the current signal of the pin.
+     *
+     * @return signal that the pin has right now
      */
     public boolean getSignal() {
         return signal;
@@ -69,7 +71,7 @@ public class Pin implements Serializable {
     }
 
     /**
-     * Sets the pin new value.
+     * Sets the pin new signal.
      *
      * @param value New value
      */
@@ -78,6 +80,8 @@ public class Pin implements Serializable {
     }
 
     /**
+     * Returns true if the pin is not connected.
+     *
      * @return Whether the pin is free or not
      */
     public boolean isFree() {

@@ -20,13 +20,13 @@ public class DeviceTypesCmd extends Command {
     }
 
     /**
-     * Lists the available device types.<br>
+     * Lists the available device types from DeviceType enum.<br>
      *
      * Command format:<br>
      * devicetypes
      *
      * @param storage                   cli data structure
-     * @param cmd                       command, splitted by spaces
+     * @param cmd                       command, split by spaces
      */
     @Override
     public void action(DeviceMap storage, String[] cmd) {

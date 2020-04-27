@@ -1,6 +1,5 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.cli.DeviceMap;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 
@@ -35,6 +34,8 @@ public abstract class Command {
     }
 
     /**
+     * Returns the name of the command.
+     *
      * @return the name of the command
      */
     public String getName() {
@@ -42,6 +43,8 @@ public abstract class Command {
     }
 
     /**
+     * Returns command description.
+     *
      * @return One/two line description about the command.
      */
     public String getBriefDescription() {
@@ -49,6 +52,8 @@ public abstract class Command {
     }
 
     /**
+     * Returns command format.
+     *
      * @return How the command should be used.
      */
     public String getFormat() {
@@ -59,7 +64,7 @@ public abstract class Command {
      * Handles the command functionality.
      *
      * @param storage                   cli data structure
-     * @param cmd                       command, splitted by spaces
+     * @param cmd                       command, split by spaces
      * @throws NotEnoughArgsException   If the provided arguments aren't enough to preform an action.
      * @throws InvalidArgumentException If there are any invalid argument in the command.
      */

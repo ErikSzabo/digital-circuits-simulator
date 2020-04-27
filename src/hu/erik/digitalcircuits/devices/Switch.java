@@ -23,6 +23,7 @@ public class Switch extends SimpleDevice {
     /**
      * Sets the switch state or status to true.
      * Output can only be true if this is true as well.
+     * Updates the whole connected circuit.
      */
     public void on() {
         this.status = true;
@@ -33,6 +34,7 @@ public class Switch extends SimpleDevice {
     /**
      * Sets the switch state or status to false.
      * The output now has to be false.
+     * Updates the whole connected circuit.
      */
     public void off() {
         this.status = false;
