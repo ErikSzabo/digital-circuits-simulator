@@ -251,7 +251,7 @@ public class DeviceCmd extends Command {
     private void loadCircuit(String name, DeviceMap storage) {
         try {
             CircuitBox box = FileHandler.loadCircuit(name);
-            storage.add(box.getName(), new DeviceBundle(box, CIRCUITBOX.getValue()));
+            storage.add(box.getName(), new DeviceBundle(box, CIRCUITBOX));
             Printer.println("Circuit loaded!");
         } catch (IOException | ClassNotFoundException err) {
             Printer.printErr("Something went wrong with the circuit loading!");

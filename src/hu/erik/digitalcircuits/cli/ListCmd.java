@@ -72,7 +72,7 @@ public class ListCmd extends Command {
         Map<String, DeviceBundle> devices = storage.getMap();
 
         for(String name : devices.keySet()) {
-            String currentType = devices.get(name).getType();
+            String currentType = devices.get(name).getType().getValue();
             if(currentType.equals(type)) {
                 Printer.println("[Name]: " + name + ", [Type]: " + type);
             }

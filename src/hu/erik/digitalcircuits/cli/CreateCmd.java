@@ -74,7 +74,7 @@ public class CreateCmd extends Command {
      */
     private void createSwitch(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new Switch(), SWITCH.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new Switch(), SWITCH));
             Printer.println("Switch added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -89,7 +89,7 @@ public class CreateCmd extends Command {
      */
     private void createPower(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new PowerSource(), POWER.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new PowerSource(), POWER));
             Printer.println("PowerSource added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -104,7 +104,7 @@ public class CreateCmd extends Command {
      */
     private void createInverter(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new Inverter(), INVERTER.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new Inverter(), INVERTER));
             Printer.println("Inverter added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -119,7 +119,7 @@ public class CreateCmd extends Command {
      */
     private void createAnd(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new AndGate(Integer.parseInt(cmd[3])), ANDGATE.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new AndGate(Integer.parseInt(cmd[3])), ANDGATE));
             Printer.println("AndGate added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -138,7 +138,7 @@ public class CreateCmd extends Command {
      */
     private void createOr(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new OrGate(Integer.parseInt(cmd[3])), ORGATE.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new OrGate(Integer.parseInt(cmd[3])), ORGATE));
             Printer.println("OrGate added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -157,7 +157,7 @@ public class CreateCmd extends Command {
      */
     private void createNand(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new NandGate(Integer.parseInt(cmd[3])), NANDGATE.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new NandGate(Integer.parseInt(cmd[3])), NANDGATE));
             Printer.println("NandGate added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -176,7 +176,7 @@ public class CreateCmd extends Command {
      */
     private void createNor(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new NorGate(Integer.parseInt(cmd[3])), NORGATE.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new NorGate(Integer.parseInt(cmd[3])), NORGATE));
             Printer.println("NorGate added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -195,7 +195,7 @@ public class CreateCmd extends Command {
      */
     private void createBox(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new CircuitBox(cmd[2], Integer.parseInt(cmd[3]), Integer.parseInt(cmd[4])), CIRCUITBOX.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new CircuitBox(cmd[2], Integer.parseInt(cmd[3]), Integer.parseInt(cmd[4])), CIRCUITBOX));
             Printer.println("CircuitBox added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
@@ -214,7 +214,7 @@ public class CreateCmd extends Command {
      */
     private void createJunction(DeviceMap storage, String[] cmd) {
         try {
-            storage.add(cmd[2], new DeviceBundle(new Junction(Integer.parseInt(cmd[3])), JUNCTION.getValue()));
+            storage.add(cmd[2], new DeviceBundle(new Junction(Integer.parseInt(cmd[3])), JUNCTION));
             Printer.println("Junction added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);

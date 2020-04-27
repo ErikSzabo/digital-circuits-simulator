@@ -13,7 +13,7 @@ public class DeviceBundle {
     /**
      * Type of the user created device.
      */
-    private String type;
+    private DeviceType type;
 
     /**
      * Constructor to initialize the device and it's type.
@@ -21,7 +21,7 @@ public class DeviceBundle {
      * @param device    stored device
      * @param type      type of the stored device
      */
-    public DeviceBundle(Device device, String type) {
+    public DeviceBundle(Device device, DeviceType type) {
         this.device = device;
         this.type = type;
     }
@@ -37,7 +37,7 @@ public class DeviceBundle {
     /**
      * @return type of the device
      */
-    public String getType() {
+    public DeviceType getType() {
         return type;
     }
 }
