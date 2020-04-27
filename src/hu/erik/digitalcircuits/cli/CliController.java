@@ -2,6 +2,7 @@ package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class CliController {
                 Printer.println("Bye, have a nice day! :)");
                 break;
             } else if(splitCMD[0].equalsIgnoreCase("menu")) {
+                if(splitCMD.length > 1) Printer.printErr(new TooManyArgumentException("menu"));
                 showMenu();
                 continue;
             } else if(cmd.equals("\n") || cmd.equals("")) {
