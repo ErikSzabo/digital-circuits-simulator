@@ -5,7 +5,7 @@ import hu.erik.digitalcircuits.devices.*;
 import hu.erik.digitalcircuits.errors.NoMorePinException;
 import hu.erik.digitalcircuits.utils.Printer;
 
-public class DigitalCircuits {
+public class Main {
     public static void kotelezoFeladat() {
         PowerSource elem = new PowerSource();
         elem.on();
