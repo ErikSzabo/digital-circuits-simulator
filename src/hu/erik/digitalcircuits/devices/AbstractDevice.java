@@ -99,14 +99,18 @@ public abstract class AbstractDevice implements Device {
             if(p.isFree()) continue;
             Pin targetPin = p.getConnectionCable().getOtherPin(p);
             Device targetDevice = targetPin.getParentDevice();
-            if(targetDevice == device) {
-                p.setConnectionCable(null);
-                p.setAvailability(true);
-                targetPin.setConnectionCable(null);
-                targetPin.setSignal(false);
-                targetPin.setAvailability(true);
-                targetDevice.calcOutput();
-                targetDevice.sendOutput();
+            // This for loop is necessary because of the CircuitBox reference binding.
+            for(Pin p2 : device.inputPins()) {
+                if(p2 == targetPin) {
+                    p.setConnectionCable(null);
+                    p.setAvailability(true);
+                    targetPin.setConnectionCable(null);
+                    targetPin.setSignal(false);
+                    targetPin.setAvailability(true);
+                    targetDevice.calcOutput();
+                    targetDevice.sendOutput();
+                    break;
+                }
             }
         }
     }
