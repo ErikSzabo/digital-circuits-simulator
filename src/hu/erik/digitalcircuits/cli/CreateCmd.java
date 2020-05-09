@@ -187,21 +187,17 @@ public class CreateCmd extends Command {
     }
 
     /**
-     * Creates a CircuitBox.
+     * Prints an error to the console.
+     * Users can't create circuit boxes with this command.
+     * There is an another command for that which is only available
+     * in BoxEditorMode.
      *
      * @param storage   cli data structure
      * @param cmd       command, split by spaces
      */
     private void createBox(DeviceMap storage, String[] cmd) {
-        if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + CIRCUITBOX));
-        try {
-            storage.add(cmd[2], new DeviceBundle(new CircuitBox(cmd[2], Integer.parseInt(cmd[3]), Integer.parseInt(cmd[4])), CIRCUITBOX));
-            Printer.println("CircuitBox, " + cmd[2] + " added!");
-        } catch (RedundantKeyException err) {
-            Printer.printErr(err);
-        } catch (NumberFormatException | IndexOutOfBoundsException err) {
-            Printer.printErr("Invalid arguments! Try: create circuitbox <name> <input pin number> <output pin number>");
-        }
+        Printer.printErr("Sorry, You can only create boxes in Box Editor Mode!");
+        Printer.printErr("Use: boxeditor, then: box <name> <input pin number> <output pin number>");
     }
 
     /**

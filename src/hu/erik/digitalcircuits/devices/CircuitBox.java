@@ -86,6 +86,34 @@ public class CircuitBox extends MultipinDevice {
         boundedOutputs[boxPinIndex] = true;
     }
 
+
+    /**
+     * Resets this box to its default state, which means, all
+     * of its pins will be disconnected, then recalculates its output.
+     */
+    public void resetToDefaultState() {
+        resetPins(inputPins(), "input");
+        resetPins(outputPins(), "output");
+        for (Pin p : inputPins()) {
+            p.getParentDevice().calcOutput();
+            p.getParentDevice().sendOutput();
+        }
+    }
+
+    /**
+     * Resets pins based on their type.
+     *
+     * @param pins  pins to be reset
+     * @param type  type of the pins like input or output
+     */
+    private void resetPins(Pin[] pins, String type) {
+        for (Pin pin : pins) {
+            pin.setConnectionCable(null);
+            pin.setAvailability(true);
+            if(type.equals("input")) pin.setSignal(false);
+        }
+    }
+
     /**
      * Returns the name of the Box. This will be used in saving and loading
      * circuits from/to file.

@@ -1,11 +1,16 @@
 package hu.erik.digitalcircuits.cli;
 
+import hu.erik.digitalcircuits.devices.CircuitBox;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
+import hu.erik.digitalcircuits.errors.RedundantKeyException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
+import hu.erik.digitalcircuits.utils.FileHandler;
 import hu.erik.digitalcircuits.utils.Printer;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -18,16 +23,34 @@ public class CliController {
      */
     private DeviceMap devices;
     /**
+     * Data structure for the box editor mode.
+     * User created devices will be stored here in editor mode.
+     * After the box is done, this will be erased.
+     */
+    private DeviceMap boxEditorDevices;
+    /**
      * Stores every command that is available for users.
      */
     private HashMap<String, Command> commands;
+    /**
+     * Stores every command that is available for users in the box editor mode.
+     */
+    private HashMap<String, Command> boxEditorCommands;
+    /**
+     * Determines whether the user in box editor mode or not.
+     */
+    private boolean inBoxEditorMode;
 
     /**
      * Default constructor to initialize the store, and the commands.
      */
     public CliController() {
         devices = new DeviceMap();
+        boxEditorDevices = new DeviceMap();
         commands = new HashMap<>();
+        boxEditorCommands = new HashMap<>();
+        inBoxEditorMode = false;
+        boxEditorCommands.put("box", new BoxCmd());
     }
 
     /**
@@ -39,6 +62,7 @@ public class CliController {
     public void addCommands(Command... commands) {
         for(Command cmd : commands) {
             this.commands.put(cmd.getName(), cmd);
+            this.boxEditorCommands.put(cmd.getName(), cmd);
         }
     }
 
@@ -57,15 +81,22 @@ public class CliController {
                 Printer.println("Bye, have a nice day! :)");
                 break;
             } else if(splitCMD[0].equalsIgnoreCase("menu")) {
-                if(splitCMD.length > 1) Printer.printErr(new TooManyArgumentException("menu"));
+                if (splitCMD.length > 1) Printer.printErr(new TooManyArgumentException("menu"));
                 showMenu();
+                continue;
+            } else if(splitCMD[0].equalsIgnoreCase("boxeditor")) {
+                handleEditorMode(splitCMD);
                 continue;
             } else if(cmd.equals("\n") || cmd.equals("")) {
                 continue;
             }
 
             try {
-                commands.get(splitCMD[0]).action(devices, splitCMD);
+                if(inBoxEditorMode) {
+                    boxEditorCommands.get(splitCMD[0]).action(boxEditorDevices, splitCMD);
+                } else {
+                    commands.get(splitCMD[0]).action(devices, splitCMD);
+                }
             } catch (NotEnoughArgsException | InvalidArgumentException err) {
                 Printer.printErr(err);
             } catch (NullPointerException err) {
@@ -88,9 +119,39 @@ public class CliController {
             Printer.println(commands.get(name).getFormat());
             System.out.println("\t" + commands.get(name).getBriefDescription());
         }
+        Printer.println(boxEditorCommands.get("box").getFormat());
+        System.out.println("\t" + boxEditorCommands.get("box").getBriefDescription());
+        Printer.println("boxeditor");
+        System.out.println("\tOpen or close a circuit box editor session.");
         Printer.println("exit");
         System.out.println("\tCloses the application.");
         Printer.printSeparatorLine("-");
     }
 
+    private void handleEditorMode(String[] cmd) {
+        if (cmd.length > 1) Printer.printErr(new TooManyArgumentException("boxeditor"));
+        inBoxEditorMode = !inBoxEditorMode;
+        if(inBoxEditorMode) {
+            Printer.println("Now you are in box editor mode. After you run this command again, your boxes will be saved.");
+        } else {
+            Map<String, DeviceBundle> devices = boxEditorDevices.getMap();
+            for(String name : devices.keySet()) {
+                if(devices.get(name).getType().equals(DeviceType.CIRCUITBOX)) {
+                    try {
+                        CircuitBox box = (CircuitBox) devices.get(name).getDevice();
+                        box.resetToDefaultState();
+                        FileHandler.saveCircuit(box);
+                        this.devices.add(name, devices.get(name));
+                        Printer.println("[BoxEditorMode] " + name + " >> Saved and added to your current session!");
+                    } catch (IOException  e) {
+                        Printer.printErr("[BoxEditorMode] " + name + " >> Save failed!");
+                    } catch (RedundantKeyException err) {
+                        Printer.printErr("[BoxEditorMode] " + name + " >> Can't be added to the current session because a device already has this name!");
+                    }
+                }
+            }
+            boxEditorDevices = new DeviceMap();
+            Printer.println("Now you are in normal mode!");
+        }
+    }
 }

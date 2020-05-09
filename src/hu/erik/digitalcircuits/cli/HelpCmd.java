@@ -71,7 +71,7 @@ public class HelpCmd extends Command {
                 "on - turns on the electricity\n" +
                 "off - turns off the electricity\n" +
                 "\n" +
-                "You can use these uniqe functions by typing \"device powersource <your powersource name> <on or off>\"");
+                "You can use these uniqe functions by typing \"device <your powersource name> <on or off>\"");
         Printer.printSeparatorLine("-");
     }
 
@@ -92,7 +92,7 @@ public class HelpCmd extends Command {
                 "on - generete 1 on the output\n" +
                 "off - generate 0 on the output\n" +
                 "\n" +
-                "You can use these uniqe functions by typing \"device switch <your switch name> <on or off>\"");
+                "You can use these uniqe functions by typing \"device <your switch name> <on or off>\"");
         Printer.printSeparatorLine("-");
     }
 
@@ -112,7 +112,7 @@ public class HelpCmd extends Command {
                 "Junction devices have access to a special connectall function. With this, you can connect multiple devices\n" +
                 "to your Junction at the same time\n" +
                 "\n" +
-                "To use this uniqe function, type: \"device junction <your junction name> connectall <you device names separated by spaces>\"");
+                "To use this uniqe function, type: \"device <your junction name> connectall <you device names separated by spaces>\"");
         Printer.printSeparatorLine("-");
     }
 
@@ -146,15 +146,14 @@ public class HelpCmd extends Command {
                 "\n" +
                 "- Bind your circuit pins to the box:\n" +
                 "     - To bind an input pin, type: \n" +
-                "          \"device circuitbox <box name> bindinputpin <target device name> <target pin index> <box pin index>\"\n" +
+                "          \"box <box name> bindinput <target device name> <target pin index> <box pin index>\"\n" +
                 "     - To bind an output pin, type:\n" +
-                "          \"device circuitbox <box name> bindoutputpin <target device name> <target pin index> <box pin index>\"\n" +
+                "          \"box <box name> bindoutput <target device name> <target pin index> <box pin index>\"\n" +
+                "      These methods only works in Box Editor Mode. For that, type: boxeditor" +
                 "\n" +
-                "- Save and load\n" +
-                "      - To save, type: \"device circuitbox <box name> save\"\n" +
-                "      - To load, type: \"device circuitbox <boxname> load\"\n" +
-                "     After loading, you can connect your box as usual." +
-                " ALWAYS SAVE YOUR NEWLY CREATED BOX BEFORE DELETING ITS PARTS!!!");
+                "- Load CircuitBox\n" +
+                "      - type: \"device circuitbox <boxname> load\"\n" +
+                "     After loading, you can connect your box as usual.");
         Printer.printSeparatorLine("-");
     }
 
