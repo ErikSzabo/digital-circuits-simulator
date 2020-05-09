@@ -30,7 +30,7 @@ public abstract class DispenserDevice extends AbstractDevice {
 
 
     /**
-     * Returns it's input pin in an array.
+     * Returns input pin in an array.
      *
      * @return all input pins on the device
      */

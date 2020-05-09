@@ -33,16 +33,19 @@ public class Cable implements Serializable {
     }
 
     /**
-     * Returns the pin that is positioned at the other end of the Cable.
+     * Returns the pin that is positioned at the other end of the Cable,
+     * based on the given pin. If the given pin isn't connected to the Cable,
+     * then null will be returned
      *
      * @param pin   one of the cable's pins
-     * @return      the other pin on the Cable
+     * @return      the other pin on the Cable or null
      */
     public Pin getOtherPin(Pin pin) {
         if(p1.equals(pin)) {
             return p2;
-        } else {
+        } else if(p2.equals(pin)) {
             return p1;
         }
+        return null;
     }
 }

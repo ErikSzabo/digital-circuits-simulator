@@ -4,6 +4,9 @@ package hu.erik.digitalcircuits.errors;
  * Cli exception that handles errors which caused by using invalid arguments in commands.
  */
 public class InvalidArgumentException extends CliException {
+    /**
+     * Stores the argument that is invalid for the command.
+     */
     private String argument;
 
     /**

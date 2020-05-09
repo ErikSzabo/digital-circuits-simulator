@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Class to save and load circuits.
+ * Class to save and load user created circuits.
  */
 public final class FileHandler {
     /**
@@ -17,13 +17,12 @@ public final class FileHandler {
     private FileHandler() {}
 
     /**
-     * Loads a circuit with the given name or null if there isn't any
-     * circuit with the given name.
+     * Loads a circuit from file if there is any .ser file with the given name.
      *
      * @param circuitName               name of the circuit which will be loaded
-     * @return                          loaded circuit or null
+     * @return                          loaded circuit
      * @throws IOException              If the load fails.
-     * @throws ClassNotFoundException   If the class doesn't exists in the classpath
+     * @throws ClassNotFoundException   If the class doesn't exists in the classpath.
      */
     public static CircuitBox loadCircuit(String circuitName) throws IOException, ClassNotFoundException {
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(circuitName + ".ser"));
@@ -33,11 +32,11 @@ public final class FileHandler {
     }
 
     /**
-     * Save a given circuit. This process will reset the input and output pins of the box
+     * Saves a circuit. This process will reset the input and output pins on the circuit
      * to save it as a default blackbox. In this way, after loading, user can connect anything to
-     * the box without any problem. After the save, the pins and box state will be the same as before.
+     * the box without any problem. After the save, the circuit will be restored.
      *
-     * @param box           circuitbox which will be saved
+     * @param box           CircuitBox which will be saved
      * @throws IOException  If the save fails.
      */
     public static void saveCircuit(CircuitBox box) throws IOException {
@@ -61,7 +60,7 @@ public final class FileHandler {
     }
 
     /**
-     * Resets the given pins based on their type, then returns the
+     * Resets pins based on their type, then returns the
      * connection cables that they had, in order to have the chance of
      * restoration.
      *
@@ -81,12 +80,12 @@ public final class FileHandler {
     }
 
     /**
-     * Restores the given pins to their original state.
+     * Restores pins to their original state by putting back the removed cables.
      * If the type is set to input, pin will get it's value from
      * the other end of the cable.
      *
-     * @param pins      pins to be reset
-     * @param cables    cables which will be used in restoration
+     * @param pins      pins to restore
+     * @param cables    cables which will be added to the pins
      * @param type      type of the pins like input or output
      */
     private static void restorePins(Pin[] pins, ArrayList<Cable> cables, String type) {
@@ -101,6 +100,7 @@ public final class FileHandler {
 
     /**
      * Runs through the whole circuit box to recalculate pin values.
+     * Used after pin reset and restore.
      *
      * @param box circuit box to run through
      */
@@ -113,6 +113,7 @@ public final class FileHandler {
 
     /**
      * Saves the given CircuitBox to a serialized file. File name will be the same as the box name.
+     * File extension will be .ser
      *
      * @param box           circuit box to save
      * @throws IOException  If the save fails.

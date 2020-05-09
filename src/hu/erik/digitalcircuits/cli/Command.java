@@ -12,7 +12,7 @@ public abstract class Command {
      */
     private String name;
     /**
-     * How the command should be used. Format first word must be the name.
+     * How the command should be used. Format first word must be the name of the command.
      */
     private String format;
     /**
@@ -63,10 +63,10 @@ public abstract class Command {
     /**
      * Handles the command functionality.
      *
-     * @param storage                   cli data structure
+     * @param storage                   cli data structure (DeviceMap)
      * @param cmd                       command, split by spaces
      * @throws NotEnoughArgsException   If the provided arguments aren't enough to preform an action.
-     * @throws InvalidArgumentException If there are any invalid argument in the command.
+     * @throws InvalidArgumentException If there is any invalid argument in the command.
      */
     public abstract void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException, InvalidArgumentException;
 

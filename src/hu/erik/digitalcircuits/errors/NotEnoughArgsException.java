@@ -4,7 +4,13 @@ package hu.erik.digitalcircuits.errors;
  * Cli exception that handles errors which caused by not giving enough arguments to the command.
  */
 public class NotEnoughArgsException extends CliException {
+    /**
+     * Number of arguments that is required for the command to work properly.
+     */
     private int reqArgNum;
+    /**
+     * Number of arguments that the user gave.
+     */
     private int givenArgNum;
 
     /**
@@ -22,7 +28,7 @@ public class NotEnoughArgsException extends CliException {
     }
 
     /**
-     * Returns an error specific message which what command needs more arguments.
+     * Returns an error message, which tells the user, how many arguments are required for the command.
      *
      * @return error message
      */

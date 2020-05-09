@@ -24,7 +24,8 @@ public class DeleteCmd extends Command {
     }
 
     /**
-     * Deletes a device with the given name.<br>
+     * Deletes a device with the given name, and also disconnects the device from
+     * every other connected devices.<br>
      *
      * Command format:<br>
      * delete {@literal <}name{@literal >}
@@ -50,8 +51,8 @@ public class DeleteCmd extends Command {
     }
 
     /**
-     * Resets the pin connections and recalculates the circuit values
-     * if the type of the given pins is output.
+     * Resets the pin connections and recalculates the circuit signals
+     * if the type of the pins is output.
      *
      * @param pins  pins which will be reset
      * @param type  type of the pins

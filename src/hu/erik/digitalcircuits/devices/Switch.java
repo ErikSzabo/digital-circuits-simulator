@@ -21,7 +21,7 @@ public class Switch extends SimpleDevice {
 
 
     /**
-     * Sets the switch state or status to true.
+     * Sets the switch state/status to true.
      * Output can only be true if this is true as well.
      * Updates the whole connected circuit.
      */
@@ -32,7 +32,7 @@ public class Switch extends SimpleDevice {
     }
 
     /**
-     * Sets the switch state or status to false.
+     * Sets the switch state/status to false.
      * The output now has to be false.
      * Updates the whole connected circuit.
      */

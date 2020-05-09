@@ -76,7 +76,7 @@ public interface Device extends Serializable {
      * Disconnects this device output pins from the
      * target device input pins.
      *
-     * @param device the device we disconnect from
+     * @param device target device we disconnect from
      */
     void disconnect(Device device);
 

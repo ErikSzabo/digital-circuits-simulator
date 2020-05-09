@@ -17,6 +17,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
 public class CreateCmd extends Command {
     /**
      * Action methods that Create command can perform, like createSwitch()
+     * Based on command name, it has O(1) complexity reach.
      */
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
@@ -55,7 +56,6 @@ public class CreateCmd extends Command {
     @Override
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
         if(cmd.length < 3) throw new NotEnoughArgsException(cmd[0], 2, cmd.length - 1);
-        if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
         String type = cmd[1].toLowerCase();
         try {
@@ -73,9 +73,10 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createSwitch(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 3) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + SWITCH));
         try {
             storage.add(cmd[2], new DeviceBundle(new Switch(), SWITCH));
-            Printer.println("Switch added!");
+            Printer.println("Switch, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
         }
@@ -88,9 +89,10 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createPower(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 3) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + POWER));
         try {
             storage.add(cmd[2], new DeviceBundle(new PowerSource(), POWER));
-            Printer.println("PowerSource added!");
+            Printer.println("PowerSource, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
         }
@@ -103,9 +105,10 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createInverter(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 3) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + INVERTER));
         try {
             storage.add(cmd[2], new DeviceBundle(new Inverter(), INVERTER));
-            Printer.println("Inverter added!");
+            Printer.println("Inverter, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
         }
@@ -118,15 +121,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createAnd(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + ANDGATE));
         try {
             storage.add(cmd[2], new DeviceBundle(new AndGate(Integer.parseInt(cmd[3])), ANDGATE));
-            Printer.println("AndGate added!");
+            Printer.println("AndGate, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of input pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create andgate <name> <input pin number>");
         }
     }
 
@@ -137,15 +139,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createOr(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + ORGATE));
         try {
             storage.add(cmd[2], new DeviceBundle(new OrGate(Integer.parseInt(cmd[3])), ORGATE));
-            Printer.println("OrGate added!");
+            Printer.println("OrGate, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of input pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create orgate <name> <input pin number>");
         }
     }
 
@@ -156,15 +157,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createNand(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + NANDGATE));
         try {
             storage.add(cmd[2], new DeviceBundle(new NandGate(Integer.parseInt(cmd[3])), NANDGATE));
-            Printer.println("NandGate added!");
+            Printer.println("NandGate, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of input pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create nandgate <name> <input pin number>");
         }
     }
 
@@ -175,15 +175,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createNor(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + NORGATE));
         try {
             storage.add(cmd[2], new DeviceBundle(new NorGate(Integer.parseInt(cmd[3])), NORGATE));
-            Printer.println("NorGate added!");
+            Printer.println("NorGate, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of input pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create norgate <name> <input pin number>");
         }
     }
 
@@ -194,15 +193,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createBox(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + CIRCUITBOX));
         try {
             storage.add(cmd[2], new DeviceBundle(new CircuitBox(cmd[2], Integer.parseInt(cmd[3]), Integer.parseInt(cmd[4])), CIRCUITBOX));
-            Printer.println("CircuitBox added!");
+            Printer.println("CircuitBox, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of input and output pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create circuitbox <name> <input pin number> <output pin number>");
         }
     }
 
@@ -213,15 +211,14 @@ public class CreateCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void createJunction(DeviceMap storage, String[] cmd) {
+        if(cmd.length > 4) Printer.printErr(new TooManyArgumentException(cmd[0] + " " + JUNCTION));
         try {
             storage.add(cmd[2], new DeviceBundle(new Junction(Integer.parseInt(cmd[3])), JUNCTION));
-            Printer.println("Junction added!");
+            Printer.println("Junction, " + cmd[2] + " added!");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
-        } catch (NumberFormatException err) {
-            Printer.printErr("Pin amount must be a number!");
-        } catch (IndexOutOfBoundsException err) {
-            Printer.printErr("You must specify the number of output pins!");
+        } catch (NumberFormatException | IndexOutOfBoundsException err) {
+            Printer.printErr("Invalid arguments! Try: create junction <name> <output pin number>");
         }
     }
 }

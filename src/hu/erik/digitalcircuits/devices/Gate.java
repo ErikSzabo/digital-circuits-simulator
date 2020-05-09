@@ -2,6 +2,7 @@ package hu.erik.digitalcircuits.devices;
 
 /**
  * Abstract class which defines the default behavior of Gates.
+ * Gates are mostly responsible for the circuit logic.
  */
 public abstract class Gate extends AbstractDevice {
     /**
@@ -36,7 +37,7 @@ public abstract class Gate extends AbstractDevice {
     }
 
     /**
-     * Returns it's output pin in an array.
+     * Returns output pin in an array.
      *
      * @return all output pins on the device
      */

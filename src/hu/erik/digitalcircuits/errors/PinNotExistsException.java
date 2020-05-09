@@ -6,6 +6,9 @@ import hu.erik.digitalcircuits.devices.Device;
  * Device exception that handles errors which caused by accessing non-existent pins.
  */
 public class PinNotExistsException extends DeviceException {
+    /**
+     * Index of the pin that is not exists.
+     */
     private int pinIndex;
 
     /**
@@ -20,7 +23,7 @@ public class PinNotExistsException extends DeviceException {
     }
 
     /**
-     * Returns an error specific message which tells that at the give index there isn't any pin.
+     * Returns an error specific message which tells that at the given index there isn't any pin.
      *
      * @return error message
      */

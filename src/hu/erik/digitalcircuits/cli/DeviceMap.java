@@ -14,6 +14,8 @@ public class DeviceMap {
     /**
      * Stores user created devices where the key is the device name,
      * and the DeviceBundle is the created Device with it's type.
+     * DeviceBundles can be reached in O(1) complexity. This will be
+     * very useful when the user tries to access his/her devices.
      */
     private HashMap<String , DeviceBundle> map;
 
@@ -25,7 +27,7 @@ public class DeviceMap {
     }
 
     /**
-     * Adds a device to the data structure.
+     * Adds a DeviceBundle to the data structure.
      *
      * @param name                      name of the device
      * @param bundle                    the device and it's type which will be added
@@ -48,7 +50,7 @@ public class DeviceMap {
     }
 
     /**
-     * Gets the device with the given name from the data structure if it exists.
+     * Gets the DeviceBundle with the given name from the data structure if it exists.
      *
      * @param name                      name of the device
      * @return                          the device with it's type

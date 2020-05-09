@@ -1,7 +1,7 @@
 package hu.erik.digitalcircuits.cli;
 
 /**
- * Stores unified device types.
+ * Stores unified device types. The whole Cli will use this.
  */
 public enum DeviceType {
 
@@ -16,7 +16,7 @@ public enum DeviceType {
     ORGATE("orgate");
 
     /**
-     * String value of the enum. Used for user created devices.
+     * String value of the enum. Will be useful in commands, and in the whole cli.
      */
     private String value;
 

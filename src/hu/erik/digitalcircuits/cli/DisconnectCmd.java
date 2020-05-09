@@ -31,7 +31,7 @@ public class DisconnectCmd extends Command {
      * disconnect {@literal <}name{@literal >} from {@literal <}name{@literal >}
      *
      * @param storage                   cli data structure
-     * @param cmd                       command, splitted by spaces
+     * @param cmd                       command, split by spaces
      * @throws NotEnoughArgsException   If the number of arguments are less then 3.
      */
     @Override

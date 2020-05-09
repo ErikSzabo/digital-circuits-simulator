@@ -7,10 +7,14 @@ import hu.erik.digitalcircuits.devices.Device;
  * Some connect methods throw this error when there isn't any more free pin on the device.
  */
 public class NoMorePinException extends DeviceException {
+    /**
+     * Type of the pin that is "out of stock".
+     * Should be "input" or "output"
+     */
     private String pinType;
 
     /**
-     * Constructor to initialize the device that has some pin problems and the pin type.
+     * Constructor to initialize the device that has some pin problems and the type of the pin.
      *
      * @param device    device which doesn't have more free pins
      * @param pinType   type of the pin

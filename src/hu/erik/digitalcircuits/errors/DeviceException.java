@@ -6,6 +6,9 @@ import hu.erik.digitalcircuits.devices.Device;
  * Default exception to handle Device errors.
  */
 public abstract class DeviceException extends Exception {
+    /**
+     * Store the device that was used incorrectly.
+     */
     private Device device;
 
     /**

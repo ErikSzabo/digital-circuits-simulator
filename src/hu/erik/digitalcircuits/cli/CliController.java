@@ -18,7 +18,7 @@ public class CliController {
      */
     private DeviceMap devices;
     /**
-     * Stores every command what is available for users.
+     * Stores every command that is available for users.
      */
     private HashMap<String, Command> commands;
 
@@ -31,7 +31,8 @@ public class CliController {
     }
 
     /**
-     * Adds commands to the data structure. Cli will only use these commands.
+     * Adds commands to the data structure. CliController will only use these commands.
+     * Make sure to add the commands before calling listen method!
      *
      * @param commands command which will be added to the cli
      */
@@ -71,15 +72,16 @@ public class CliController {
                 Printer.printErr("There isn't any command with this name: " + splitCMD[0] + "!");
                 Printer.printErr("Too see the available commands, use the menu command!");
             }
-
         }
+
+        sc.close();
     }
 
     /**
      * Creates a nice looking menu from the commands and prints it to the console.
      */
     private void showMenu() {
-        Printer.printTitle("Digital Circuits v1.0");
+        Printer.printTitle("Digital Circuits v2.0");
         Printer.println("menu");
         System.out.println("\tShows this menu.");
         for(String name : commands.keySet()) {

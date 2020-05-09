@@ -10,10 +10,12 @@ public class Pin implements Serializable {
 
     /**
      * Cable which is connected to the pin.
+     * It will be useful for signal transmission
      */
     private Cable connectionCable;
     /**
      * Device that holds this pin.
+     * It will be useful for signal transmission
      */
     private Device parentDevice;
     /**
@@ -22,12 +24,13 @@ public class Pin implements Serializable {
     private boolean signal;
     /**
      * Whether the pin is connected to something or not.
+     * This is not necessary, it can be calculated based on
+     * the connection cable, but I find this more readable.
      */
     private boolean free;
 
     /**
-     * Creates a Pin and set it's parent device.
-     * You can only connect devices through pins.
+     * Creates a Pin and set it's parent device, signal and availability.
      *
      * @param parentDevice Device to which it will be connected.
      */
@@ -64,7 +67,7 @@ public class Pin implements Serializable {
      * This will set the pin's connection cable.
      * It shouldn't be used explicitly.
      *
-     * @param connectionCable Cable to connect this pin to another
+     * @param connectionCable cable to connect this pin to another
      */
     public void setConnectionCable(Cable connectionCable) {
         this.connectionCable = connectionCable;

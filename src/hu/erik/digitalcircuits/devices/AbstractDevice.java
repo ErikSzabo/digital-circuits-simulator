@@ -7,7 +7,7 @@ import hu.erik.digitalcircuits.errors.PinNotExistsException;
 import hu.erik.digitalcircuits.utils.Printer;
 
 /**
- * Abstract class for Device which implements the connection methods.
+ * Abstract class for the Device interface which implements the connection methods.
  */
 public abstract class AbstractDevice implements Device {
 
@@ -87,8 +87,11 @@ public abstract class AbstractDevice implements Device {
      * Disconnects this device output pins from the
      * target device input pins.
      * Updates the whole circuit.
+     * <br>
+     * NOTE that the target device will be removed from very
+     * output pin!
      *
-     * @param device the device we disconnect from
+     * @param device target device we disconnect from
      */
     @Override
     public void disconnect(Device device) {

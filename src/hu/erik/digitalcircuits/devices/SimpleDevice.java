@@ -23,7 +23,7 @@ public abstract class SimpleDevice extends AbstractDevice {
     }
 
     /**
-     * Returns it's input pin in an array.
+     * Returns input pin in an array.
      *
      * @return all input pins on the device
      */
@@ -33,7 +33,7 @@ public abstract class SimpleDevice extends AbstractDevice {
     }
 
     /**
-     * Returns it's output pins in an array.
+     * Returns output pin in an array.
      *
      * @return all output pins on the device
      */

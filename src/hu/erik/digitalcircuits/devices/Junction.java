@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Class to create Junctions.
+ * Junctions are used for multiplying and sending their input signal
+ * to the connected devices.
  */
 public class Junction extends DispenserDevice {
 
@@ -13,15 +15,16 @@ public class Junction extends DispenserDevice {
      * Constructor to create Junction with the given number
      * of output pins.
      *
-     * @param numOfOutputPins Required amount of output pins
+     * @param numOfOutputPins number of output pins
      */
     public Junction(int numOfOutputPins) {
         super(numOfOutputPins);
     }
 
     /**
-     * Calculate the output. It is basically
-     * sends to every output pin whatever is it's input pin value.
+     * Calculates the output.
+     * In other words, it sets all of it's output pin signals
+     * to it's input pin signal.
      */
     @Override
     public void calcOutput() {
@@ -33,7 +36,7 @@ public class Junction extends DispenserDevice {
     /**
      * Connects all of the given devices to the junction output pins.
      *
-     * @param devices               Array of devices you want to connect
+     * @param devices               devices which will be connected
      * @throws NoMorePinException   If any of the devices doesn't have more free pins.
      */
     public void connectAll(Device... devices) throws NoMorePinException {
@@ -45,7 +48,7 @@ public class Junction extends DispenserDevice {
     /**
      * Connects all of the given devices to the junction output pins.
      *
-     * @param devices               Array of devices you want to connect
+     * @param devices               array of devices which will be connected
      * @throws NoMorePinException   If any of the devices doesn't have more free pins.
      */
     public void connectAll(ArrayList<Device> devices) throws NoMorePinException {

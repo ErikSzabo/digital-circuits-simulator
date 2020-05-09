@@ -4,10 +4,13 @@ package hu.erik.digitalcircuits.errors;
  * Default exception to handle Cli errors.
  */
 public abstract class CliException extends Exception {
+    /**
+     * Stores the misused command or device name.
+     */
     private String cmdOrName;
 
     /**
-     * Constructor to save the wrong command or the wong
+     * Constructor to save the wrong command or the wrong
      * device name.
      *
      * @param cmdOrName wrong command or device name
@@ -17,7 +20,7 @@ public abstract class CliException extends Exception {
     }
 
     /**
-     * Returns the command or the device name, what is used incorrectly.
+     * Returns the command or the device name, that was used incorrectly.
      *
      * @return the stored string
      */

@@ -6,6 +6,9 @@ import hu.erik.digitalcircuits.devices.CircuitBox;
  * Device exception that handles errors which caused by circuit box bindings.
  */
 public class BoundException extends DeviceException {
+    /**
+     * The name of the CircuitBox in which the problem occurred.
+     */
     private String boxName;
 
     /**

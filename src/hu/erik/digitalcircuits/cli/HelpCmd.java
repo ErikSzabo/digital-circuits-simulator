@@ -84,7 +84,7 @@ public class HelpCmd extends Command {
         System.out.println("Switch\n" +
                 "\n" +
                 "Used to simulate circuit variables. You can set your variables in your circuits with switches.\n" +
-                "Switch won't work unless it's connected to a PowerSource.\n" +
+                "Switch won't work unless it's connected to a PowerSource (or to anything which provides 1 signal).\n" +
                 "\n" +
                 "To create: \"create switch <name>\"\n" +
                 "\n" +

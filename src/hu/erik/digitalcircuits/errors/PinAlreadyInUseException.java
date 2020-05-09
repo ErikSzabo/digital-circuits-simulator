@@ -8,6 +8,9 @@ import hu.erik.digitalcircuits.devices.Device;
  * to something else.
  */
 public class PinAlreadyInUseException extends DeviceException {
+    /**
+     * Index of the pin that is already in use on the device.
+     */
     private int pinIndex;
 
     /**
@@ -23,7 +26,7 @@ public class PinAlreadyInUseException extends DeviceException {
     }
 
     /**
-     * Returns an error specific message which tells what pin is already used on what device.
+     * Returns an error specific message about the pin that is already in use.
      *
      * @return error message
      */

@@ -27,7 +27,7 @@ public class ShowCmd extends Command {
      * show {@literal <}output | input{@literal >} {@literal <}name{@literal >} {@literal <}pin index{@literal >}
      *
      * @param storage                   cli data structure
-     * @param cmd                       command, splitted by spaces
+     * @param cmd                       command, split by spaces
      * @throws NotEnoughArgsException   If the number of arguments are less then 3.
      */
     @Override
@@ -58,7 +58,7 @@ public class ShowCmd extends Command {
     }
 
     /**
-     * Shows the device input value at the given index.
+     * Shows the device input signal at the given index.
      *
      * @param device device that has the pin
      * @param name   name of the device
@@ -73,7 +73,7 @@ public class ShowCmd extends Command {
     }
 
     /**
-     * Shows the device output value at the given index.
+     * Shows the device output signal at the given index.
      *
      * @param device device that has the pin
      * @param name   name of the device

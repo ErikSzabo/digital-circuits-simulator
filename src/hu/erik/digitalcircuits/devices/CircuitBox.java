@@ -57,7 +57,7 @@ public class CircuitBox extends MultipinDevice {
      * @param target                    device to bind
      * @param pinIndex                  pin index on the device
      * @param boxPinIndex               pin index on the box
-     * @throws BoundException           if an already bound pin is targeted on the box.
+     * @throws BoundException           if an already bounded pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
     public void bindInputPin(Device target, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
@@ -75,7 +75,7 @@ public class CircuitBox extends MultipinDevice {
      * @param target                    device to bind
      * @param pinIndex                  pin index on the device
      * @param boxPinIndex               pin index on the box
-     * @throws BoundException           if an already bound pin is targeted on the box.
+     * @throws BoundException           if an already bounded pin is targeted on the box.
      * @throws PinNotExistsException    If there isn't any pin at the given index.
      */
     public void bindOutputPin(Device target, int pinIndex, int boxPinIndex) throws BoundException, PinNotExistsException {
@@ -96,12 +96,6 @@ public class CircuitBox extends MultipinDevice {
         return name;
     }
 
-
-    /**
-     * Returns the device type specified in the DeviceType static class.
-     *
-     * @return the type of the Device
-     */
     @Override
     public String toString() {
         return "CircuitBox";

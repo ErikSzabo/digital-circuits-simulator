@@ -7,7 +7,7 @@ package hu.erik.digitalcircuits.errors;
 public class RedundantKeyException extends CliException {
 
     /**
-     * Default constructor to initialize the duplicated name
+     * Default constructor to initialize the duplicated name.
      *
      * @param key the device name that is already exists
      */
@@ -16,7 +16,7 @@ public class RedundantKeyException extends CliException {
     }
 
     /**
-     * Returns an error specific message which shows the information about the duplication.
+     * Returns an error specific message which shows information about the duplication.
      *
      * @return error message
      */
