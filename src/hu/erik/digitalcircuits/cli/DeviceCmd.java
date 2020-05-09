@@ -142,7 +142,7 @@ public class DeviceCmd extends Command {
         DeviceBundle bundle;
 
         try {
-            bundle = storage.get(cmd[2]);
+            bundle = storage.get(cmd[1]);
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
             return;
