@@ -24,7 +24,7 @@ public class BoxCmd extends Command {
     public BoxCmd() {
         super(
                 "box",
-                "box <name> <inputnum> <outputnum>\n\tbox <name> <bindinput | bindoutput> <target name> <target pin index> <box pin index>",
+                "box <name> create <inputnum> <outputnum>\n\tbox <name> <bindinput | bindoutput> <target name> <target pin index> <box pin index>",
                 "Creates a box with the given parameters or bind its pins. Only works in Box Editor Mode"
         );
         this.actions = new HashMap<>();

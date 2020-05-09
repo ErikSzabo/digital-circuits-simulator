@@ -70,6 +70,7 @@ public class CliController {
      * Listens for commands in an infinite loop.
      */
     public void listen() {
+        boxEditorCommands.remove("delete");
         Scanner sc = new Scanner(System.in);
         showMenu();
 
