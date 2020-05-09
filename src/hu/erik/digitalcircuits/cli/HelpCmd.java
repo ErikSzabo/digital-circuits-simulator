@@ -153,7 +153,8 @@ public class HelpCmd extends Command {
                 "- Save and load\n" +
                 "      - To save, type: \"device circuitbox <box name> save\"\n" +
                 "      - To load, type: \"device circuitbox <boxname> load\"\n" +
-                "     After loading, you can connect your box as usual.");
+                "     After loading, you can connect your box as usual." +
+                " ALWAYS SAVE YOUR NEWLY CREATED BOX BEFORE DELETING ITS PARTS!!!");
         Printer.printSeparatorLine("-");
     }
 

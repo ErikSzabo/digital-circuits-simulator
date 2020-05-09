@@ -1,6 +1,5 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.devices.Device;
 import hu.erik.digitalcircuits.devices.Pin;
 import hu.erik.digitalcircuits.errors.DeviceNotExistsException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
@@ -39,10 +38,21 @@ public class DeleteCmd extends Command {
         if(cmd.length < 2) throw new NotEnoughArgsException(cmd[0], 1, 0);
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
+
         try {
-            Device d = storage.get(cmd[1]).getDevice();
-            connectionReset(d.inputPins(), "input");
-            connectionReset(d.outputPins(), "output");
+            DeviceBundle device = storage.get(cmd[1]);
+            if(device.getType().equals(DeviceType.CIRCUITBOX)) {
+                Printer.println("You are trying to delete a CircuitBox." +
+                        "\nAll of the devices that are bounded to the box will lose all of their" +
+                        " connections! (Inner connections will remain the same.)" +
+                        "\nFor example, if you have a Switch -> Andgate -> Orgate -> Nandgate circuit" +
+                        " where the Andgate inputs and Orgate outputs are bounded to the box. " +
+                        "\nWell, then your Orgate loses its connection to the Nandgate, and your Andgate lose its connection to the Switch." +
+                        "\nAndgate and Orgate connection will remain the same." +
+                        "\nThis thing isn't an issue if you just loaded your fresh circuit from yesterday.");
+            }
+            connectionReset(device.getDevice().inputPins(), "input");
+            connectionReset(device.getDevice().outputPins(), "output");
             storage.remove(cmd[1]);
             Printer.println("Device has been deleted!");
         } catch (DeviceNotExistsException err) {
@@ -69,6 +79,12 @@ public class DeleteCmd extends Command {
                     otherPin.getParentDevice().sendOutput();
                 }
             }
+            // This is necessary because of CircuitBox reference bindings
+            p.setAvailability(true);
+            p.setConnectionCable(null);
+            p.setSignal(false);
+            p.getParentDevice().calcOutput();
+            p.getParentDevice().sendOutput();
         }
     }
 }
