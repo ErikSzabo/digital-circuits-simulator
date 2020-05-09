@@ -95,8 +95,7 @@ public abstract class AbstractDevice implements Device {
      */
     @Override
     public void disconnect(Device device) {
-        Pin[] outputPins = outputPins();
-        for(Pin p : outputPins) {
+        for(Pin p : outputPins()) {
             if(p.isFree()) continue;
             Pin targetPin = p.getConnectionCable().getOtherPin(p);
             Device targetDevice = targetPin.getParentDevice();

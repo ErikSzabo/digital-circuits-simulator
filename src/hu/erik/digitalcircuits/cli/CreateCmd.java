@@ -17,7 +17,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
 public class CreateCmd extends Command {
     /**
      * Action methods that Create command can perform, like createSwitch()
-     * Based on command name, it has O(1) complexity reach.
+     * Based on device type, it has O(1) complexity reach.
      */
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
