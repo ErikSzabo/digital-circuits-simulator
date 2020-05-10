@@ -183,7 +183,7 @@ public class DeviceCmd extends Command {
             Printer.println("Connected!");
         } catch (NoMorePinException err) {
             Printer.printErr(err);
-            Printer.printErr("After and including " + err.getDevice() + ", none of the devices connected");
+            Printer.printErr("Some of the connections can't be made.");
         }
     }
 
