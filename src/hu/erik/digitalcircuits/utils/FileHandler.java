@@ -3,9 +3,14 @@ package hu.erik.digitalcircuits.utils;
 import hu.erik.digitalcircuits.devices.CircuitBox;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
- * Class to save and load user created circuits.
+ * Class to handle file interactions.<br>
+ * Can load and save CircuitBoxes.<br>
+ * Can load command help pages.
  */
 public final class FileHandler {
     /**
@@ -38,5 +43,17 @@ public final class FileHandler {
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(box.getName() + ".ser"));
         outputStream.writeObject(box);
         outputStream.close();
+    }
+
+    /**
+     * Reads a help page from a txt file into a String and returns it.
+     *
+     * @param filename      name of the file that contains the help page
+     * @return              the help page in a single String
+     * @throws IOException  If the read fails.
+     */
+    public static String readHelpPage(String filename) throws IOException {
+        byte[] encoded = Files.readAllBytes(Paths.get(filename + ".txt"));
+        return new String(encoded, Charset.defaultCharset());
     }
 }
