@@ -1,7 +1,6 @@
 package hu.erik.digitalcircuits.cli;
 
 import hu.erik.digitalcircuits.devices.CircuitBox;
-import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.errors.RedundantKeyException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
@@ -105,7 +104,7 @@ public class CliController {
                 } else {
                     commands.get(splitCMD[0]).action(devices, splitCMD);
                 }
-            } catch (NotEnoughArgsException | InvalidArgumentException err) {
+            } catch (NotEnoughArgsException err) {
                 Printer.printErr(err);
             } catch (NullPointerException err) {
                 Printer.printErr("There isn't any command with this name: " + splitCMD[0] + "!");
