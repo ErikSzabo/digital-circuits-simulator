@@ -1,0 +1,11 @@
+Junction
+
+Junctions are usually used to duplicate signals. For example, you can connect your PowerSource to a
+Junction, and then you can connect the Junction to all of your switches.
+
+To create: "create junction <name> <output pin number>"
+
+Junction devices have access to a special connectall function. With this, you can connect multiple devices
+to your Junction at the same time.
+
+To use this unique function, type: "device <your junction name> connectall <you device names separated by spaces>"

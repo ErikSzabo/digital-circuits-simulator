@@ -1,0 +1,12 @@
+Switch
+
+Used to simulate circuit variables. You can set your variables in your circuits with switches.
+Switch won't work unless it's connected to a PowerSource (or to anything which provides 1 signal).
+
+To create: "create switch <name>"
+
+Unique functions:
+    on - generate 1 on the output
+    off - generate 0 on the output
+
+You can use these unique functions by typing "device <your switch name> <on or off>"

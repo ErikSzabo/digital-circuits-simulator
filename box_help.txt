@@ -1,0 +1,23 @@
+CircuitBox
+
+With this tool, you can put your whole circuit to a box. And the reason to that, well, you can save and load
+your boxes. So next time if you want to use the same circuit, the only thing you need is to load your box.
+Don't bind switch pins to input pins! You won't be able to interact with the switch after loading.(on off methods)
+
+Following methods are only work in Box Editor Mode. For that, type: boxeditor
+
+    Create a box: "box <name> create <input pin number> <output pin number>"
+
+    Bind your device pins to the box:
+        - To bind an input pin, type:
+             "box <box name> bindinput <target device name> <target pin index> <box pin index>"
+        - To bind an output pin, type:
+             "box <box name> bindoutput <target device name> <target pin index> <box pin index>"
+
+    After exiting Box Editor Mode, your boxes will be saved and added to your normal mode.
+
+Following methods are works in normal mode as well:
+
+    Load CircuitBox
+        type: "device <boxname> load"
+        After loading, you can connect your box as usual.

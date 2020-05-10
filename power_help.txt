@@ -1,0 +1,13 @@
+PowerSource
+
+Used for giving electricity to switches, or to generate constant 0 or 1 signal to a device.
+Mostly you want to connect your PowerSource to a Junction, the your Junction to Switches.
+Use Switches for circuit variables instead of PowerSources if you can!
+
+To create: "create powersource <name>"
+
+Unique functions:
+	on - turns on the electricity
+	off - turns off the electricity
+
+You can use these unique functions by typing "device <your powersource name> <on or off>"
