@@ -1,6 +1,5 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
 import hu.erik.digitalcircuits.utils.Printer;
 
@@ -33,8 +32,7 @@ public class ListCmd extends Command {
      * @param cmd                       command, splitted by spaces
      */
     @Override
-    public void action(DeviceMap storage, String[] cmd) throws InvalidArgumentException {
-        if(cmd.length == 2 && !DeviceType.contains(cmd[1].toLowerCase())) throw new InvalidArgumentException(cmd[0], cmd[1]);
+    public void action(DeviceMap storage, String[] cmd) {
 
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 

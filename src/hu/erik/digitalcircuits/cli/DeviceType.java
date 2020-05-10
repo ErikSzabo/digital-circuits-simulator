@@ -63,19 +63,6 @@ public enum DeviceType {
         return value;
     }
 
-    /**
-     * Checks if any of the enums has the same string value.
-     *
-     * @param type string value to check
-     * @return     true if one of the enums' value is the same as the parameter
-     */
-    public static boolean contains(String type) {
-        for(DeviceType type1: values()) {
-            if(type1.value.equals(type)) return true;
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         return value;

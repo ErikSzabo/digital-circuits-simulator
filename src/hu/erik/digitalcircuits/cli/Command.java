@@ -1,6 +1,5 @@
 package hu.erik.digitalcircuits.cli;
 
-import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 
 /**
@@ -66,8 +65,7 @@ public abstract class Command {
      * @param storage                   cli data structure (DeviceMap)
      * @param cmd                       command, split by spaces
      * @throws NotEnoughArgsException   If the provided arguments aren't enough to preform an action.
-     * @throws InvalidArgumentException If there is any invalid argument in the command.
      */
-    public abstract void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException, InvalidArgumentException;
+    public abstract void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException;
 
 }
