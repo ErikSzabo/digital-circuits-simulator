@@ -5,14 +5,41 @@ package hu.erik.digitalcircuits.cli;
  */
 public enum DeviceType {
 
+    /**
+     * Represents a Switch type.
+     */
     SWITCH("switch"),
+    /**
+     * Represents a PowerSource type.
+     */
     POWER("powersource"),
+    /**
+     * Represents an Inverter type.
+     */
     INVERTER("inverter"),
+    /**
+     * Represents a Junction type.
+     */
     JUNCTION("junction"),
+    /**
+     * Represents a CircuitBox type.
+     */
     CIRCUITBOX("circuitbox"),
+    /**
+     * Represents a NandGate type.
+     */
     NANDGATE("nandgate"),
+    /**
+     * Represents a NorGate type.
+     */
     NORGATE("norgate"),
+    /**
+     * Represents an AndGate type.
+     */
     ANDGATE("andgate"),
+    /**
+     * Represents an OrGate type.
+     */
     ORGATE("orgate");
 
     /**

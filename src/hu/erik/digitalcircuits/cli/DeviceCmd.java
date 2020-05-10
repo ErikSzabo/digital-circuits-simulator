@@ -53,7 +53,7 @@ public class DeviceCmd extends Command {
     public void action(DeviceMap storage, String[] cmd) throws NotEnoughArgsException {
         if(cmd.length < 3) throw new NotEnoughArgsException("device", 2, cmd.length - 1);
 
-        if(cmd[2].equalsIgnoreCase("load")) {
+        if(cmd[2].strip().equalsIgnoreCase("load")) {
             handleCircuitBox(storage, cmd);
             return;
         }

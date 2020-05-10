@@ -11,6 +11,7 @@ import static hu.erik.digitalcircuits.cli.DeviceType.CIRCUITBOX;
 
 /**
  * Class to handle commands prefixed with "box".
+ * It can create boxes, and bind pins to boxes.
  */
 public class BoxCmd extends Command {
     /**
@@ -19,7 +20,7 @@ public class BoxCmd extends Command {
     private HashMap<String, BiConsumer<DeviceMap, String[]>> actions;
 
     /**
-     * Constructor to setup the command's name, format, description.
+     * Constructor to setup the command's name, format, description and its possible actions.
      */
     public BoxCmd() {
         super(
@@ -62,7 +63,7 @@ public class BoxCmd extends Command {
      * @param cmd       command, split by spaces
      */
     private void create(DeviceMap storage, String[] cmd) {
-        if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0] + " create"));
+        if(cmd.length > 5) Printer.printErr(new TooManyArgumentException(cmd[0] + " <name> create"));
         try {
             storage.add(cmd[1], new DeviceBundle(
                     new CircuitBox(
@@ -73,7 +74,7 @@ public class BoxCmd extends Command {
             );
             Printer.println("CircuitBox, " + cmd[1] + " added!");
         } catch (NumberFormatException err) {
-            Printer.printErr("Invalid arguments! Try: " + getFormat());
+            Printer.printErr("Invalid arguments! Try: box <name> create <input pin number> <output pin number>");
         } catch (RedundantKeyException err) {
             Printer.printErr(err);
         }

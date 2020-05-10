@@ -16,7 +16,7 @@ public class DeviceBundle {
     private DeviceType type;
 
     /**
-     * Constructor to initialize user created device and it's type.
+     * Constructor to initialize user created device and its type.
      *
      * @param device    stored device
      * @param type      type of the stored device

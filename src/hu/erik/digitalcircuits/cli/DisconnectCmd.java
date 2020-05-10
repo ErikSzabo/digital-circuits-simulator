@@ -25,7 +25,8 @@ public class DisconnectCmd extends Command {
     /**
      * Fully disconnects the two given device.
      * Fully means that the target device will be removed from all
-     * of the current device output pins.<br>
+     * of the current device output pins.
+     * First device output pins and second device input pins will be disconnected.<br>
      *
      * Command format:<br>
      * disconnect {@literal <}name{@literal >} from {@literal <}name{@literal >}

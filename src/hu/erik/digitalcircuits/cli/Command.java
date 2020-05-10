@@ -54,7 +54,7 @@ public abstract class Command {
     /**
      * Returns command format.
      *
-     * @return How the command should be used.
+     * @return how the command should be used
      */
     public String getFormat() {
         return format;

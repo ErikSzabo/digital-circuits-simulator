@@ -15,6 +15,13 @@ import java.util.Scanner;
 
 /**
  * Class to handle CLI events and commands.
+ * Features two user mode, normal and boxeditor.
+ * In normal mode CircuitBoxes can't be created.
+ * Box editor mode used for creating boxes. After exiting this mode,
+ * all of the boxes will be saved and added to the normal mode. Anything else
+ * will be deleted. User can switch modes at any time.
+ * In box editor mode, delete command can't be use to ensure that
+ * users don't mess up their circuit.
  */
 public class CliController {
     /**
@@ -129,6 +136,11 @@ public class CliController {
         Printer.printSeparatorLine("-");
     }
 
+    /**
+     * Handles the switching between box editor mode and normal mode.
+     *
+     * @param cmd command, split by spaces
+     */
     private void handleEditorMode(String[] cmd) {
         if (cmd.length > 1) Printer.printErr(new TooManyArgumentException("boxeditor"));
         inBoxEditorMode = !inBoxEditorMode;
