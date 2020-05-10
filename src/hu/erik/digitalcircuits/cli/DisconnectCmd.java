@@ -18,7 +18,7 @@ public class DisconnectCmd extends Command {
         super(
                 "disconnect",
                 "disconnect <name> from <name>",
-                "Disconnects the first device output pin from the second device input pin."
+                "Disconnects the first device output pins from the second device input pins."
         );
     }
 
