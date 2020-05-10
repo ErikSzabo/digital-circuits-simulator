@@ -20,7 +20,7 @@ public class HelpCmd extends Command {
     private HashMap<String, String> helpPages;
 
     /**
-     * Constructor to setup the command's name, format, description and its possible actions.
+     * Constructor to setup the command's name, format, description and its possible help pages.
      */
     public HelpCmd() {
         super(
