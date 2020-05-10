@@ -94,7 +94,7 @@ public class DeviceCmd extends Command {
             ((PowerSource) bundle.getDevice()).off();
             Printer.println("Your power state is now FALSE(0)");
         } else {
-            Printer.printErr("Invalid arguments! Try: device " + POWER + " <name> <on | off>");
+            Printer.printErr("Invalid arguments! Try: device <name> <on | off>");
         }
     }
 
@@ -125,7 +125,7 @@ public class DeviceCmd extends Command {
             ((Switch) bundle.getDevice()).off();
             Printer.println("Your switch state is now FALSE(0)");
         } else {
-            Printer.printErr("Invalid arguments! Try: device " + SWITCH + " <name> <on | off>");
+            Printer.printErr("Invalid arguments! Try: device <name> <on | off>");
         }
     }
 
@@ -151,7 +151,7 @@ public class DeviceCmd extends Command {
         if(cmd[2].equalsIgnoreCase("connectall") && cmd.length > 3) {
             junctionConnectAll(bundle.getDevice(), cmd, storage);
         } else {
-            Printer.printErr("Invalid arguments! Try: device " + JUNCTION + " <name> connectall <name1> <name2> <nameN>");
+            Printer.printErr("Invalid arguments! Try: device <name> connectall <name1> <name2> <nameN>");
         }
 
 
