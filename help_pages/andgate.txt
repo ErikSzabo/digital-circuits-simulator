@@ -1,0 +1,11 @@
+AndGate
+
+An AndGate output signal will only be true(1) if all of its input signals are ture(1) as well.
+
+I | I | OUT
+0 | 0 | 0
+0 | 1 | 0
+1 | 0 | 0
+1 | 1 | 1
+
+To create an AndGate: create andgate <name> <input pin number>

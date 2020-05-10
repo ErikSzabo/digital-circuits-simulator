@@ -1,0 +1,5 @@
+Inverter
+
+An inverter output signal is always the opposite of its input signal.
+
+To create an Inverter:  "create inverter <name>"

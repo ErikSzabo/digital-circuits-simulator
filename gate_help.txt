@@ -1,6 +1,0 @@
-Gates and Inverters
-
-A Gate or an Inverter is responsible for the circuit logic.
-
-To create a Gate:       "create <gatetype> <name> <input pin number>"
-To create an Inverter:  "create inverter <name>"

@@ -1,0 +1,11 @@
+NorGate
+
+A NorGate output signal will only be true(1) if all of its input signals are false(0).
+
+I | I | OUT
+0 | 0 | 1
+0 | 1 | 0
+1 | 0 | 0
+1 | 1 | 0
+
+To create an NandGate: create nandgate <name> <input pin number>

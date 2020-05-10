@@ -53,7 +53,7 @@ public final class FileHandler {
      * @throws IOException  If the read fails.
      */
     public static String readHelpPage(String filename) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(filename + ".txt"));
+        byte[] encoded = Files.readAllBytes(Paths.get("help_pages/" + filename + ".txt"));
         return new String(encoded, Charset.defaultCharset());
     }
 }

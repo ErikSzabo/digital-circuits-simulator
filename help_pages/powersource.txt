@@ -1,7 +1,7 @@
 PowerSource
 
 Used for giving electricity to switches, or to generate constant 0 or 1 signal to a device.
-Mostly you want to connect your PowerSource to a Junction, the your Junction to Switches.
+Mostly you want to connect your PowerSource to a Junction, then your Junction to Switches.
 Use Switches for circuit variables instead of PowerSources if you can!
 
 To create: "create powersource <name>"

@@ -1,0 +1,11 @@
+OrGate
+
+An OrGate output signal will only be false(0) if all of its input signals are false(0) as well.
+
+I | I | OUT
+0 | 0 | 0
+0 | 1 | 1
+1 | 0 | 1
+1 | 1 | 1
+
+To create an OrGate: create orgate <name> <input pin number>
