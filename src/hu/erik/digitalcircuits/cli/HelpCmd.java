@@ -3,7 +3,10 @@ package hu.erik.digitalcircuits.cli;
 import hu.erik.digitalcircuits.errors.InvalidArgumentException;
 import hu.erik.digitalcircuits.errors.NotEnoughArgsException;
 import hu.erik.digitalcircuits.errors.TooManyArgumentException;
+import hu.erik.digitalcircuits.utils.FileHandler;
 import hu.erik.digitalcircuits.utils.Printer;
+
+import java.io.IOException;
 
 import static hu.erik.digitalcircuits.cli.DeviceType.*;
 
@@ -11,6 +14,30 @@ import static hu.erik.digitalcircuits.cli.DeviceType.*;
  * Class to handle commands prefixed with "help".
  */
 public class HelpCmd extends Command {
+    /**
+     * Stores the help page for PowerSource devices in a single String.
+     */
+    private String powerHelp;
+
+    /**
+     * Stores the help page for Switch devices in a single String.
+     */
+    private String switchHelp;
+
+    /**
+     * Stores the help page for Gate and Inverter devices in a single String.
+     */
+    private String gateHelp;
+
+    /**
+     * Stores the help page for Junction devices in a single String.
+     */
+    private String junctionHelp;
+
+    /**
+     * Stores the help page for CircuitBox devices in a single String.
+     */
+    private String circuitBoxHelp;
 
     /**
      * Constructor to setup the command's name, format and description.
@@ -18,9 +45,18 @@ public class HelpCmd extends Command {
     public HelpCmd() {
         super(
                 "help",
-                "help [devicetype]",
+                "help <devicetype>",
                 "Shows help for the specified device type. You can view here the unique methods for a device."
         );
+        try {
+            powerHelp = FileHandler.readHelpPage("power_help");
+            switchHelp = FileHandler.readHelpPage("switch_help");
+            junctionHelp = FileHandler.readHelpPage("junction_help");
+            circuitBoxHelp = FileHandler.readHelpPage("box_help");
+            gateHelp = FileHandler.readHelpPage("gate_help");
+        } catch (IOException err) {
+            Printer.printErr("Some of the help pages can't be loaded.");
+        }
     }
 
     /**
@@ -39,122 +75,19 @@ public class HelpCmd extends Command {
         if(!DeviceType.contains(cmd[1].toLowerCase())) throw new InvalidArgumentException(cmd[0], cmd[1]);
         if(cmd.length > 2) Printer.printErr(new TooManyArgumentException(cmd[0]));
 
+        Printer.printSeparatorLine("-");
         if(cmd[1].toLowerCase().contains("gate") || cmd[1].equalsIgnoreCase(INVERTER.getValue())) {
-            writeGatesHelpPage();
+            System.out.println(gateHelp);
         } else if(cmd[1].equalsIgnoreCase(POWER.getValue())) {
-            writePowerHelpPage();
+            System.out.println(powerHelp);
         } else if(cmd[1].equalsIgnoreCase(SWITCH.getValue())) {
-            writeSwitchHelpPage();
+            System.out.println(switchHelp);
         } else if(cmd[1].equalsIgnoreCase(JUNCTION.getValue())) {
-            writeJunctionHelpPage();
+            System.out.println(junctionHelp);
         } else if(cmd[1].equalsIgnoreCase(CIRCUITBOX.getValue())) {
-            writeCircuitBoxHelpPage();
+            System.out.println(circuitBoxHelp);
         }
-
+        Printer.printSeparatorLine("-");
 
     }
-
-    /**
-     * Write the PowerSource help page to the console.
-     * It contains information about creation, and unique methods.
-     */
-    private void writePowerHelpPage() {
-        Printer.printSeparatorLine("-");
-        System.out.println("PowerSource\n" +
-                "\n" +
-                "Used for giving eletricity to switches, or to generate constant 0 or 1 signal to a device.\n" +
-                "Important thing, that a Switch will never work without a connected PowerSource.\n" +
-                "\n" +
-                "To create: \"create powersource <name>\"\n" +
-                "\n" +
-                "Uniqe functions:\n" +
-                "on - turns on the electricity\n" +
-                "off - turns off the electricity\n" +
-                "\n" +
-                "You can use these uniqe functions by typing \"device <your powersource name> <on or off>\"");
-        Printer.printSeparatorLine("-");
-    }
-
-    /**
-     * Write the Switch help page to the console.
-     * It contains information about creation, and unique methods.
-     */
-    private void writeSwitchHelpPage() {
-        Printer.printSeparatorLine("-");
-        System.out.println("Switch\n" +
-                "\n" +
-                "Used to simulate circuit variables. You can set your variables in your circuits with switches.\n" +
-                "Switch won't work unless it's connected to a PowerSource (or to anything which provides 1 signal).\n" +
-                "\n" +
-                "To create: \"create switch <name>\"\n" +
-                "\n" +
-                "Uniqe functions:\n" +
-                "on - generete 1 on the output\n" +
-                "off - generate 0 on the output\n" +
-                "\n" +
-                "You can use these uniqe functions by typing \"device <your switch name> <on or off>\"");
-        Printer.printSeparatorLine("-");
-    }
-
-    /**
-     * Write the Junction help page to the console.
-     * It contains information about creation, and unique methods.
-     */
-    private void writeJunctionHelpPage() {
-        Printer.printSeparatorLine("-");
-        System.out.println("Junction\n" +
-                "\n" +
-                "Junctions are usally used to duplicate signals. For example, you can connect your PowerSource to a\n" +
-                "Junction, and then you can connect the junction to all of your switches.\n" +
-                "\n" +
-                "To create: \"create junction <name> <output pin number>\"\n" +
-                "\n" +
-                "Junction devices have access to a special connectall function. With this, you can connect multiple devices\n" +
-                "to your Junction at the same time\n" +
-                "\n" +
-                "To use this uniqe function, type: \"device <your junction name> connectall <you device names separated by spaces>\"");
-        Printer.printSeparatorLine("-");
-    }
-
-    /**
-     * Write the Gates and Inverter help page to the console.
-     * It contains information about creation, and unique methods.
-     */
-    private void writeGatesHelpPage() {
-        Printer.printSeparatorLine("-");
-        System.out.println("Gates\n" +
-                "\n" +
-                "A Gate or an Inverter is responsible for the circuit logic.\n" +
-                "\n" +
-                "To create a Gate: \"create <gatetype or inverter> <name> [input pin number if it is a gate] ");
-        Printer.printSeparatorLine("-");
-    }
-
-    /**
-     * Write the CircuitBox help page to the console.
-     * It contains information about creation, and unique methods.
-     */
-    private void writeCircuitBoxHelpPage() {
-        Printer.printSeparatorLine("-");
-        System.out.println("CircuitBox\n" +
-                "\n" +
-                "With this tool, you can put your whole circuit to a box. And the reason to that, well, you can save and load\n" +
-                "your boxes. So next time if you want to use the same circuit, the only thing you need is to load your box.\n" +
-                "Don't bind switch pins to input pins! You won't be able to interact with the switch after loading.(on off methods)\n" +
-                "\n" +
-                "To create: \"create circuitbox <name> <box input pins> <box output pins>\"\n" +
-                "\n" +
-                "- Bind your circuit pins to the box:\n" +
-                "     - To bind an input pin, type: \n" +
-                "          \"box <box name> bindinput <target device name> <target pin index> <box pin index>\"\n" +
-                "     - To bind an output pin, type:\n" +
-                "          \"box <box name> bindoutput <target device name> <target pin index> <box pin index>\"\n" +
-                "      These methods only works in Box Editor Mode. For that, type: boxeditor" +
-                "\n" +
-                "- Load CircuitBox\n" +
-                "      - type: \"device circuitbox <boxname> load\"\n" +
-                "     After loading, you can connect your box as usual.");
-        Printer.printSeparatorLine("-");
-    }
-
 }
