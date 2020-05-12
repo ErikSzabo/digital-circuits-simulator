@@ -34,7 +34,6 @@ public class DeviceCmd extends Command {
         );
         actions = new HashMap<>();
         actions.put(SWITCH, this::handleSwitch);
-        actions.put(POWER, this::handlePower);
         actions.put(JUNCTION, this::handleJunction);
         actions.put(CIRCUITBOX, this::handleCircuitBox);
     }
@@ -64,37 +63,6 @@ public class DeviceCmd extends Command {
             Printer.printErr("There isn't any specific unique method for this device!");
         } catch (DeviceNotExistsException err) {
             Printer.printErr(err);
-        }
-    }
-
-    /**
-     * Handles PowerSource specific unique methods like ON and OFF.<br>
-     *
-     * Command format:<br>
-     * device {@literal <}name{@literal >} {@literal <}on or off{@literal >}
-     *
-     * @param storage   cli data structure
-     * @param cmd       command, split by spaces
-     */
-    private void handlePower(DeviceMap storage, String[] cmd) {
-        if(cmd.length > 3) Printer.printErr(new TooManyArgumentException(cmd[0]));
-        DeviceBundle bundle;
-
-        try {
-            bundle = storage.get(cmd[1]);
-        } catch (DeviceNotExistsException err) {
-            Printer.printErr(err);
-            return;
-        }
-
-        if(cmd[2].equalsIgnoreCase("on")) {
-            ((PowerSource) bundle.getDevice()).on();
-            Printer.println("Your power state is now TRUE(1)");
-        } else if(cmd[2].equalsIgnoreCase("off")) {
-            ((PowerSource) bundle.getDevice()).off();
-            Printer.println("Your power state is now FALSE(0)");
-        } else {
-            Printer.printErr("Invalid arguments! Try: device <name> <on | off>");
         }
     }
 

@@ -8,7 +8,6 @@ import hu.erik.digitalcircuits.utils.Printer;
 public class Main {
     public static void kotelezoFeladat() {
         PowerSource elem = new PowerSource();
-        elem.on();
 
         Junction csomopont = new Junction(5);
 

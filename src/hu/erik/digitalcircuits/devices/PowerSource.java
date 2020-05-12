@@ -6,31 +6,22 @@ package hu.erik.digitalcircuits.devices;
 public class PowerSource extends SimpleDevice {
 
     /**
-     * Sets the output signal to true.
-     * Updates the whole connected circuit.
+     * Default constructor for PowerSource.
+     * Sets the output signal to true, and sets the input
+     * pin availability to false.
      */
-    public void on() {
-        getInputPin().setSignal(true);
-        calcOutput();
-        sendOutput();
+    public PowerSource() {
+        super();
+        getInputPin().setAvailability(false);
+        getOutputPin().setSignal(true);
     }
 
     /**
-     * Sets the output signal to false.
-     * Updates the whole connected circuit.
-     */
-    public void off() {
-        getInputPin().setSignal(false);
-        calcOutput();
-        sendOutput();
-    }
-
-    /**
-     * Calculates the output purely based on the input pin value.
+     * Sets its output to true, since PowerSource can only output true signal.
      */
     @Override
     public void calcOutput() {
-        getOutputPin().setSignal(getInputPin().getSignal());
+        getOutputPin().setSignal(true);
     }
 
     @Override
