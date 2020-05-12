@@ -59,7 +59,7 @@ public class DeleteCmd extends Command {
      */
     private void connectionReset(Pin[] pins, boolean isOutput) {
         for(Pin p : pins) {
-            if(!p.isFree()) {
+            if(!p.isFree() && p.getConnectionCable() != null) {
                 Pin otherPin = p.getConnectionCable().getOtherPin(p);
                 otherPin.setConnectionCable(null);
                 otherPin.setAvailability(true);
