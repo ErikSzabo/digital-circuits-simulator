@@ -63,7 +63,8 @@ public class CliController {
      * Adds commands to the data structure. CliController will only use these commands.
      * Make sure to add the commands before calling listen method!
      *
-     * @param commands command which will be added to the cli
+     * @param addToEditor   Determines that the command will be added to Editor commands or not.
+     * @param commands      command which will be added to the cli
      */
     public void addCommands(boolean addToEditor, Command... commands) {
         for(Command cmd : commands) {
