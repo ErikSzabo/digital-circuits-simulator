@@ -65,10 +65,12 @@ public class CliController {
      *
      * @param commands command which will be added to the cli
      */
-    public void addCommands(Command... commands) {
+    public void addCommands(boolean addToEditor, Command... commands) {
         for(Command cmd : commands) {
             this.commands.put(cmd.getName(), cmd);
-            this.boxEditorCommands.put(cmd.getName(), cmd);
+            if(addToEditor) {
+                this.boxEditorCommands.put(cmd.getName(), cmd);
+            }
         }
     }
 
@@ -76,7 +78,6 @@ public class CliController {
      * Listens for commands in an infinite loop.
      */
     public void listen() {
-        boxEditorCommands.remove("delete");
         Scanner sc = new Scanner(System.in);
         showMenu();
 

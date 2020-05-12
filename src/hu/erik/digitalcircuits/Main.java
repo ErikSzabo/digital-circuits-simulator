@@ -63,11 +63,12 @@ public class Main {
     public static void main(String[] args) {
         //kotelezoFeladat();
         CliController cliController = new CliController();
-        cliController.addCommands(
-                new ConnectCmd(), new CreateCmd(), new DeleteCmd(),
-                new DeviceCmd(), new DeviceTypesCmd(), new DisconnectCmd(),
+        cliController.addCommands(true,
+                new ConnectCmd(), new CreateCmd(), new DeviceCmd(),
+                new DeviceTypesCmd(), new DisconnectCmd(),
                 new HelpCmd(), new ListCmd(), new ShowCmd()
         );
+        cliController.addCommands(false, new DeleteCmd());
         cliController.listen();
     }
 }
