@@ -92,8 +92,8 @@ public class CircuitBox extends MultipinDevice {
      * of its pins will be disconnected, then recalculates its output.
      */
     public void resetToDefaultState() {
-        resetPins(inputPins(), "input");
-        resetPins(outputPins(), "output");
+        resetPins(inputPins(), true);
+        resetPins(outputPins(), false);
         for (Pin p : inputPins()) {
             p.getParentDevice().calcOutput();
             p.getParentDevice().sendOutput();
@@ -103,14 +103,14 @@ public class CircuitBox extends MultipinDevice {
     /**
      * Resets pins based on their type.
      *
-     * @param pins  pins to be reset
-     * @param type  type of the pins like input or output
+     * @param pins      pins to be reset
+     * @param isInput   whether the pins are input pins or not
      */
-    private void resetPins(Pin[] pins, String type) {
+    private void resetPins(Pin[] pins, boolean isInput) {
         for (Pin pin : pins) {
             pin.setConnectionCable(null);
             pin.setAvailability(true);
-            if(type.equals("input")) pin.setSignal(false);
+            if(isInput) pin.setSignal(false);
         }
     }
 

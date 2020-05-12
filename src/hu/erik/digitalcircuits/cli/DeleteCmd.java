@@ -41,8 +41,8 @@ public class DeleteCmd extends Command {
 
         try {
             DeviceBundle device = storage.get(cmd[1]);
-            connectionReset(device.getDevice().inputPins(), "input");
-            connectionReset(device.getDevice().outputPins(), "output");
+            connectionReset(device.getDevice().inputPins(), false);
+            connectionReset(device.getDevice().outputPins(), true);
             storage.remove(cmd[1]);
             Printer.println("Device has been deleted!");
         } catch (DeviceNotExistsException err) {
@@ -54,16 +54,16 @@ public class DeleteCmd extends Command {
      * Resets the pin connections and recalculates the circuit signals
      * if the type of the pins is output.
      *
-     * @param pins  pins which will be reset
-     * @param type  type of the pins
+     * @param pins      pins which will be reset
+     * @param isOutput  whether the pins are output pins or not
      */
-    private void connectionReset(Pin[] pins, String type) {
+    private void connectionReset(Pin[] pins, boolean isOutput) {
         for(Pin p : pins) {
             if(!p.isFree()) {
                 Pin otherPin = p.getConnectionCable().getOtherPin(p);
                 otherPin.setConnectionCable(null);
                 otherPin.setAvailability(true);
-                if(type.equals("output")) {
+                if(isOutput) {
                     otherPin.setSignal(false);
                     otherPin.getParentDevice().calcOutput();
                     otherPin.getParentDevice().sendOutput();
