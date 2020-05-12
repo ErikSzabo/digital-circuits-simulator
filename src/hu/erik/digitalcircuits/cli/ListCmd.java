@@ -53,7 +53,8 @@ public class ListCmd extends Command {
         Map<String, DeviceBundle> devices = storage.getMap();
 
         for(String name : devices.keySet()) {
-            Printer.println("[Name]: " + name + ", [Type]: " + devices.get(name).getType());
+            DeviceType type = devices.get(name).getType();
+            Printer.println("[" + type + "]" + " ".repeat(15 - type.getValue().length()) + name);
         }
 
         Printer.println("Done!");
@@ -72,7 +73,7 @@ public class ListCmd extends Command {
         for(String name : devices.keySet()) {
             String currentType = devices.get(name).getType().getValue();
             if(currentType.equals(type)) {
-                Printer.println("[Name]: " + name + ", [Type]: " + type);
+                Printer.println("[" + type + "]" + " ".repeat(15 - type.length()) + name);
             }
         }
 
